@@ -4,7 +4,7 @@ namespace SwagFirstPluginExample\Core\Content\FirstPlugin;
 
 use Shopware\Core\Framework\DataAbstractionLayer\Entity;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityIdTrait;
-;
+use Shopware\Core\Content\Product\ProductEntity;
 
 class FirstPluginEntity extends Entity
 {
@@ -29,6 +29,26 @@ class FirstPluginEntity extends Entity
      * @var string|null
      */
     protected $password;
+
+    /**
+     * @var string|null
+     */
+    protected $productId;
+
+    /**
+     * @var string|null
+     */
+    protected $product_name;
+
+    /**
+     * @var string|null
+     */
+    protected $product_number;
+
+    /**
+     * @var ProductEntity|null
+     */
+    protected $product;
 
     /**
      * @var \DateTimeInterface
@@ -78,6 +98,46 @@ class FirstPluginEntity extends Entity
     public function setPassword(?string $password): void
     {
         $this->password = $password;
+    }
+
+    public function getProductId(): ?string
+    {
+        return $this->productId;
+    }
+
+    public function setProductId(?string $productId): void
+    {
+        $this->productId = $productId;
+    }
+
+    public function getProduct_name(): ?string
+    {
+        return $this->product_name;
+    }
+
+    public function setProduct_name(?string $product_name): void
+    {
+        $this->product_name = $product_name;
+    }
+
+    public function getProduct_number(): ?string
+    {
+        return $this->product_number;
+    }
+
+    public function setProduct_number(?string $product_number): void
+    {
+        $this->product_number = $product_number;
+    }
+
+    public function getProduct(): ?ProductEntity
+    {
+        return $this->product;
+    }
+
+    public function setProduct(?ProductEntity $product): void
+    {
+        $this->product = $product;
     }
 
     public function getCreatedAt(): \DateTimeInterface

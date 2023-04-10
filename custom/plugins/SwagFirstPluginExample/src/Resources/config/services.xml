@@ -8,5 +8,8 @@
         <service id="SwagFirstPluginExample\Core\Content\FirstPlugin\FirstPluginDefinition">
             <tag name="shopware.entity.definition" entity="first_plugin"/>
         </service>
+        <service id="SwagFirstPluginExample\Extension\ProductExtension">
+            <tag name="shopware.entity.extension" />
+        </service>
     </services>
 </container>
