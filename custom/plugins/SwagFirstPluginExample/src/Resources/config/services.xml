@@ -11,5 +11,8 @@
         <service id="SwagFirstPluginExample\Extension\ProductExtension">
             <tag name="shopware.entity.extension" />
         </service>
+        <service id="SwagFirstPluginExample\Core\Content\FirstPlugin\Aggregate\FirstPluginTranslation\FirstPluginTranslationDefinition">
+            <tag name="shopware.entity.definition" entity="first_plugin_translation" />
+        </service>
     </services>
 </container>
