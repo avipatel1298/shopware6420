@@ -1,30 +1,28 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace SwagFirstPluginExample\Extension;
 
-use Shopware\Core\Content\Product\ProductDefinition;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityExtension;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\OneToManyAssociationField;
 use Shopware\Core\Framework\DataAbstractionLayer\FieldCollection;
-use SwagFirstPluginExample\Core\Content\FirstPlugin\FirstPluginDefinition;
+use Shopware\Core\System\Language\LanguageDefinition;
+use SwagFirstPluginExample\Core\Content\FirstPlugin\Aggregate\FirstPluginTranslation\FirstPluginTranslationDefinition;
 
-
-class ProductExtension extends EntityExtension
+class LanguageExtension extends EntityExtension
 {
     public function extendFields(FieldCollection $collection): void
     {
         $collection->add(
             new OneToManyAssociationField(
-                'products',
-                FirstPluginDefinition::class,
-                'product_id')
+                'firstPluginId',
+                FirstPluginTranslationDefinition::class,
+                'name')
         );
-
     }
 
     public function getDefinitionClass(): string
     {
-        return ProductDefinition::class;
+       return LanguageDefinition::class;
     }
+
 }

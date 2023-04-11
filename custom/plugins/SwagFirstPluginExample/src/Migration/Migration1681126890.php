@@ -14,7 +14,7 @@ class Migration1681126890 extends MigrationStep
 
     public function update(Connection $connection): void
     {
-        $connection->executeStatement("CREATE TABLE IF NOT EXISTS `first_plugin` (
+        $connection->executeStatement("CREATE TABLE  `first_plugin` (
     `id` BINARY(16) NOT NULL,
     `name` VARCHAR(255) NOT NULL,
     `email` VARCHAR(255) NULL,

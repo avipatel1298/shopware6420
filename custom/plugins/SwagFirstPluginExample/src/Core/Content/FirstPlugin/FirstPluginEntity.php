@@ -4,6 +4,7 @@ namespace SwagFirstPluginExample\Core\Content\FirstPlugin;
 
 use Shopware\Core\Framework\DataAbstractionLayer\Entity;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityIdTrait;
+use Shopware\Core\Framework\DataAbstractionLayer\EntityCollection;
 use Shopware\Core\Content\Product\ProductEntity;
 
 class FirstPluginEntity extends Entity
@@ -16,7 +17,12 @@ class FirstPluginEntity extends Entity
     protected $id;
 
     /**
-     * @var string
+     * @var string|null
+     */
+    protected $notTranslatedField;
+
+    /**
+     * @var EntityCollection
      */
     protected $name;
 
@@ -31,24 +37,19 @@ class FirstPluginEntity extends Entity
     protected $password;
 
     /**
-     * @var string|null
+     * @var ProductEntity|null
      */
     protected $productId;
 
     /**
      * @var string|null
      */
-    protected $product_name;
+    protected $productName;
 
     /**
      * @var string|null
      */
     protected $product_number;
-
-    /**
-     * @var ProductEntity|null
-     */
-    protected $product;
 
     /**
      * @var \DateTimeInterface
@@ -60,6 +61,11 @@ class FirstPluginEntity extends Entity
      */
     protected $updatedAt;
 
+    /**
+     * @var array|null
+     */
+    protected $translated;
+
     public function getId(): string
     {
         return $this->id;
@@ -70,12 +76,22 @@ class FirstPluginEntity extends Entity
         $this->id = $id;
     }
 
-    public function getName(): string
+    public function getNotTranslatedField(): ?string
+    {
+        return $this->notTranslatedField;
+    }
+
+    public function setNotTranslatedField(?string $notTranslatedField): void
+    {
+        $this->notTranslatedField = $notTranslatedField;
+    }
+
+    public function getName(): EntityCollection
     {
         return $this->name;
     }
 
-    public function setName(string $name): void
+    public function setName(EntityCollection $name): void
     {
         $this->name = $name;
     }
@@ -100,24 +116,24 @@ class FirstPluginEntity extends Entity
         $this->password = $password;
     }
 
-    public function getProductId(): ?string
+    public function getProductId(): ?ProductEntity
     {
         return $this->productId;
     }
 
-    public function setProductId(?string $productId): void
+    public function setProductId(?ProductEntity $productId): void
     {
         $this->productId = $productId;
     }
 
-    public function getProduct_name(): ?string
+    public function getProductName(): ?string
     {
-        return $this->product_name;
+        return $this->productName;
     }
 
-    public function setProduct_name(?string $product_name): void
+    public function setProductName(?string $productName): void
     {
-        $this->product_name = $product_name;
+        $this->productName = $productName;
     }
 
     public function getProduct_number(): ?string
@@ -128,16 +144,6 @@ class FirstPluginEntity extends Entity
     public function setProduct_number(?string $product_number): void
     {
         $this->product_number = $product_number;
-    }
-
-    public function getProduct(): ?ProductEntity
-    {
-        return $this->product;
-    }
-
-    public function setProduct(?ProductEntity $product): void
-    {
-        $this->product = $product;
     }
 
     public function getCreatedAt(): \DateTimeInterface
@@ -158,5 +164,15 @@ class FirstPluginEntity extends Entity
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
+    }
+
+    public function getTranslated(): array
+    {
+        return $this->translated;
+    }
+
+    public function setTranslated(?array $translated): void
+    {
+        $this->translated = $translated;
     }
 }
