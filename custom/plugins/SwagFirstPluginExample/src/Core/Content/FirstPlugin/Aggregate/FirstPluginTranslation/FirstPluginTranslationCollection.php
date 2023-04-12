@@ -13,7 +13,7 @@ use Shopware\Core\Framework\DataAbstractionLayer\EntityCollection;
  * @method FirstPluginTranslationEntity|null first()
  * @method FirstPluginTranslationEntity|null last()
  */
- #[Package('core')]
+#[Package('core')]
 class FirstPluginTranslationCollection extends EntityCollection
 {
     protected function getExpectedClass(): string

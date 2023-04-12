@@ -56,7 +56,7 @@ class FirstPluginTranslationEntity extends Entity
         $this->name = $name;
     }
 
-    public function getCreatedAt(): \DateTimeInterface
+    public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
     }
@@ -76,7 +76,7 @@ class FirstPluginTranslationEntity extends Entity
         $this->updatedAt = $updatedAt;
     }
 
-    public function getFirstPluginId(): ?string
+    public function getFirstPluginId(): string
     {
         return $this->firstPluginId;
     }
@@ -86,7 +86,7 @@ class FirstPluginTranslationEntity extends Entity
         $this->firstPluginId = $firstPluginId;
     }
 
-    public function getLanguageId(): ?string
+    public function getLanguageId(): string
     {
         return $this->languageId;
     }

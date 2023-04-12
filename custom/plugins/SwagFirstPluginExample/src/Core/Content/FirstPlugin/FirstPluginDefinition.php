@@ -43,19 +43,16 @@ class FirstPluginDefinition extends EntityDefinition
     {
         return new FieldCollection([
             (new IdField('id', 'id'))->addFlags(new Required(), new PrimaryKey()),
-            (new StringField('not_translated_field', 'notTranslatedField'))->addFlags(new ApiAware()),
-            (new TranslatedField('name')),
             (new StringField('email', 'email')),
             (new StringField('password', 'password')),
             (new FkField('product_id', 'productId', ProductDefinition::class))->addFlags(new ApiAware(), new Required()),
-            (new StringField('product_name', 'productName')),
-            (new ReferenceVersionField(ProductDefinition::class))->addFlags(new ApiAware(), new Inherited()),
-            (new StringField('product_number', 'product_number')),
-            (new TranslationsAssociationField(
-                FirstPluginTranslationDefinition::class,
-                'name', 'name'))->addFlags(new ApiAware(), new Required()),
-
+            (new ReferenceVersionField(ProductDefinition::class,'',))->addFlags(new ApiAware(), new Inherited()),
+            (new TranslatedField('name'))->addFlags(new ApiAware()),
             new ManyToOneAssociationField('productId', 'product_id', ProductDefinition::class, 'id'),
+
+            (new TranslationsAssociationField(
+                FirstPluginTranslationDefinition::class,'first_plugin_id'))->addFlags(new ApiAware(), new Required()),
+
 
         ]);
     }
