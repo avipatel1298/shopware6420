@@ -27,6 +27,11 @@ class FirstPluginTranslationDefinition extends EntityTranslationDefinition
         return FirstPluginTranslationEntity::class;
     }
 
+    public function getCollectionClass(): string
+    {
+        return FirstPluginTranslationCollection::class;
+    }
+
     protected function defineFields(): FieldCollection
     {
         return new FieldCollection([
