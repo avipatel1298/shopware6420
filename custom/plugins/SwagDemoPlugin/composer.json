@@ -5,11 +5,11 @@
   "license": "MIT",
   "autoload": {
     "psr-4": {
-      "SwagShopFinder\\": "src/"
+      "SwagDemoPlugin\\": "src/"
     }
   },
   "extra": {
-    "shopware-plugin-class": "SwagShopFinder\\SwagShopFinder",
+    "shopware-plugin-class": "SwagDemoPlugin\\SwagDemoPlugin",
     "label": {
       "de-DE": "Skeleton plugin",
       "en-GB": "Skeleton plugin"

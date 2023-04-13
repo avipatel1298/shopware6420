@@ -1,16 +1,16 @@
 <?php declare(strict_types=1);
 
-namespace SwagFirstPluginExample\Core\Content\FirstPlugin\Aggregate\FirstPluginTranslation;
+namespace SwagDemoPlugin\Core\Content\SwagDemo\Aggregate\SwagDemoTranslation;
 
 use Shopware\Core\Framework\DataAbstractionLayer\EntityTranslationDefinition;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\Flag\Required;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\StringField;
 use Shopware\Core\Framework\DataAbstractionLayer\FieldCollection;
-use SwagFirstPluginExample\Core\Content\FirstPlugin\FirstPluginDefinition;
+use SwagDemoPlugin\Core\Content\SwagDemo\SwagDemoDefinition;
 
-class FirstPluginTranslationDefinition extends EntityTranslationDefinition
+class SwagDemoTranslationDefinition extends EntityTranslationDefinition
 {
-    public const ENTITY_NAME = 'first_plugin_translation';
+    public const ENTITY_NAME = 'swag_demo_translation';
 
     public function getEntityName(): string
     {
@@ -19,23 +19,24 @@ class FirstPluginTranslationDefinition extends EntityTranslationDefinition
 
     public function getParentDefinitionClass(): string
     {
-        return FirstPluginDefinition::class;
+        return SwagDemoDefinition::class;
     }
 
     public function getEntityClass(): string
     {
-        return FirstPluginTranslationEntity::class;
+        return SwagDemoTranslationEntity::class;
     }
 
     public function getCollectionClass(): string
     {
-        return FirstPluginTranslationCollection::class;
+        return SwagDemoTranslationCollection::class;
     }
 
     protected function defineFields(): FieldCollection
     {
         return new FieldCollection([
             (new StringField('name', 'name'))->addFlags(new Required()),
+            (new StringField('city','city'))->addFlags(new Required()),
         ]);
     }
 }
