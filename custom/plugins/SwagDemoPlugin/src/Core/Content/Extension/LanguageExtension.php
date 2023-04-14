@@ -6,6 +6,7 @@ use Shopware\Core\Framework\DataAbstractionLayer\EntityExtension;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\OneToManyAssociationField;
 use Shopware\Core\Framework\DataAbstractionLayer\FieldCollection;
 use Shopware\Core\System\Language\LanguageDefinition;
+use SwagDemoPlugin\Core\Content\SwagDemo\Aggregate\SwagDemoTranslation\SwagDemoTranslationDefinition;
 
 class LanguageExtension extends EntityExtension
 {
@@ -13,10 +14,20 @@ class LanguageExtension extends EntityExtension
     {
         $collection->add(
             new OneToManyAssociationField(
-                'language',
-                LanguageDefinition::class,
-                'swag_demo_id ','id')
+                'swagDemoTranslationsId',
+                SwagDemoTranslationDefinition::class,
+                'name',
+                'id'),
         );
+
+        $collection->add(
+            new OneToManyAssociationField(
+                'swagDemoTranslationsId',
+                SwagDemoTranslationDefinition::class,
+                'city',
+                'id'),
+        );
+
     }
 
     public function getDefinitionClass(): string

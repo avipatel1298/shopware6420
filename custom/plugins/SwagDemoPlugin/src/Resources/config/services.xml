@@ -3,28 +3,34 @@
 <container xmlns="http://symfony.com/schema/dic/services"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-
+<!--  Translation Service-->
     <services>
+        <service id="SwagDemoPlugin\Core\Content\SwagDemo\Aggregate\SwagDemoTranslation\SwagDemoTranslationDefinition">
+            <tag name="shopware.entity.definition" entity="swag_demo_translation" />
+        </service>
+<!--Main Definition service-->
         <service id="SwagDemoPlugin\Core\Content\SwagDemo\SwagDemoDefinition">
             <tag name="shopware.entity.definition" entity="swag_demo"/>
         </service>
+        <!--Country Extension service-->
         <service id="SwagDemoPlugin\Core\Content\Extension\CountryExtension">
             <tag name="shopware.entity.extension" />
         </service>
-        <service id="SwagDemoPlugin\Core\Content\Extension\StateExtension">
+        <!--CountryState Extension service-->
+        <service id="SwagDemoPlugin\Core\Content\Extension\CountryStateExtension">
             <tag name="shopware.entity.extension" />
         </service>
+        <!--Media Extension  service-->
         <service id="SwagDemoPlugin\Core\Content\Extension\MediaExtension">
             <tag name="shopware.entity.extension" />
         </service>
-        <service id="SwagDemoPlugin\Core\Content\Extension\LanguageExtension">
-            <tag name="shopware.entity.extension" />
-        </service>
+        <!--Product Extension service-->
         <service id="SwagDemoPlugin\Core\Content\Extension\ProductExtension">
             <tag name="shopware.entity.extension" />
         </service>
-        <service id="SwagDemoPlugin\Core\Content\SwagDemo\Aggregate\SwagDemoTranslation\SwagDemoTranslationDefinition">
-            <tag name="shopware.entity.definition" entity="swag_demo_translation" />
+        <!--Language Extension service-->
+        <service id="SwagDemoPlugin\Core\Content\Extension\LanguageExtension">
+            <tag name="shopware.entity.extension" />
         </service>
     </services>
 </container>

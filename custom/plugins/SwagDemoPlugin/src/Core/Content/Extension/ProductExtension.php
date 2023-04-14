@@ -6,6 +6,7 @@ use Shopware\Core\Content\Product\ProductDefinition;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityExtension;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\OneToManyAssociationField;
 use Shopware\Core\Framework\DataAbstractionLayer\FieldCollection;
+use SwagDemoPlugin\Core\Content\SwagDemo\SwagDemoDefinition;
 
 class ProductExtension extends EntityExtension
 {
@@ -14,7 +15,7 @@ class ProductExtension extends EntityExtension
         $collection->add(
             new OneToManyAssociationField(
                 'product',
-                ProductDefinition::class,
+                SwagDemoDefinition::class,
                 'product_id','id')
         );
 

@@ -42,10 +42,11 @@ class SwagDemoDefinition extends EntityDefinition
         return SwagDemoCollection::class;
     }
 
-
     protected function defineFields(): FieldCollection
     {
         return new FieldCollection([
+
+            //Fields to be Entered in Swag_demo table in Database
             (new IdField('id', 'id'))->addFlags(new Required(), new PrimaryKey()),
             (new BoolField('active', 'active')),
             (new TranslatedField('name'))->addFlags(new Required()),
@@ -53,19 +54,21 @@ class SwagDemoDefinition extends EntityDefinition
             (new ReferenceVersionField(ProductDefinition::class))->addFlags(new ApiAware(), new Inherited()),
             (new StringField('not_translated_field', 'notTranslatedField'))->addFlags(new ApiAware()),
 
+            //Foreign Key Fields
             (new FkField('country_id', 'countryId', CountryDefinition::class)),
-            (new FkField('state_id', 'stateId', CountryStateDefinition::class)),
+            (new FkField('countrystate_id', 'countrystateId', CountryStateDefinition::class)),
             (new FkField('media_id', 'mediaId', MediaDefinition::class)),
-            (new FkField('product_id', 'productId', ProductDefinition::class,'id')),
+            (new FkField('product_id', 'productId', ProductDefinition::class, 'id')),
 
+            //Data Association Fields
             new ManyToOneAssociationField('country', 'country_id', CountryDefinition::class, 'id'),
-            new ManyToOneAssociationField('state', 'state_id', CountryStateDefinition::class, 'id'),
-            new OneToOneAssociationField('media', 'media_id', 'id', MediaDefinition::class),
+            new ManyToOneAssociationField('countryState', 'countrystate_id', CountryStateDefinition::class, 'id'),
+            new OneToOneAssociationField('media', 'media_id', 'id', MediaDefinition::class, false),
             new ManyToOneAssociationField('product', 'product_id', ProductDefinition::class, 'id'),
 
+            //TranslationsAssociationField
             (new TranslationsAssociationField(
                 SwagDemoTranslationDefinition::class, 'swag_demo_id'))->addFlags(new ApiAware(), new Required()),
-
         ]);
     }
 }

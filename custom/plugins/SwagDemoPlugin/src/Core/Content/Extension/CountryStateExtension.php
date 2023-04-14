@@ -6,16 +6,17 @@ use Shopware\Core\Framework\DataAbstractionLayer\EntityExtension;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\OneToManyAssociationField;
 use Shopware\Core\Framework\DataAbstractionLayer\FieldCollection;
 use Shopware\Core\System\Country\Aggregate\CountryState\CountryStateDefinition;
+use SwagDemoPlugin\Core\Content\SwagDemo\SwagDemoDefinition;
 
-class StateExtension extends EntityExtension
+class CountryStateExtension extends EntityExtension
 {
     public function extendFields(FieldCollection $collection): void
     {
         $collection->add(
             new OneToManyAssociationField(
-                'state',
-                CountryStateDefinition::class,
-                'state_id')
+                'countryState',
+                SwagDemoDefinition::class,
+                'countrystate_id')
         );
 
     }

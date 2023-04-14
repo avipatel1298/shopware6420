@@ -6,6 +6,7 @@ use Shopware\Core\Content\Media\MediaDefinition;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityExtension;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\OneToOneAssociationField;
 use Shopware\Core\Framework\DataAbstractionLayer\FieldCollection;
+use SwagDemoPlugin\Core\Content\SwagDemo\SwagDemoDefinition;
 
 class MediaExtension extends EntityExtension
 {
@@ -14,8 +15,8 @@ class MediaExtension extends EntityExtension
         $collection->add(
             new OneToOneAssociationField(
                 'media',
-                'media_id',
-                'id',MediaDefinition::class,false)
+                'id',
+                'media_id',SwagDemoDefinition::class,false)
         );
 
     }
