@@ -1,12 +1,11 @@
 import './page/sw-demoplugin-list';
 import './page/sw-demoplugin-detail';
-// import deDE from './snippet/de-DE';
-// import enGB from './snippet/en-GB';
-// import './acl';
+import deDE from './snippet/de-DE';
+import enGB from './snippet/en-GB';
+import './acl';
 const { Module } = Shopware;
 
 
-// eslint-disable-next-line sw-deprecation-rules/private-feature-declarations
 Module.register('sw-demoplugin', {
     type: 'core',
     name: 'demoplugin',
@@ -17,11 +16,13 @@ Module.register('sw-demoplugin', {
     color: '#57D9A3',
     icon: 'regular-products',
     favicon: 'icon-module-products.png',
+    entity: 'swag_demo',
 
-    // snippets: {
-    //     'de-DE': deDE,
-    //     'en-GB': enGB
-    // },
+
+    snippets: {
+        'de-DE': deDE,
+        'en-GB': enGB
+    },
 
     routes: {
         index: {
@@ -47,13 +48,14 @@ Module.register('sw-demoplugin', {
             component: 'sw-demoplugin-create',
             path: 'create',
             meta: {
-                parentPath: 'sw.demoplugin.list'
+                parentPath: 'sw.demoplugin.index',
+                privilege: 'swag_demo.creator'
             }
         }
     },
 
     navigation: [{
-        label: 'sw-demoplugin.general.mainMenuItemGeneral',
+        label: 'Demo',
         color: '#7036d3',
         path: 'sw.demoplugin.index',
         icon: 'default-shopping-paper-bag-product',

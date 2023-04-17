@@ -1,0 +1,14 @@
+{
+    "sw-demoplugin": {
+        "detail": {
+            "cardTitledemopluginInfo": ""
+        },
+        "list": {
+
+        },
+        "details": {
+            "labelName": "Name",
+            "labelLogo": "Logo"
+        }
+    }
+}
