@@ -4,8 +4,8 @@
 
 import template from './sw-demoplugin-list.html.twig';
 
-const { Component, Mixin } = Shopware;
-const { Criteria } = Shopware.Data;
+const {Component, Mixin} = Shopware;
+const {Criteria} = Shopware.Data;
 
 Component.register('sw-demoplugin-list', {
     template,
@@ -41,18 +41,40 @@ Component.register('sw-demoplugin-list', {
         demopluginColumns() {
             return [{
                 property: 'name',
-
                 dataIndex: 'name',
                 allowResize: true,
                 routerLink: 'sw.demoplugin.detail',
-                label: 'sw-demoplugin.list.columnName',
+                label: 'Name',
                 inlineEdit: 'string',
                 primary: true,
-            }, {
-                property: 'link',
-                label: 'sw-demoplugin.list.columnLink',
-                inlineEdit: 'string',
-            }];
+            },
+                {
+                    property: 'city',
+                    label: 'City',
+                    inlineEdit: 'string',
+                },
+                {
+                    property: 'country.name',
+                    label: 'Country',
+                    inlineEdit: 'string',
+                },
+                {
+                    property: 'countryState.name',
+                    label: 'State',
+                    inlineEdit: 'string',
+                },
+                {
+                    property: 'product.name',
+                    label: 'Products',
+                    inlineEdit: 'string',
+                },
+                {
+                    property: 'Active',
+                    label: 'Active',
+                    inlineEdit: 'boolean',
+                    align:'center',
+                },
+            ];
         },
 
         demopluginCriteria() {
@@ -60,6 +82,10 @@ Component.register('sw-demoplugin-list', {
 
             demopluginCriteria.setTerm(this.term);
             demopluginCriteria.addSorting(Criteria.sort(this.sortBy, this.sortDirection, this.naturalSorting));
+            demopluginCriteria.addAssociation('country');
+            demopluginCriteria.addAssociation('countryState');
+            demopluginCriteria.addAssociation('media');
+            demopluginCriteria.addAssociation('product');
 
             return demopluginCriteria;
         },
@@ -94,7 +120,7 @@ Component.register('sw-demoplugin-list', {
                 });
         },
 
-        updateTotal({ total }) {
+        updateTotal({total}) {
             this.total = total;
         },
     },

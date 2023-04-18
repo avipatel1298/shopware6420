@@ -4,7 +4,7 @@ const {Component, Mixin, Data: {Criteria}} = Shopware;
 
 const {mapPropertyErrors} = Shopware.Component.getComponentHelper();
 
-Component.register('sw-demoplugin-create', {
+Component.register('sw-demoplugin-detail', {
     template, inject: ['repositoryFactory', 'acl'],
 
     mixins: [
@@ -23,14 +23,13 @@ Component.register('sw-demoplugin-create', {
 
     data() {
         return {
-            demoplugin: null,
-            customFieldSets: [],
+            demoplugin: [],
             isLoading: false,
             isSaveSuccessful: false,
-            country:null,
-            state:[],
-            product:[],
-            media:[]
+            country: null,
+            state: [],
+            product: [],
+            media: []
         };
     },
 
@@ -69,17 +68,6 @@ Component.register('sw-demoplugin-create', {
             return this.repositoryFactory.create('product')
         },
 
-        customFieldSetRepository() {
-            return this.repositoryFactory.create('custom_field_set');
-        },
-
-        customFieldSetCriteria() {
-            const criteria = new Criteria(1, null);
-            criteria.addFilter(Criteria.equals('relations.entityName', 'swag_demo'),);
-
-            return criteria;
-        },
-
         mediaUploadTag() {
             return `sw-demoplugin-detail--${this.demoplugin.id}`;
         },
@@ -107,42 +95,63 @@ Component.register('sw-demoplugin-create', {
             };
         },
         ...mapPropertyErrors('demoplugin', ['name',
-        'city',
-        'countryId',
-        'countryStateId',
-        'product',
+            'city',
         ]),
-    },
 
-    countryId: {
-        get() {
-            return this.demoplugin.countryId;
+        countryId: {
+            get() {
+                return this.demoplugin.countryId;
+            },
+
+            set(countryId) {
+                this.demoplugin.countryId = countryId;
+            },
         },
 
-        set(countryId) {
-            this.demoplugin.countryId = countryId;
+        countryCriteria() {
+            const criteria = new Criteria(1, 25);
+            criteria.addSorting(Criteria.sort('position', 'ASC'));
+            return criteria;
         },
-    },
 
-    countryCriteria() {
-        const criteria = new Criteria(1, 25);
-        criteria.addSorting(Criteria.sort('position', 'ASC'));
-        return criteria;
-    },
+        stateCriteria() {
+            if (!this.demoplugin.countryId) {
+                return null;
+            }
 
-    stateCriteria() {
-        if (!this.demoplugin.countryId) {
-            return null;
-        }
+            const criteria = new Criteria(1, 25);
+            criteria.addFilter(Criteria.equals('countryId', this.demoplugin.countryId));
+            return criteria;
+        },
 
-        const criteria = new Criteria(1, 25);
-        criteria.addFilter(Criteria.equals('countryId', this.demoplugin.countryId));
-        return criteria;
+        productCriteria() {
+            const criteria = new Criteria(1, 25);
+            return criteria;
+        },
     },
 
     watch: {
         demopluginId() {
             this.createdComponent();
+        },
+
+        countryId: {
+            immediate: true,
+            handler(newId, oldId) {
+                if (typeof oldId !== 'undefined') {
+                    this.demoplugin.countryStateId = null;
+                }
+
+                if (!this.countryId) {
+                    this.country = null;
+                    return Promise.resolve();
+                }
+
+                return this.countryRepository.get(this.countryId).then((country) => {
+                    this.country = country;
+                    this.getCountryStates();
+                });
+            },
         },
     },
 
@@ -153,7 +162,7 @@ Component.register('sw-demoplugin-create', {
     methods: {
         createdComponent() {
             Shopware.ExtensionAPI.publishData({
-                id: 'sw-demoplugin-detail__manufacturer',
+                id: 'sw-demoplugin-detail',
                 path: 'demoplugin',
                 scope: this,
             });
@@ -166,23 +175,29 @@ Component.register('sw-demoplugin-create', {
             this.demoplugin = this.demopluginRepository.create();
         },
 
+        getCountryStates() {
+            if (!this.country) {
+                return Promise.resolve();
+            }
+
+            return this.countryStateRepository.search(this.stateCriteria).then((response) => {
+                this.states = response;
+            });
+        },
+
         async loadEntityData() {
             this.isLoading = true;
 
-            const [demopluginResponse, customFieldResponse] = await Promise.allSettled([
-                this.demopluginRepository.get(this.demopluginId),
-                this.customFieldSetRepository.search(this.customFieldSetCriteria),
+            const [demopluginResponse] = await Promise.allSettled([
+                this.demopluginRepository.get(this.demopluginId)
             ]);
 
+
             if (demopluginResponse.status === 'fulfilled') {
-                this.manufacturer = demopluginResponse.value;
+                this.demoplugin = demopluginResponse.value;
             }
 
-            if (customFieldResponse.status === 'fulfilled') {
-                this.customFieldSets = customFieldResponse.value;
-            }
-
-            if (demopluginResponse.status === 'rejected' || customFieldResponse.status === 'rejected') {
+            if (demopluginResponse.status === 'rejected') {
                 this.createNotificationError({
                     message: this.$tc(
                         'global.notification.notificationLoadingDataErrorMessage',
@@ -194,7 +209,7 @@ Component.register('sw-demoplugin-create', {
         },
 
         abortOnLanguageChange() {
-            return this.demopluginRepository.hasChanges(this.manufacturer);
+            return this.demopluginRepository.hasChanges(this.demoplugin);
         },
 
         saveOnLanguageChange() {
@@ -232,7 +247,7 @@ Component.register('sw-demoplugin-create', {
 
             this.isLoading = true;
 
-            this.demopluginRepository.save(this.manufacturer).then(() => {
+            this.demopluginRepository.save(this.demoplugin).then(() => {
                 this.isLoading = false;
                 this.isSaveSuccessful = true;
                 if (this.demopluginId === null) {

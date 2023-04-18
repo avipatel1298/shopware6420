@@ -80,7 +80,7 @@ class SwagDemoEntity extends Entity
     protected $product;
 
     /**
-     * @var SwagDemoTranslationCollection
+     * @var SwagDemoTranslationCollection|null
      */
     protected $translations;
 
@@ -229,7 +229,7 @@ class SwagDemoEntity extends Entity
         $this->product = $product;
     }
 
-    public function getTranslations(): SwagDemoTranslationCollection
+    public function getTranslations(): ?SwagDemoTranslationCollection
     {
         return $this->translations;
     }

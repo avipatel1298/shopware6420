@@ -83,15 +83,14 @@
                             @page-change="onPageChange"
                             @column-sort="onSortColumn"
                         >
-                            {% block sw_manufacturer_list_grid_columns_name_preview %}
-                                <template #preview-name="{ item }">
+                            {% block sw_demoplugin_list_grid_columns_name_preview %}
+                                <template #preview-name="{item}">
                                     <sw-media-preview-v2 :source="item.mediaId"></sw-media-preview-v2>
                                 </template>
                             {% endblock %}
                         </sw-entity-listing>
                     {% endblock %}
 
-                    <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
                     {% block sw_demoplugin_list_empty_state %}
                         <sw-empty-state
                             v-if="!isLoading && !total && isValidTerm(term)"

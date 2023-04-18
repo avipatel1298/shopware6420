@@ -68,7 +68,7 @@ class SwagDemoDefinition extends EntityDefinition
 
             //TranslationsAssociationField
             (new TranslationsAssociationField(
-                SwagDemoTranslationDefinition::class, 'swag_demo_id'))->addFlags(new ApiAware(), new Required()),
+                SwagDemoTranslationDefinition::class, 'swag_demo_id'))->addFlags(new ApiAware()),
         ]);
     }
 }

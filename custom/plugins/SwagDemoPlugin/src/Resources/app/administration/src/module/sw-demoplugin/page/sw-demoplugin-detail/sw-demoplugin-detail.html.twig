@@ -3,7 +3,6 @@
 
         {% block sw_demoplugin_detail_header %}
             <template #smart-bar-header>
-{#                <h2>{{ placeholder(demoplugin, 'name', $tc('sw-demoplugin.detail.textHeadline')) }}</h2>#}
             </template>
 
         {% endblock %}
@@ -72,16 +71,24 @@
                                             v-model="demoplugin.name"
                                             type="text"
                                             :label="$tc('Name')"
-                                            :placeholder="$tc('Name')"                                            name="name"
-                                            validation="required"
-                                            required
+                                            :placeholder="$tc('Name')"
                                             :error="demopluginNameError"
-                                            :disabled="!acl.can('swag_demo.editor')"></sw-field>
+                                           ></sw-field>
+                                    {% endblock %}
+
+                                    {% block sw_demoplugin_detail_base_info_field_city %}
+                                        <sw-field
+                                            v-model="demoplugin.city"
+                                            type="text"
+                                            :label="$tc('City')"
+                                            :placeholder="$tc('City')"
+                                            :error="demopluginCityError"
+                                        ></sw-field>
                                     {% endblock %}
 
                                     {% block sw_demoplugin_detail_base_info_field_country %}
                                         <sw-entity-single-select
-                                            v-model="demoplugin.countryId"
+                                            v-model="countryId"
                                             class="sw-demoplugin-detail-form__country-select"
                                             entity="country"
                                             :criteria="countryCriteria"
@@ -95,16 +102,36 @@
                                             class="sw-demoplugin-detail-state-select-placeholder"
                                         >
                                             <sw-entity-single-select
-                                                v-model="demoplugin.countryStateId"
+                                                v-model="demoplugin.countrystateId"
                                                 class="sw-demoplugin-detail-state-select"
                                                 entity="country_state"
-                                                :criteria="stateCriteria"
                                                 :label="$tc('State')"
-                                                :placeholder="$tc('sw-demoplugin.detail.placeholderState')"
-                                                :required="country && country.forceStateInRegistration"
-                                                :error="demopluginCountryStateIdError"
+                                                :criteria="stateCriteria"
+                                                :placeholder="$tc('Enter your State')"
                                                 show-clearable-button/>
                                         </div>
+                                    {% endblock %}
+
+                                    {% block sw_demoplugin_detail_base_info_field_product %}
+                                        <sw-entity-single-select
+                                            v-model="demoplugin.productId"
+                                            class="sw-demoplugin-form_product-select"
+                                            entity="product"
+                                            :criteria="productCriteria"
+                                            :label="$tc('product')"
+                                            :placeholder="$tc(product)"
+                                            show-clearable-button
+                                        />
+                                    {% endblock %}
+
+                                    {% block sw_demoplugin_active_switch %}
+                                        <sw-switch-field
+                                            v-model="demoplugin.active"
+                                            class="sw_demoplugin_active_switch"
+                                            size="medium"
+                                            :label="$tc('Active')"
+
+                                        />
                                     {% endblock %}
 
 

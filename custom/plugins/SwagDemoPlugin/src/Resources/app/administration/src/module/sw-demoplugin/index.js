@@ -5,7 +5,6 @@ import enGB from './snippet/en-GB';
 import './acl';
 const { Module } = Shopware;
 
-
 Module.register('sw-demoplugin', {
     type: 'core',
     name: 'demoplugin',
@@ -24,32 +23,38 @@ Module.register('sw-demoplugin', {
         'en-GB': enGB
     },
 
+
     routes: {
         index: {
             components: {
                 default: 'sw-demoplugin-list',
             },
             path: 'index',
-
+            meta: {
+                privilege: 'swag_demo.viewer',
+            },
         },
-
-        list: {
-            component: 'sw-demoplugin-list',
-            path: 'list'
+        create: {
+            component: 'sw-demoplugin-detail',
+            path: 'create',
+            meta: {
+                parentPath: 'sw.demoplugin.index',
+                privilege: 'swag_demo.creator',
+            },
         },
         detail: {
             component: 'sw-demoplugin-detail',
             path: 'detail/:id',
             meta: {
-                parentPath: 'sw.demoplugin.list'
-            }
-        },
-        create: {
-            component: 'sw-demoplugin-create',
-            path: 'create',
-            meta: {
                 parentPath: 'sw.demoplugin.index',
-                privilege: 'swag_demo.creator'
+                privilege: 'swag_demo.viewer',
+            },
+            props: {
+                default(route) {
+                    return {
+                        demopluginId: route.params.id,
+                    };
+                }
             }
         }
     },
