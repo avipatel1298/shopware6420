@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <!--Translation Definition-->
+        <service id="SwagBlogPlugin\Core\Content\SwagBlog\Aggregate\SwagBlogTranslation\SwagBlogTranslationDefinition">
+            <tag name="shopware.entity.definition" entity="swag_blog_translation"/>
+        </service>
+        <service
+            id="SwagBlogPlugin\Core\Content\SwagBlogCategory\Aggregate\SwagBlogCategoryTranslation\SwagBlogCategoryTranslationDefinition">
+            <tag name="shopware.entity.definition" entity="swag_blog_category_translation"/>
+        </service>
+        <!--Translation Definition-->
+
+        <!--Definition Services-->
+        <service id="SwagBlogPlugin\Core\Content\SwagBlog\SwagBlogDefinition">
+            <tag name="shopware.entity.definition" entity="swag_blog"/>
+        </service>
+        <service id="SwagBlogPlugin\Core\Content\SwagBlogCategory\SwagBlogCategoryDefinition">
+            <tag name="shopware.entity.definition" entity="swag_blog_category"/>
+        </service>
+        <service id="SwagBlogPlugin\Core\Content\SwagBlogMappingDefinition">
+            <tag name="shopware.entity.definition" entity="swag_blog_product"/>
+        </service>
+        <!--Definition Services-->
+
+        <!--Product Extension Service-->
+        <service id="SwagBlogPlugin\Extension\ProductExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+        <!--Product Extension Service-->
+
+        <!--Language Extension service-->
+        <service id="SwagBlogPlugin\Extension\LanguageExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+        <!--Language Extension service-->
+
+    </services>
+</container>
