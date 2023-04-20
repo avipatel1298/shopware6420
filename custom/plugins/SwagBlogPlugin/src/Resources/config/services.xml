@@ -6,38 +6,41 @@
 
     <services>
         <!--Translation Definition-->
-        <service id="SwagBlogPlugin\Core\Content\SwagBlog\Aggregate\SwagBlogTranslation\SwagBlogTranslationDefinition">
-            <tag name="shopware.entity.definition" entity="swag_blog_translation"/>
+        <service id="SwagBlogPlugin\Core\Content\SwagBlog\Aggregate\SwagBlogTranslation\BlogTranslationDefinition">
+            <tag name="shopware.entity.definition" entity="blog_translation"/>
         </service>
         <service
-            id="SwagBlogPlugin\Core\Content\SwagBlogCategory\Aggregate\SwagBlogCategoryTranslation\SwagBlogCategoryTranslationDefinition">
-            <tag name="shopware.entity.definition" entity="swag_blog_category_translation"/>
+            id="SwagBlogPlugin\Core\Content\SwagBlogCategory\Aggregate\SwagBlogCategoryTranslation\BlogCategoryTranslationDefinition">
+            <tag name="shopware.entity.definition" entity="blog_category_translation"/>
         </service>
         <!--Translation Definition-->
 
         <!--Definition Services-->
-        <service id="SwagBlogPlugin\Core\Content\SwagBlog\SwagBlogDefinition">
-            <tag name="shopware.entity.definition" entity="swag_blog"/>
+        <service id="SwagBlogPlugin\Core\Content\SwagBlog\BlogDefinition">
+            <tag name="shopware.entity.definition" entity="blog"/>
         </service>
-        <service id="SwagBlogPlugin\Core\Content\SwagBlogCategory\SwagBlogCategoryDefinition">
-            <tag name="shopware.entity.definition" entity="swag_blog_category"/>
+        <service id="SwagBlogPlugin\Core\Content\SwagBlogCategory\BlogCategoryDefinition">
+            <tag name="shopware.entity.definition" entity="blog_category"/>
         </service>
-        <service id="SwagBlogPlugin\Core\Content\SwagBlogMappingDefinition">
-            <tag name="shopware.entity.definition" entity="swag_blog_product"/>
+        <service id="SwagBlogPlugin\Core\Content\ProductMappingDefinition">
+            <tag name="shopware.entity.definition" entity="blog_product"/>
+        </service>
+
+        <service id="SwagBlogPlugin\Core\Content\CategoryMappingDefinition">
+            <tag name="shopware.entity.definition" entity="blog_category_mapping"/>
         </service>
         <!--Definition Services-->
 
-        <!--Product Extension Service-->
+<!--        &lt;!&ndash;Product Extension Service&ndash;&gt;-->
         <service id="SwagBlogPlugin\Extension\ProductExtension">
             <tag name="shopware.entity.extension"/>
         </service>
-        <!--Product Extension Service-->
+<!--        &lt;!&ndash;Product Extension Service&ndash;&gt;-->
 
         <!--Language Extension service-->
         <service id="SwagBlogPlugin\Extension\LanguageExtension">
             <tag name="shopware.entity.extension"/>
         </service>
-        <!--Language Extension service-->
-
-    </services>
+<!--    Language Extension service-->
+</services>
 </container>

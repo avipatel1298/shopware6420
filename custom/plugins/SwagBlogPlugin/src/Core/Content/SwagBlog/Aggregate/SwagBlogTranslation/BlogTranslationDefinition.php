@@ -1,16 +1,16 @@
 <?php declare(strict_types=1);
 
-namespace SwagBlogPlugin\Core\Content\SwagBlogCategory\Aggregate\SwagBlogCategoryTranslation;
+namespace SwagBlogPlugin\Core\Content\SwagBlog\Aggregate\SwagBlogTranslation;
 
 use Shopware\Core\Framework\DataAbstractionLayer\EntityTranslationDefinition;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\Flag\Required;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\StringField;
 use Shopware\Core\Framework\DataAbstractionLayer\FieldCollection;
-use SwagBlogPlugin\Core\Content\SwagBlogCategory\SwagBlogCategoryDefinition;
+use SwagBlogPlugin\Core\Content\SwagBlog\BlogDefinition;
 
-class SwagBlogCategoryTranslationDefinition extends EntityTranslationDefinition
+class BlogTranslationDefinition extends EntityTranslationDefinition
 {
-    public const ENTITY_NAME = 'swag_blog_category_translation';
+    public const ENTITY_NAME = 'blog_translation';
 
     public function getEntityName(): string
     {
@@ -19,25 +19,24 @@ class SwagBlogCategoryTranslationDefinition extends EntityTranslationDefinition
 
     public function getParentDefinitionClass(): string
     {
-        return SwagBlogCategoryDefinition::class;
+        return BlogDefinition::class;
     }
 
 //    public function getEntityClass(): string
 //    {
-//        return SwagBlogTranslationEntity::class;
+//        return BlogTranslationEntity::class;
 //    }
 //
 //    public function getCollectionClass(): string
 //    {
-//        return SwagBlogTranslationCollection::class;
+//        return BlogTranslationCollection::class;
 //    }
 
     protected function defineFields(): FieldCollection
     {
         return new FieldCollection([
-            (new StringField('category_name',
-                'category_name'))->addFlags(new Required()),
-
+            (new StringField('blog_name', 'blogName'))->addFlags(new Required()),
+            (new StringField('description','description'))->addFlags(new Required()),
         ]);
     }
 

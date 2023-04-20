@@ -1,16 +1,18 @@
 <?php declare(strict_types=1);
 
-namespace SwagBlogPlugin\Core\Content\SwagBlog\Aggregate\SwagBlogTranslation;
+namespace SwagBlogPlugin\Core\Content\SwagBlogCategory\Aggregate\SwagBlogCategoryTranslation;
 
 use Shopware\Core\Framework\DataAbstractionLayer\EntityTranslationDefinition;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\Flag\Required;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\StringField;
 use Shopware\Core\Framework\DataAbstractionLayer\FieldCollection;
-use SwagBlogPlugin\Core\Content\SwagBlog\SwagBlogDefinition;
+use SwagBlogPlugin\Core\Content\SwagBlog\Aggregate\SwagBlogTranslation\SwagBlogTranslationCollection;
+use SwagBlogPlugin\Core\Content\SwagBlog\Aggregate\SwagBlogTranslation\SwagBlogTranslationEntity;
+use SwagBlogPlugin\Core\Content\SwagBlogCategory\BlogCategoryDefinition;
 
-class SwagBlogTranslationDefinition extends EntityTranslationDefinition
+class BlogCategoryTranslationDefinition extends EntityTranslationDefinition
 {
-    public const ENTITY_NAME = 'swag_blog_translation';
+    public const ENTITY_NAME = 'swag_blog_category_translation';
 
     public function getEntityName(): string
     {
@@ -19,9 +21,9 @@ class SwagBlogTranslationDefinition extends EntityTranslationDefinition
 
     public function getParentDefinitionClass(): string
     {
-        return SwagBlogDefinition::class;
+        return BlogCategoryDefinition::class;
     }
-//
+
 //    public function getEntityClass(): string
 //    {
 //        return SwagBlogTranslationEntity::class;
@@ -35,8 +37,9 @@ class SwagBlogTranslationDefinition extends EntityTranslationDefinition
     protected function defineFields(): FieldCollection
     {
         return new FieldCollection([
-            (new StringField('blog_name', 'blog_name'))->addFlags(new Required()),
-            (new StringField('discription','discription'))->addFlags(new Required()),
+            (new StringField('category_name',
+                'categoryName'))->addFlags(new Required()),
+
         ]);
     }
 

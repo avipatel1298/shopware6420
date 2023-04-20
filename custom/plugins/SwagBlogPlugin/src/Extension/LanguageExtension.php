@@ -6,8 +6,8 @@ use Shopware\Core\Framework\DataAbstractionLayer\EntityExtension;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\OneToManyAssociationField;
 use Shopware\Core\Framework\DataAbstractionLayer\FieldCollection;
 use Shopware\Core\System\Language\LanguageDefinition;
-use SwagBlogPlugin\Core\Content\SwagBlog\Aggregate\SwagBlogTranslation\SwagBlogTranslationDefinition;
-use SwagBlogPlugin\Core\Content\SwagBlogCategory\Aggregate\SwagBlogCategoryTranslation\SwagBlogCategoryTranslationDefinition;
+use SwagBlogPlugin\Core\Content\SwagBlog\Aggregate\SwagBlogTranslation\BlogTranslationDefinition;
+use SwagBlogPlugin\Core\Content\SwagBlogCategory\Aggregate\SwagBlogCategoryTranslation\BlogCategoryTranslationDefinition;
 
 class LanguageExtension extends EntityExtension
 {
@@ -16,24 +16,16 @@ class LanguageExtension extends EntityExtension
         $collection->add(
             new OneToManyAssociationField(
                 'swagBlogTranslationsId',
-                SwagBlogTranslationDefinition::class,
-                'blog_name',
+                BlogTranslationDefinition::class,
+                'swag_blog_id',
                 'id'),
         );
 
         $collection->add(
             new OneToManyAssociationField(
-                'swagBlogTranslationsId',
-                SwagBlogTranslationDefinition::class,
-                'discription',
-                'id'),
-        );
-
-        $collection->add(
-            new OneToManyAssociationField(
-                'swagBlogCategoryTranslationsId',
-                SwagBlogCategoryTranslationDefinition::class,
-                'category_name',
+                'BlogCategoryTranslationId',
+                BlogCategoryTranslationDefinition::class,
+                'swag_blog_category_id',
                 'id'),
         );
 

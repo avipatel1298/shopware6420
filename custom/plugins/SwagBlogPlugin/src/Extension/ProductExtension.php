@@ -6,8 +6,8 @@ use Shopware\Core\Content\Product\ProductDefinition;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityExtension;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\ManyToManyAssociationField;
 use Shopware\Core\Framework\DataAbstractionLayer\FieldCollection;
-use SwagBlogPlugin\Core\Content\SwagBlog\SwagBlogDefinition;
-use SwagBlogPlugin\Core\Content\SwagBlogMappingDefinition;
+use SwagBlogPlugin\Core\Content\SwagBlog\BlogDefinition;
+use SwagBlogPlugin\Core\Content\ProductMappingDefinition;
 
 class ProductExtension extends EntityExtension
 {
@@ -16,8 +16,8 @@ class ProductExtension extends EntityExtension
         $collection->add(
             new ManyToManyAssociationField(
                 'blogs',
-                SwagBlogDefinition::class,
-                SwagBlogMappingDefinition::class,
+                BlogDefinition::class,
+                ProductMappingDefinition::class,
                 'product_id',
                 'blog_id',
                 'id',

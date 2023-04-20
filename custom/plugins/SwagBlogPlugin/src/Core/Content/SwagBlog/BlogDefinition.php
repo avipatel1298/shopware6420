@@ -14,33 +14,35 @@ use Shopware\Core\Framework\DataAbstractionLayer\Field\Flag\PrimaryKey;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\Flag\Required;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\IdField;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\ManyToManyAssociationField;
+use Shopware\Core\Framework\DataAbstractionLayer\Field\ManyToManyIdField;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\ManyToOneAssociationField;
-use Shopware\Core\Framework\DataAbstractionLayer\Field\ReferenceVersionField;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\StringField;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\TranslatedField;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\TranslationsAssociationField;
 use Shopware\Core\Framework\DataAbstractionLayer\FieldCollection;
-use SwagBlogPlugin\Core\Content\SwagBlog\Aggregate\SwagBlogTranslation\SwagBlogTranslationDefinition;
-use SwagBlogPlugin\Core\Content\SwagBlogMappingDefinition;
+use SwagBlogPlugin\Core\Content\CategoryMappingDefinition;
+use SwagBlogPlugin\Core\Content\SwagBlog\Aggregate\SwagBlogTranslation\BlogTranslationDefinition;
+use SwagBlogPlugin\Core\Content\SwagBlogCategory\BlogCategoryDefinition;
+use SwagBlogPlugin\Core\Content\ProductMappingDefinition;
 
 
-class SwagBlogDefinition extends EntityDefinition
+class BlogDefinition extends EntityDefinition
 {
-    public const ENTITY_NAME = 'swag_blog';
+    public const ENTITY_NAME = 'blog';
 
     public function getEntityName(): string
     {
         return self::ENTITY_NAME;
     }
-//
+
 //    public function getEntityClass(): string
 //    {
-//        return SwagBlogEntity::class;
+//        return BlogEntity::class;
 //    }
 //
 //    public function getCollectionClass(): string
 //    {
-//        return SwagBlogCollection::class;
+//        return BlogCollection::class;
 //    }
 
     protected function defineFields(): FieldCollection
@@ -48,36 +50,33 @@ class SwagBlogDefinition extends EntityDefinition
         return new FieldCollection([
 
             (new IdField('id', 'id'))->addFlags(new Required(), new PrimaryKey()),
-            (new TranslatedField('blog_name',))->AddFlags(new Required()),
-            (new TranslatedField('discription'))->AddFlags(new Required()),
-            (new DateField('release_date', 'release_date'))->AddFlags(new Required()),
+            (new TranslatedField('blogName',))->addFlags(new Required()),
+            (new TranslatedField('description'))->addFlags(new Required()),
+            (new DateField('release_date', 'releaseDate'))->addFlags(new Required()),
+
             (new BoolField('active', 'active')),
             (new StringField('author', 'author')),
-            (new ReferenceVersionField(ProductDefinition::class))->addFlags(new ApiAware(), new Inherited()),
             (new StringField('not_translated_field', 'notTranslatedField'))->addFlags(new ApiAware()),
-
-            (new FkField('category_id', 'categoryId', CategoryDefinition::class, 'id')),
-            (new FkField('product_id', 'productId', ProductDefinition::class, 'id')),
-
 
             new ManyToManyAssociationField('products',
                 ProductDefinition::class,
-                SwagBlogMappingDefinition::class,
+                ProductMappingDefinition::class,
                 'blog_id',
                 'product_id',
                 'id',
                 'id'),
 
-            new ManyToOneAssociationField('categoryId',
-                'category_id',
-                CategoryDefinition::class,
-                'id',
-                false),
+            new ManyToManyAssociationField('categories',
+            CategoryDefinition::class,
+            CategoryMappingDefinition::class,
+            'blog_id',
+                'blog_category_id','id',
+                'id'),
 
 
             (new TranslationsAssociationField(
-                SwagBlogTranslationDefinition::class,
+                BlogTranslationDefinition::class,
                 'swag_blog_id'))->addFlags(new ApiAware()),
-        ]);
+       ]);
     }
 }
