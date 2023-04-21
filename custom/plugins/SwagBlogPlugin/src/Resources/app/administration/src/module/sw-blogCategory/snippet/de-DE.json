@@ -1,0 +1,13 @@
+{
+    "sw-blogCategory": {
+        "detail": {
+            "textHeadline": "",
+            "cardTitleblogCategoryInfo": "Blog Category Information",
+            "buttonCancel": "Cancel"
+        },
+        "list": {
+
+        }
+
+    }
+}
