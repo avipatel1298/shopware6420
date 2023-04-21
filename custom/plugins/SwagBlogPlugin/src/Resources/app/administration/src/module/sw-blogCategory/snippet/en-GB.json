@@ -1,0 +1,18 @@
+{
+    "sw-blogCategory": {
+        "detail": {
+            "textHeadline": "",
+            "cardTitleblogCategoryInfo": "Blog Category Information",
+            "buttonCancel": "Cancel",
+            "buttonSave": "Save",
+            "labelName": "Name",
+            "placeholderName": "Enter Name.."
+        },
+        "list": {
+            "textblogCategoryOverview": "Total Categories",
+            "buttonAddblogCategory": "Add Category"
+
+        }
+
+    }
+}

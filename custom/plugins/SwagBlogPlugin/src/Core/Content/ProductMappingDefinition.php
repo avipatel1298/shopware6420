@@ -29,8 +29,16 @@ class ProductMappingDefinition extends MappingEntityDefinition
             (new FkField('blog_id', 'blogId', BlogDefinition::class,'id'))->addFlags(new PrimaryKey(), new Required()),
             (new FkField('product_id', 'productId', ProductDefinition::class,'id'))->addFlags(new PrimaryKey(), new Required()),
             (new ReferenceVersionField(ProductDefinition::class))->addFlags(new ApiAware(), new Inherited()),
-            new ManyToOneAssociationField('blog', 'blog_id', BlogDefinition::class, 'id'),
-            new ManyToOneAssociationField('product', 'product_id', ProductDefinition::class, 'id')
+
+            new ManyToOneAssociationField('blog',
+                'blog_id',
+                BlogDefinition::class,
+                'id'),
+
+            new ManyToOneAssociationField('product',
+                'product_id',
+                ProductDefinition::class,
+                'id')
         ]);
     }
 }

@@ -22,15 +22,15 @@ class BlogTranslationDefinition extends EntityTranslationDefinition
         return BlogDefinition::class;
     }
 
-//    public function getEntityClass(): string
-//    {
-//        return BlogTranslationEntity::class;
-//    }
-//
-//    public function getCollectionClass(): string
-//    {
-//        return BlogTranslationCollection::class;
-//    }
+    public function getEntityClass(): string
+    {
+        return BlogTranslationEntity::class;
+    }
+
+    public function getCollectionClass(): string
+    {
+        return BlogTranslationCollection::class;
+    }
 
     protected function defineFields(): FieldCollection
     {

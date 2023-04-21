@@ -2,28 +2,24 @@
 
 namespace SwagBlogPlugin\Core\Content\SwagBlog;
 
-use Shopware\Core\Content\Category\CategoryDefinition;
 use Shopware\Core\Content\Product\ProductDefinition;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityDefinition;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\BoolField;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\DateField;
-use Shopware\Core\Framework\DataAbstractionLayer\Field\FkField;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\Flag\ApiAware;
-use Shopware\Core\Framework\DataAbstractionLayer\Field\Flag\Inherited;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\Flag\PrimaryKey;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\Flag\Required;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\IdField;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\ManyToManyAssociationField;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\ManyToManyIdField;
-use Shopware\Core\Framework\DataAbstractionLayer\Field\ManyToOneAssociationField;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\StringField;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\TranslatedField;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\TranslationsAssociationField;
 use Shopware\Core\Framework\DataAbstractionLayer\FieldCollection;
 use SwagBlogPlugin\Core\Content\CategoryMappingDefinition;
 use SwagBlogPlugin\Core\Content\SwagBlog\Aggregate\SwagBlogTranslation\BlogTranslationDefinition;
-use SwagBlogPlugin\Core\Content\SwagBlogCategory\BlogCategoryDefinition;
 use SwagBlogPlugin\Core\Content\ProductMappingDefinition;
+use SwagBlogPlugin\Core\Content\SwagBlogCategory\BlogCategoryDefinition;
 
 
 class BlogDefinition extends EntityDefinition
@@ -35,15 +31,15 @@ class BlogDefinition extends EntityDefinition
         return self::ENTITY_NAME;
     }
 
-//    public function getEntityClass(): string
-//    {
-//        return BlogEntity::class;
-//    }
-//
-//    public function getCollectionClass(): string
-//    {
-//        return BlogCollection::class;
-//    }
+    public function getEntityClass(): string
+    {
+        return BlogEntity::class;
+    }
+
+    public function getCollectionClass(): string
+    {
+        return BlogCollection::class;
+    }
 
     protected function defineFields(): FieldCollection
     {
@@ -58,6 +54,9 @@ class BlogDefinition extends EntityDefinition
             (new StringField('author', 'author')),
             (new StringField('not_translated_field', 'notTranslatedField'))->addFlags(new ApiAware()),
 
+            (new ManyToManyIdField('category_ids','categoryIds','blogCategories')),
+            (new ManyToManyIdField('product_ids','productIds','products')),
+
             new ManyToManyAssociationField('products',
                 ProductDefinition::class,
                 ProductMappingDefinition::class,
@@ -66,17 +65,17 @@ class BlogDefinition extends EntityDefinition
                 'id',
                 'id'),
 
-            new ManyToManyAssociationField('categories',
-            CategoryDefinition::class,
-            CategoryMappingDefinition::class,
-            'blog_id',
-                'blog_category_id','id',
+            new ManyToManyAssociationField('blogCategories',
+                BlogCategoryDefinition::class,
+                CategoryMappingDefinition::class,
+                'blog_id',
+                'blog_category_id', 'id',
                 'id'),
 
 
             (new TranslationsAssociationField(
                 BlogTranslationDefinition::class,
-                'swag_blog_id'))->addFlags(new ApiAware()),
-       ]);
+                'blog_id'))->addFlags(new ApiAware()),
+        ]);
     }
 }

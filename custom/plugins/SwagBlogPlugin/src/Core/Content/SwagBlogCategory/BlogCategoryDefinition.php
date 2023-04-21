@@ -24,15 +24,15 @@ class BlogCategoryDefinition extends EntityDefinition
         return self::ENTITY_NAME;
     }
 
-//    public function getEntityClass(): string
-//    {
-//        return BlogCategoryEntity::class;
-//    }
-//
-//    public function getCollectionClass(): string
-//    {
-//        return BlogCategoryCollection::class;
-//    }
+    public function getEntityClass(): string
+    {
+        return BlogCategoryEntity::class;
+    }
+
+    public function getCollectionClass(): string
+    {
+        return BlogCategoryCollection::class;
+    }
 
     protected function defineFields(): FieldCollection
     {
@@ -41,7 +41,7 @@ class BlogCategoryDefinition extends EntityDefinition
             (new IdField('id', 'id'))->addFlags(new Required(), new PrimaryKey()),
             (new TranslatedField('categoryName',))->AddFlags(new Required()),
 
-            new ManyToManyAssociationField('swagBlogs', BlogDefinition::class,
+            new ManyToManyAssociationField('blogs', BlogDefinition::class,
                 CategoryMappingDefinition::class,
                 'blog_category_id', 'blog_id',
                 'id',
@@ -49,7 +49,7 @@ class BlogCategoryDefinition extends EntityDefinition
 
             (new TranslationsAssociationField(
                 BlogCategoryTranslationDefinition::class,
-                'swag_blog_category_id'))->addFlags(new ApiAware()),
+                'blog_category_id'))->addFlags(new ApiAware()),
         ]);
     }
 }

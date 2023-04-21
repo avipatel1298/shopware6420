@@ -12,7 +12,7 @@ use SwagBlogPlugin\Core\Content\SwagBlogCategory\BlogCategoryDefinition;
 
 class BlogCategoryTranslationDefinition extends EntityTranslationDefinition
 {
-    public const ENTITY_NAME = 'swag_blog_category_translation';
+    public const ENTITY_NAME = 'blog_category_translation';
 
     public function getEntityName(): string
     {
@@ -24,15 +24,15 @@ class BlogCategoryTranslationDefinition extends EntityTranslationDefinition
         return BlogCategoryDefinition::class;
     }
 
-//    public function getEntityClass(): string
-//    {
-//        return SwagBlogTranslationEntity::class;
-//    }
-//
-//    public function getCollectionClass(): string
-//    {
-//        return SwagBlogTranslationCollection::class;
-//    }
+    public function getEntityClass(): string
+    {
+        return BlogCategoryTranslationEntity::class;
+    }
+
+    public function getCollectionClass(): string
+    {
+        return BlogCategoryTranslationCollection::class;
+    }
 
     protected function defineFields(): FieldCollection
     {

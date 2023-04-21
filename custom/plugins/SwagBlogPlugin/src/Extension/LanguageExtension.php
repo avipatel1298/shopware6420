@@ -15,9 +15,9 @@ class LanguageExtension extends EntityExtension
     {
         $collection->add(
             new OneToManyAssociationField(
-                'swagBlogTranslationsId',
+                'BlogTranslationsId',
                 BlogTranslationDefinition::class,
-                'swag_blog_id',
+                'blog_id',
                 'id'),
         );
 
@@ -25,12 +25,10 @@ class LanguageExtension extends EntityExtension
             new OneToManyAssociationField(
                 'BlogCategoryTranslationId',
                 BlogCategoryTranslationDefinition::class,
-                'swag_blog_category_id',
+                'blog_category_id',
                 'id'),
         );
-
     }
-
     public function getDefinitionClass(): string
     {
         return LanguageDefinition::class;
