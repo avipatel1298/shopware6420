@@ -1,156 +1,157 @@
 <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
 {% block sw_blog_detail %}
-<sw-page class="sw-blog-detail">
+    <sw-page class="sw-blog-detail">
+        <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+        {% block sw_blog_detail_header %}
+            <template #smart-bar-header>
+                {#            <h2>{{ placeholder(blog, 'name', $tc('sw-blog.detail.textHeadline')) }}</h2> #}
+            </template>
+        {% endblock %}
 
-    <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
-    {% block sw_blog_detail_header %}
-        <template #smart-bar-header>
-{#            <h2>{{ placeholder(blog, 'name', $tc('sw-blog.detail.textHeadline')) }}</h2>#}
-        </template>
+        <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+        {% block sw_blog_detail_actions %}
+            <template #smart-bar-actions>
 
-    {% endblock %}
+                <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+                {% block sw_blog_detail_actions_abort %}
+                    <sw-button
+                        v-tooltip.bottom="tooltipCancel"
+                        :disabled="blogIsLoading"
+                        @click="onCancel"
+                    >
+                        {{ $tc('sw-blog.detail.buttonCancel') }}
+                    </sw-button>
+                {% endblock %}
 
-    <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
-    {% block sw_blog_detail_actions %}
-        <template #smart-bar-actions>
+                <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+                {% block sw_blog_detail_actions_save %}
+                    <sw-button-process
+                        v-model="isSaveSuccessful"
+                        v-tooltip.bottom="tooltipSave"
+                        class="sw-blog-detail__save-action"
+                        :is-loading="isLoading"
+                        :disabled="isLoading || !acl.can('blog.editor')"
+                        variant="primary"
+                        @click.prevent="onSave"
+                    >
+                        {{ $tc('sw-blog.detail.buttonSave') }}
+                    </sw-button-process>
+                {% endblock %}
+            </template>
+        {% endblock %}
 
-            <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
-            {% block sw_blog_detail_actions_abort %}
-                <sw-button
-                    v-tooltip.bottom="tooltipCancel"
-                    :disabled="blogIsLoading"
-                    @click="onCancel"
-                >
-                    {{ $tc('sw-blog.detail.buttonCancel') }}
-                </sw-button>
-            {% endblock %}
-
-            <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
-            {% block sw_blog_detail_actions_save %}
-                <sw-button-process
-                    v-model="isSaveSuccessful"
-                    v-tooltip.bottom="tooltipSave"
-                    class="sw-blog-detail__save-action"
-                    :is-loading="isLoading"
-                    :disabled="isLoading || !acl.can('blog.editor')"
-                    variant="primary"
-                    @click.prevent="onSave"
-                >
-                    {{ $tc('sw-blog.detail.buttonSave') }}
-                </sw-button-process>
-            {% endblock %}
-
-        </template>
-    {% endblock %}
-
-    <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
-    {% block sw_blog_detail_language_switch %}
-        <template #language-switch>
-            <sw-language-switch
-                :save-changes-function="saveOnLanguageChange"
-                :abort-change-function="abortOnLanguageChange"
-                @on-change="onChangeLanguage"
-            />
-        </template>
-    {% endblock %}
-
-    <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
-    {% block sw_blog_detail_content %}
-    <sw-card-view slot="content">
-        <template v-if="blogIsLoading">
-            <sw-skeleton variant="detail-bold"/>
-            <sw-skeleton/>
-        </template>
-
-        <template v-else>
-
-            <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
-            {% block sw_blog_detail_content_language_info %}
-                <sw-language-info
-                    :entity-description="placeholder(blog, 'name', $tc('sw-blog.detail.textHeadline'))"
+        <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+        {% block sw_blog_detail_language_switch %}
+            <template #language-switch>
+                <sw-language-switch
+                    :save-changes-function="saveOnLanguageChange"
+                    :abort-change-function="abortOnLanguageChange"
+                    @on-change="onChangeLanguage"
                 />
-            {% endblock %}
+            </template>
+        {% endblock %}
 
-            <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
-            {% block sw_blog_detail_base_basic_info_card %}
-            <sw-card
-                position-identifier="sw-blog-detail-basic-info"
-                :title="$tc('sw-blog.detail.cardTitleblogInfo')"
-            >
-                <sw-container
-                    class="sw-blog-detail__container"
-                    columns="repeat(auto-fit, minmax(250px, 1fr))"
-                    gap="0 30px"
-                >
-                    <div class="sw-blog-detail__base-info-wrapper">
+        <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+        {% block sw_blog_detail_content %}
+            <sw-card-view slot="content">
+                <template v-if="blogIsLoading">
+                    <sw-skeleton variant="detail-bold"/>
+                    <sw-skeleton/>
+                </template>
+                <template v-else>
 
-                        <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
-                        {% block sw_blog_detail_base_info_field_name %}
-                            <sw-field
-                                v-model="blog.name"
-                                type="text"
-                                :label="$tc('sw-blog.detail.labelName')"
-{#                                :placeholder="placeholder(blog, 'name', $tc('sw-blog.detail.placeholderName'))"#}
-                                name="name"/>
-                        {% endblock %}
-
-                        {% block sw_blog_detail_base_info_field_description %}
-                            <sw-text-editor
-                                v-model="blog.description"
-                                :label="$tc('sw-blog.detail.labelDescription')"
-                                :placeholder="placeholder(blog, 'description', $tc('sw-blog.detail.placeholderDescription'))"
-                                name="description"
-                                sanitize-input
-                                sanitize-field-name="blog_translation.description"
-                                :disabled="!acl.can('blog.editor')"
-                            />
-                        {% endblock %}
-
-                        {% block sw_blog_edit_order_documents_generate_invoice_datepicker %}
-                            <sw-datepicker
-                                v-model="blog.documentDate"
-                                class="sw-blog-edit-order-documents-generate-invoice__item"
-                                :label="$tc('sw-blog-edit.order.documents.generateInvoice.labelDatePicker')"
-                            />
-                        {% endblock %}
-
-                        {% block sw_blog_detail_base_info_field_name %}
-                            <sw-field
-                                v-model="blog.author"
-                                type="text"
-                                :label="$tc('sw-blog.detail.labelName')"
-                                {#                                :placeholder="placeholder(blog, 'name', $tc('sw-blog.detail.placeholderName'))"#}
-                                name="author"/>
-                        {% endblock %}
-
-                        {% block sw_blog_my_extensions_listing_controls_active_switch %}
-                            <sw-switch-field
-                                v-model="blog.active"
-                                class="sw-blog-my-extensions-listing-controls__active-filter-switch"
-                                :label="$tc('sw-extension.my-extensions.listing.controls.labelActiveStateSwitch')"
-                            />
-                        {% endblock %}
-
-
-                        {% block sw_blog_form_category_select %}
-                        <sw-entity-multi-select
-                            class="sw-blog-form_category-select"
-                            entity="blog_category"
-                            :entity-collection="categories"
-                            :criteria="blogCategoryCriteria"
-                            :label="$tc('sw-blog.detail.labelCategory')"
-                            :placeholder="$tc('sw-blog.detail.placeholderCategory')"
-                            @change="setCategoryIds"
-                            show-clearable-button
+                    <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+                    {% block sw_blog_detail_content_language_info %}
+                        <sw-language-info
+                            :entity-description="placeholder(blog, 'name', $tc('sw-blog.detail.textHeadline'))"
                         />
-                        {% endblock %}
-                    </div>
-                </sw-container>
-            </sw-card>
-            {% endblock %}
-        </template>
+                    {% endblock %}
 
-    </sw-card-view>
-    {% endblock %}
-</sw-page>
+                    <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+                    {% block sw_blog_detail_base_basic_info_card %}
+                        <sw-card
+                            position-identifier="sw-blog-detail-basic-info"
+                            :title="$tc('sw-blog.detail.cardTitleblogInfo')"
+                        >
+                            <sw-container
+                                class="sw-blog-detail__container"
+                                columns="repeat(auto-fit, minmax(250px, 1fr))"
+                                gap="0 30px"
+                            >
+                                <div class="sw-blog-detail__base-info-wrapper">
+
+                                    <!-- eslint-disable-next-line sw-deprecation-rules/no-twigjs-blocks -->
+                                    {% block sw_blog_detail_base_info_field_name %}
+                                        <sw-field
+                                            v-model="blog.name"
+                                            type="text"
+                                            :label="$tc('sw-blog.detail.labelName')"
+                                            {#                                :placeholder="placeholder(blog, 'name', $tc('sw-blog.detail.placeholderName'))" #}
+                                            name="name"/>
+                                    {% endblock %}
+                                    {% block sw_blog_detail_base_info_field_description %}
+                                        <sw-text-editor
+                                            v-model="blog.description"
+                                            :label="$tc('sw-blog.detail.labelDescription')"
+                                            :placeholder="placeholder(blog, 'description', $tc('sw-blog.detail.placeholderDescription'))"
+                                            name="description"
+                                            sanitize-input
+                                            sanitize-field-name="blog_translation.description"
+                                        />
+                                    {% endblock %}
+                                    {% block sw_blog_edit_order_documents_generate_invoice_datepicker %}
+                                        <sw-datepicker
+                                            v-model="blog.documentDate"
+                                            class="sw-blog-edit-order-documents-generate-invoice__item"
+                                            :label="$tc('sw-blog-edit.order.documents.generateInvoice.labelDatePicker')"
+                                        />
+                                    {% endblock %}
+                                    {% block sw_blog_detail_base_info_field_authorname %}
+                                        <sw-field
+                                            v-model="blog.author"
+                                            type="text"
+                                            :label="$tc('sw-blog.detail.labelAuthor')"
+                                            {#                                :placeholder="placeholder(blog, 'name', $tc('sw-blog.detail.placeholderName'))" #}
+                                            name="author"/>
+                                    {% endblock %}
+                                    {% block sw_blog_my_extensions_listing_controls_active_switch %}
+                                        <sw-switch-field
+                                            v-model="blog.active"
+                                            class="sw-blog-my-extensions-listing-controls__active-filter-switch"
+                                            :label="$tc('sw-blog.my-extensions.listing.controls.labelActiveStateSwitch')"
+                                        />
+                                    {% endblock %}
+
+                                    {% block sw_blog_form_category_select %}
+                                        <sw-entity-multi-select
+                                            class="sw-blog-form_category-select"
+                                            entity="blog_category"
+                                            :entity-collection="categories"
+                                            :criteria="blogCategoryCriteria"
+                                            :label="$tc('sw-blog.detail.labelCategory')"
+                                            :placeholder="$tc('sw-blog.detail.placeholderCategory')"
+                                            @change="setCategoryIds"
+                                            show-clearable-button
+                                        />
+                                    {% endblock %}
+
+                                    {% block sw_blog_form_product_select %}
+                                        <sw-entity-multi-select
+                                            class="sw-blog-form_product-select"
+                                            entity="blog_product"
+                                            :entity-collection="product"
+                                            :criteria="productCriteria"
+                                            :label="$tc('sw-blog.detail.labelProduct')"
+                                            :placeholder="$tc('sw-blog.detail.placeholderProduct')"
+                                            show-clearable-button
+                                        />
+                                    {% endblock %}
+                                </div>
+                            </sw-container>
+                        </sw-card>
+                    {% endblock %}
+                </template>
+            </sw-card-view>
+        {% endblock %}
+    </sw-page>
 {% endblock %}
