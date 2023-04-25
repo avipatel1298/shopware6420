@@ -1,17 +1,12 @@
-import './preview';
 import './component';
-
-/**
- * @private since v6.5.0
- * @package content
- */
+import './preview';
 
 Shopware.Service('cmsService').registerCmsBlock({
-    name: 'firsttext',
-    label: 'sw-cms.blocks.blog.text.label',
-    category: 'commerce',
-    component: 'sw-cms-block-blog-text',
-    previewComponent: 'sw-cms-preview-blog-text',
+    name: 'blog-text',
+    label: 'sw-cms-test.blocks.text.blog-text.label',
+    category: 'text',
+    component: 'sw-cms-block-test',
+    previewComponent: 'sw-cms-preview-test',
     defaultConfig: {
         marginBottom: '20px',
         marginTop: '20px',

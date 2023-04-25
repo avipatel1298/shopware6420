@@ -31,16 +31,16 @@
         </service>
         <!--Definition Services-->
 
-<!--        &lt;!&ndash;Product Extension Service&ndash;&gt;-->
+        <!--Product Extension Service-->
         <service id="SwagBlogPlugin\Extension\ProductExtension">
             <tag name="shopware.entity.extension"/>
         </service>
-<!--        &lt;!&ndash;Product Extension Service&ndash;&gt;-->
+        <!--Product Extension Service-->
 
         <!--Language Extension service-->
         <service id="SwagBlogPlugin\Extension\LanguageExtension">
             <tag name="shopware.entity.extension"/>
         </service>
-<!--    Language Extension service-->
-</services>
+        <!--Language Extension service-->
+    </services>
 </container>
