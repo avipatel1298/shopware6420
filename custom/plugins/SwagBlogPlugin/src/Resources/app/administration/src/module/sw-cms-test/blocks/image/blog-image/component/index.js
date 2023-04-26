@@ -1,4 +1,4 @@
-import template from './sw-cms-block-test.html.twig';
+import template from './sw-cms-block-images.html.twig';
 
 const { Component } = Shopware;
 
@@ -6,6 +6,6 @@ const { Component } = Shopware;
  * @private since v6.5.0
  * @package content
  */
-Component.register('sw-cms-block-blog-text', {
+Component.register('sw-cms-block-images', {
     template,
 });
