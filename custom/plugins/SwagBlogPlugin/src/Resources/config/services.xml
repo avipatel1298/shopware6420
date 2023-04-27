@@ -31,16 +31,31 @@
         </service>
         <!--Definition Services-->
 
-<!--        &lt;!&ndash;Product Extension Service&ndash;&gt;-->
+        <!--Product Extension Service-->
         <service id="SwagBlogPlugin\Extension\ProductExtension">
             <tag name="shopware.entity.extension"/>
         </service>
-<!--        &lt;!&ndash;Product Extension Service&ndash;&gt;-->
+        <!--Product Extension Service-->
 
         <!--Language Extension service-->
         <service id="SwagBlogPlugin\Extension\LanguageExtension">
             <tag name="shopware.entity.extension"/>
         </service>
-<!--    Language Extension service-->
-</services>
+        <!--Language Extension service-->
+
+        <!--Blog Element Resolver-->
+        <service id="SwagBlogPlugin\Core\Content\blogImages\cms\blogImageCmsElementResolver">
+            <tag name="shopware.cms.data_resolver"/>
+            <argument type="service" id="Shopware\Core\Content\Media\Cms\DefaultMediaResolver"/>
+        </service>
+        <!--Blog Element Resolver-->
+
+        <!--Ictech Product Slider-->
+        <service id="SwagBlogPlugin\Core\Content\productSlider\Cms\ictechProductSliderCmsElementResolver">
+            <tag name="shopware.cms.data_resolver"/>
+            <argument type="service" id="Shopware\Core\Content\ProductStream\Service\ProductStreamBuilder"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <!--Ictech Product Slider-->
+        </service>
+    </services>
 </container>

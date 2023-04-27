@@ -1,6 +1,7 @@
 import template from './sw-blog-detail.html.twig';
 
-const {Component, Mixin, Data: {Criteria}} = Shopware;
+const {Component, Mixin,Context , Data: {Criteria}} = Shopware;
+const { EntityCollection } = Shopware.Data;
 
 const {mapPropertyErrors} = Shopware.Component.getComponentHelper();
 
@@ -18,6 +19,7 @@ Component.register('sw-blog-detail', {
             type: String,
             required: false,
             default: null,
+
         },
     },
 
@@ -26,6 +28,11 @@ Component.register('sw-blog-detail', {
             blog: [],
             isLoading: false,
             isSaveSuccessful: false,
+            product: [],
+            category:[],
+            categories: null
+
+
         };
     },
 
@@ -48,6 +55,13 @@ Component.register('sw-blog-detail', {
             return this.repositoryFactory.create('blog');
         },
 
+        categoryRepository() {
+            return this.repositoryFactory.create('blog_category');
+        },
+
+        productRepository() {
+            return this.repositoryFactory.create('product')
+        },
 
         tooltipSave() {
             if (this.acl.can('blog.editor')) {
@@ -74,11 +88,25 @@ Component.register('sw-blog-detail', {
         ...mapPropertyErrors('blog', ['name',
 
         ]),
+
+        blogCategoryCriteria() {
+            const criteria = new Criteria(1, 25);
+            return criteria;
+        },
+
+        productCriteria() {
+            const criteria = new Criteria(1, 25);
+            return criteria;
+        },
     },
 
     watch: {
         blogId() {
             this.createdComponent();
+        },
+
+        categoryId() {
+            this.setCategory();
         },
     },
 
@@ -88,19 +116,51 @@ Component.register('sw-blog-detail', {
 
     methods: {
         createdComponent() {
+                this.categories = new EntityCollection(
+                    this.categoryRepository.route,
+                    this.categoryRepository.entityName,
+                    Context.api,
+                );
+                console.log(this.categories);
+
+                this.product = new EntityCollection(
+                    this.productRepository.route,
+                    this.productRepository.entityName,
+                    Context.api,
+                );
+
             Shopware.ExtensionAPI.publishData({
                 id: 'sw-blog-detail',
                 path: 'blog',
                 scope: this,
             });
+
             if (this.blogId) {
                 this.loadEntityData();
                 return;
             }
-
             Shopware.State.commit('context/resetLanguageToDefault');
             this.blog = this.blogRepository.create();
+
+
         },
+        setCategoryIds(cat) {
+            this.categoryIds = cat.getIds();
+            // this.categories = this.categories;
+            console.log(cat)
+        },
+
+        // setProductIds(categories) {
+        //     this.productIds = products.getIds();
+        //     this.productsIds = this.categories;
+        //
+        // },
+
+        // setIds(categories) {
+        //     this.categoryIds = categories.getIds();
+        //     this.categories = this.categories;
+        //
+        // },
 
         async loadEntityData() {
             this.isLoading = true;
@@ -125,6 +185,7 @@ Component.register('sw-blog-detail', {
             this.isLoading = false;
         },
 
+
         abortOnLanguageChange() {
             return this.blogRepository.hasChanges(this.blog);
         },
@@ -143,7 +204,7 @@ Component.register('sw-blog-detail', {
             }
 
             this.isLoading = true;
-
+            console.log(this.blog);
             this.blogRepository.save(this.blog).then(() => {
                 this.isLoading = false;
                 this.isSaveSuccessful = true;

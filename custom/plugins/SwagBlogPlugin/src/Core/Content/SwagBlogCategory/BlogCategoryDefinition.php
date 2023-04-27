@@ -41,7 +41,7 @@ class BlogCategoryDefinition extends EntityDefinition
             (new IdField('id', 'id'))->addFlags(new Required(), new PrimaryKey()),
             (new TranslatedField('categoryName',))->AddFlags(new Required()),
 
-            new ManyToManyAssociationField('blogs', BlogDefinition::class,
+            new ManyToManyAssociationField('blog-text', BlogDefinition::class,
                 CategoryMappingDefinition::class,
                 'blog_category_id', 'blog_id',
                 'id',

@@ -15,7 +15,7 @@ class ProductExtension extends EntityExtension
     {
         $collection->add(
             new ManyToManyAssociationField(
-                'blogs',
+                'blog-text',
                 BlogDefinition::class,
                 ProductMappingDefinition::class,
                 'product_id',

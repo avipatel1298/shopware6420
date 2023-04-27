@@ -1,0 +1,12 @@
+{
+    "sw-cms-test": {
+        "blocks": {
+            "text": {
+                "blog-text": {
+                    "label": "Demo Text"
+                    }
+                }
+            }
+        }
+    }
+
