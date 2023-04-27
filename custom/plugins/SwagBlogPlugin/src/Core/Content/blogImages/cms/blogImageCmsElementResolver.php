@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace SwagBlogPlugin\Core\Content\blogImages\Cms;
+namespace SwagBlogPlugin\Core\Content\blogImages\cms;
 
 use Shopware\Core\Content\Cms\Aggregate\CmsSlot\CmsSlotEntity;
 use Shopware\Core\Content\Cms\DataResolver\CriteriaCollection;

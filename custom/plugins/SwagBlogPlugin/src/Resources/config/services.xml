@@ -49,5 +49,13 @@
             <argument type="service" id="Shopware\Core\Content\Media\Cms\DefaultMediaResolver"/>
         </service>
         <!--Blog Element Resolver-->
+
+        <!--Ictech Product Slider-->
+        <service id="SwagBlogPlugin\Core\Content\productSlider\Cms\ictechProductSliderCmsElementResolver">
+            <tag name="shopware.cms.data_resolver"/>
+            <argument type="service" id="Shopware\Core\Content\ProductStream\Service\ProductStreamBuilder"/>
+            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
+            <!--Ictech Product Slider-->
+        </service>
     </services>
 </container>
