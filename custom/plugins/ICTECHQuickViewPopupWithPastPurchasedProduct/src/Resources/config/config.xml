@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/trunk/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <card>
+        <title>Configuration</title>
+        <input-field type="bool">
+            <name>ActiveInactive</name>
+            <label>Active</label>
+        </input-field>
+        <input-field type="bool">
+            <name>CustomerBuyProductsSlider</name>
+            <label>User's Bought Products Slider</label>
+        </input-field>
+        <input-field type="bool">
+            <name>ReviewRatingSlider</name>
+            <label>Review Rating Slider</label>
+        </input-field>
+    </card>
+</config>

@@ -1,0 +1,28 @@
+{
+    "sw-cms": {
+        "blocks": {
+            "commerce": {
+                "ictech-user-bought-products-slider": {
+                    "label": "User-Bought-Product-Slider",
+                    "preview": {
+                        "label": {
+                            "ictechUserBoughtProductsSliderTitle" : "User-Bought-Product-Slider"
+                        }
+                    }
+
+                }
+            }
+        },
+        "elements": {
+            "ictech-user-bought-products-slider": {
+                "preview": {
+                    "label": {
+                        "ictechUserBoughtProductsSliderTitle" : "User Bought Product Slider Title"
+                    }
+                }
+
+            }
+
+        }
+    }
+}

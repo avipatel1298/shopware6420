@@ -1,0 +1,39 @@
+{
+    "name": "ictech/ictech-quick-view-popup-with-past-purchased-product",
+    "description": "Quick view popup with past purchased product",
+    "type": "shopware-platform-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": ""
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "ICTECHQuickViewPopupWithPastPurchasedProduct\\": "src/"
+        }
+    },
+    "extra": {
+        "shopware-plugin-class": "ICTECHQuickViewPopupWithPastPurchasedProduct\\ICTECHQuickViewPopupWithPastPurchasedProduct",
+        "label": {
+            "de-DE": "Schnellansicht Popup mit früher gekauften Produkten",
+            "en-GB": "Quick view popup with past purchased product",
+            "nl-NL": "Snel overzicht popup met eerder gekochte producten"
+        },
+        "description": {
+            "de-DE": "Die Schaltfläche Schnellansicht zeigt auf der Seite mit der Produktliste alle erforderlichen Details des Produkts einschließlich der ausgewählten Schieberegler an.",
+            "en-GB": "The quick view button will show on the product listing page with all the required detail of  the product including selected sliders.",
+            "nl-NL": "De knop Snelle weergave verschijnt op de pagina van de productlijst met alle vereiste details van het product, inclusief de geselecteerde schuifregelaars."
+        },
+        "manufacturerLink": {
+            "de-DE": "https://www.icreativetechnologies.com",
+            "en-GB": "https://www.icreativetechnologies.com",
+            "nl-NL": "https://www.icreativetechnologies.com"
+        },
+        "supportLink": {
+            "de-DE": "https://support.icreativetechnologies.com/",
+            "en-GB": "https://support.icreativetechnologies.com/",
+            "nl-NL": "https://support.icreativetechnologies.com/"
+        }
+    }
+}
