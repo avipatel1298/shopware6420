@@ -9,8 +9,8 @@ Shopware.Service('cmsService').registerCmsBlock({
     name: 'ictech-user-bought-products-slider',
     label: 'sw-cms.blocks.commerce.ictech-user-bought-products-slider.label',
     category: 'commerce',
-    component: 'sw-cms-blocks-ictech-user-bought-products-slider',
-    previewComponent: 'sw-cms-preview-ictech-user-bought-product-slider',
+    component: 'sw-cms-block-ictech-user-bought-products-slider',
+    previewComponent: 'sw-cms-preview-ictech-user-bought-products-slider',
     defaultConfig: {
         marginBottom: '20px',
         marginTop: '20px',

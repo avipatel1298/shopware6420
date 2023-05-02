@@ -18,6 +18,16 @@
                 "preview": {
                     "label": {
                         "ictechUserBoughtProductsSliderTitle" : "User Bought Product Slider Title"
+
+                    }
+                },
+                "config": {
+                    "label": {
+                        "selection": "Select Product",
+                        "minWidth": "Minimum Width"
+                    },
+                    "placeholder": {
+                        "selection": "select Product"
                     }
                 }
 

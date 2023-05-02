@@ -5,6 +5,12 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+        <service
+            id="ICTECHQuickViewPopupWithPastPurchasedProduct\Core\Content\Product\Cms\IctechUserBoughtProductsSliderCmsElementResolver">
+<!--            <argument type="service" id="Shopware\Core\Framework\DataAbstractionLayer\EntityRepositoryInterface"/>-->
+            <argument type="service" id="order_customer.repository"/>
+            <tag name="shopware.cms.data_resolver"/>
+        </service>
 
     </services>
 </container>
