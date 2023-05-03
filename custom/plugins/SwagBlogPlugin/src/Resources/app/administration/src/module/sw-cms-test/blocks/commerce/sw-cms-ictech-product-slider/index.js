@@ -7,7 +7,7 @@ import './preview';
  */
 Shopware.Service('cmsService').registerCmsBlock({
     name: 'ictech-product-slider',
-    label: 'Demo product-slider',
+    label: 'sw-cms-test.blocks.commerce.sw-cms-ictech-product-slider.label',
     category: 'commerce',
     component: 'sw-cms-block-ictech-product-slider',
     previewComponent: 'sw-cms-preview-ictech-product-slider',

@@ -1,8 +1,8 @@
-import template from'./sw-cms-ictech-el-config-product-slider.html.twig';
+import template from './sw-cms-ictech-el-config-product-slider.html.twig';
 import './sw-cms-ictech-el-config-product-slider.scss';
 
-const { Component, Mixin } = Shopware;
-const { Criteria, EntityCollection } = Shopware.Data;
+const {Component, Mixin} = Shopware;
+const {Criteria, EntityCollection} = Shopware.Data;
 
 /**
  * @private since v6.5.0
@@ -153,7 +153,7 @@ Component.register('sw-cms-ictech-el-config-product-slider', {
                 criteria.setIds(this.element.config.products.value);
 
                 this.productRepository
-                    .search(criteria, Object.assign({}, Shopware.Context.api, { inheritance: true }))
+                    .search(criteria, Object.assign({}, Shopware.Context.api, {inheritance: true}))
                     .then((result) => {
                         this.productCollection = result;
                     });
