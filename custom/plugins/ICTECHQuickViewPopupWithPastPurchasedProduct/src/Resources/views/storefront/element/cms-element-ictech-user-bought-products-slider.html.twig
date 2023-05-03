@@ -1,103 +1,91 @@
-{% block cms_element_ictech_user_bought_products_slider_tabs_inner %}
+{% block element_ictech_user_bought_products_slider %}
     {% if not sliderConfig %}
         {% set sliderConfig = element.fieldConfig.elements %}
     {% endif %}
+{#    {{ dump(element.data.entities.elements) }}#}
+    {% if element.data.entities.elements %}
+        <div
+            class="cms-element-{{ element.type }}{% if sliderConfig.displayMode.value == "standard" and sliderConfig.verticalAlign.value %} has-vertical-alignment{% endif %}">
+            {% block element_ictech_user_bought_products_slider_alignment %}
+                {% if config.verticalAlign.value %}
+                    <div class="cms-element-alignment{% if sliderConfig.verticalAlign.value == "center" %} align-self-center{% elseif sliderConfig.verticalAlign.value == "flex-end" %} align-self-end{% else %} align-self-start{% endif %}">
+                {% endif %}
 
-    {% if element.data.entities.elements is defined and element.data.entities.elements %}
-        <div class="product-detail-ictech-user-bought-products-slider">
-            <div class="card card-tabs" data-cross-selling="true">
-                {% block cms_element_ictech_user_bought_products_slider_tabs_navigation %}
-                    <div class="card-header product-detail-tab-navigation product-ictech-user-bought-products-slider-tab-navigation">
-                        {% block cms_element_ictech_user_bought_products_slider_tabs_navigation_container %}
-                            <ul class="nav nav-tabs product-detail-tab-navigation-list"
-                                id="product-detail-cross-selling-tabs"
-                                role="tablist">
-                                {% for item in element.data.entities.elements %}
-                                    {% set products = item.order.lineItems.elements %}
-                                    {% set id = products.id %}
-                                    {{ dump(products) }}
-                                    <li class="nav-item">
-                                        <a class="nav-link product-detail-tab-navigation-link{% if loop.first %} active{% endif %}"
-                                           id="cross-selling-tab-{{ id }}"
-                                        {{ dataBsToggleAttr }}="tab"
-                                        href="#cross-selling-tab-{{ id }}-pane"
-                                        role="tab"
-                                        aria-controls="cross-selling-tab-{{ id }}-pane"
-                                        aria-selected="true">
-                                        {{ entities.translated.name }}
-                                        <span class="product-detail-tab-navigation-icon">
-                                                    {% sw_icon 'arrow-medium-right' style {'pack':'solid'} %}
-                                                </span>
-                                        </a>
-                                    </li>
-                                {% endfor %}
-                            </ul>
+                {% set productSliderOptions = {
+                    productboxMinWidth: sliderConfig.elMinWidth.value ? sliderConfig.elMinWidth.value : '',
+                    slider: {
+                        gutter: 30,
+                        autoplayButtonOutput: false,
+                        nav: true,
+                        mouseDrag: true,
+                        controls: true,
+                        autoplay: false
+                    }
+                } %}
+                {% block element_ictech_user_bought_products_slider_slider %}
+                    <div
+                        class="base-slider product-slider{% if sliderConfig.border.value %} has-border{% endif %} has-nav"
+                        data-product-slider="true"
+                        data-product-slider-options="{{ productSliderOptions|json_encode }}">
+
+                        {% block element_ictech_user_bought_products_slider_title %}
+                            {% if sliderConfig.title.value %}
+                                <div class="cms-element-title">
+                                    <p class="cms-element-title-paragraph">{{ sliderConfig.title.value }}</p>
+                                </div>
+                            {% endif %}
                         {% endblock %}
-                    </div>
-                {% endblock %}
+                        {% block element_ictech_user_bought_products_slider_inner %}
+                            {% block element_ictech_user_bought_products_slider_element %}
+                                <div class="product-slider-container"
+                                     data-product-slider-container="true">
+{#                                    {{ dump(element.data.entities.elements.order) }}#}
+                                    {% for item in element.data.entities.elements %}
+                                        {% set productItem = item.order.lineItems %}
+                                        {% for products in productItem %}
+                                            {% set product = products.product %}
+{#                                            {% block element_ictech_user_bought_products_slider_inner_item %}#}
+{#                                                <div class="product-slider-item">#}
+{#                                                    {% sw_include '@Storefront/storefront/component/product/card/box.html.twig' with {#}
+{#                                                        'layout': sliderConfig.boxLayout.value,#}
+{#                                                        'displayMode': sliderConfig.displayMode.value,#}
+{#                                                        'product': product,#}
+{#                                                    } %}#}
+{#                                                </div>#}
+{#                                            {% endblock %}#}
+                                        {% endfor %}
 
-                {% block cms_element_ictech_user_bought_products_slider_tabs_content %}
-                    <div class="product-detail-tabs-content card-body">
-                        {% block cms_element_ictech_user_bought_products_slider_tabs_content_container %}
-                            <div class="tab-content">
-                                {% for item in element.data.entities.elements|filter(item => item.total > 0 and item.crossSelling.active == true) %}
-                                    {% set entities = item.entities %}
-                                    {% set products = item.products %}
-                                    {% set id = entities.id %}
-
-                                    <div class="tab-pane fade show{% if loop.first %} active{% endif %}"
-                                         id="cross-selling-tab-{{ id }}-pane"
-                                         role="tabpanel"
-                                         aria-labelledby="cross-selling-tab-{{ id }}">
-                                        {% set config = {
-                                            'title': {
-                                                'value': entities.name ?: entities.translated.name
-                                            },
-                                            'border': {
-                                                'value': false
-                                            },
-                                            'rotate': {
-                                                'value': false
-                                            },
-                                            'products': {
-                                                'value': products
-                                            },
-                                            'boxLayout': {
-                                                'value': sliderConfig.boxLayout.value
-                                            },
-                                            'elMinWidth': {
-                                                'value': sliderConfig.elMinWidth.value
-                                            },
-                                            'navigation': {
-                                                'value': true
-                                            },
-                                            'displayMode': {
-                                                'value': sliderConfig.displayMode.value
-                                            },
-                                            'verticalAlign': {
-                                                'value': center
-                                            }
-                                        } %}
-
-                                        {% block cms_element_ictech_user_bought_products_slider_tabs_content_container_slider %}
-                                            {% sw_include "@Storefront/storefront/element/cms-element-product-slider.html.twig" with {
-                                                sliderConfig: config,
-                                                element: {
-                                                    'data': {
-                                                        'products': products
-                                                    },
-                                                    type: 'product-slider'
-                                                }
-                                            } %}
+                                    {% endfor %}
+                                </div>
+                            {% endblock %}
+                            {% block element_product_slider_controls %}
+                                <div class="product-slider-controls-container">
+                                    <div class="base-slider-controls"
+                                         data-product-slider-controls="true">
+                                        {% block element_product_slider_controls_items %}
+                                            <button
+                                                class="base-slider-controls-prev product-slider-controls-prev{% if sliderConfig.border.value %} has-border{% endif %}">
+                                                {% block element_product_slider_controls_items_prev_icon %}
+                                                    {% sw_icon 'arrow-head-left' %}
+                                                {% endblock %}
+                                            </button>
+                                            <button
+                                                class="base-slider-controls-next product-slider-controls-next{% if sliderConfig.border.value %} has-border{% endif %}">
+                                                {% block element_product_slider_controls_items_next_icon %}
+                                                    {% sw_icon 'arrow-head-right' %}
+                                                {% endblock %}
+                                            </button>
                                         {% endblock %}
-
                                     </div>
-                                {% endfor %}
-                            </div>
+                                </div>
+                            {% endblock %}
                         {% endblock %}
                     </div>
                 {% endblock %}
-            </div>
+                {% if config.verticalAlign.value %}
+                    </div>
+                {% endif %}
+            {% endblock %}
         </div>
     {% endif %}
 {% endblock %}
