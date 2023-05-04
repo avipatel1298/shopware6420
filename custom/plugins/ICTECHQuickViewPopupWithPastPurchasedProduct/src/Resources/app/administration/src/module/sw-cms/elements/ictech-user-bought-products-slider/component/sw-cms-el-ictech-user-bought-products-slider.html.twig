@@ -1,9 +1,12 @@
 {% block sw_cms_ictech_user_bought_products_slider %}
     <div class="sw-cms-el-ictech-user-bought-products-slider">
-        {% block sw_cms_ictech_user_bought_products_slider_title %}
-            <h2 class="sw-cms-el-ictech-user-bought-products-slider__title">
-                {{ placeholder(crossSelling, 'name', crossSelling.name) }}
-            </h2>
+        {% block sw_cms_element_ictech_products_review_slider_title %}
+            <div
+                v-if="element.config.title.value"
+                class="sw-cms-el-ictech-products-review-slider__title"
+            >
+                {{ element.config.title.value }}
+            </div>
         {% endblock %}
 
         {% block sw_cms_ictech_user_bought_products_slider_content %}

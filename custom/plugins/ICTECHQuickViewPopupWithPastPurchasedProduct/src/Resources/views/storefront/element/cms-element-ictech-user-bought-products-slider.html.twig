@@ -2,8 +2,8 @@
     {% if not sliderConfig %}
         {% set sliderConfig = element.fieldConfig.elements %}
     {% endif %}
-{#    {{ dump(element.data.entities.elements) }}#}
-    {% if element.data.entities.elements %}
+{#    {{ dump(element.data.elements) }}#}
+    {% if element.data.elements %}
         <div
             class="cms-element-{{ element.type }}{% if sliderConfig.displayMode.value == "standard" and sliderConfig.verticalAlign.value %} has-vertical-alignment{% endif %}">
             {% block element_ictech_user_bought_products_slider_alignment %}
@@ -16,10 +16,10 @@
                     slider: {
                         gutter: 30,
                         autoplayButtonOutput: false,
-                        nav: true,
-                        mouseDrag: true,
-                        controls: true,
-                        autoplay: false
+                        nav: false,
+                        mouseDrag: sliderConfig.navigation.value ? false : true,
+                        controls: sliderConfig.navigation.value ? true : false,
+                        autoplay: sliderConfig.rotate.value ? true : false
                     }
                 } %}
                 {% block element_ictech_user_bought_products_slider_slider %}
@@ -40,20 +40,17 @@
                                 <div class="product-slider-container"
                                      data-product-slider-container="true">
 {#                                    {{ dump(element.data.entities.elements.order) }}#}
-                                    {% for item in element.data.entities.elements %}
-                                        {% set productItem = item.order.lineItems %}
-                                        {% for products in productItem %}
-                                            {% set product = products.product %}
-{#                                            {% block element_ictech_user_bought_products_slider_inner_item %}#}
-{#                                                <div class="product-slider-item">#}
-{#                                                    {% sw_include '@Storefront/storefront/component/product/card/box.html.twig' with {#}
-{#                                                        'layout': sliderConfig.boxLayout.value,#}
-{#                                                        'displayMode': sliderConfig.displayMode.value,#}
-{#                                                        'product': product,#}
-{#                                                    } %}#}
-{#                                                </div>#}
-{#                                            {% endblock %}#}
-                                        {% endfor %}
+                                    {% for item in element.data.elements %}
+                                            {% set product = item %}
+                                            {% block element_ictech_user_bought_products_slider_inner_item %}
+                                                <div class="product-slider-item">
+                                                    {% sw_include '@Storefront/storefront/component/product/card/box.html.twig' with {
+                                                        'layout': sliderConfig.boxLayout.value,
+                                                        'displayMode': sliderConfig.displayMode.value,
+                                                        'product': product,
+                                                    } %}
+                                                </div>
+                                            {% endblock %}
 
                                     {% endfor %}
                                 </div>

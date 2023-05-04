@@ -8,8 +8,16 @@
         <service
             id="ICTECHQuickViewPopupWithPastPurchasedProduct\Core\Content\Product\Cms\IctechUserBoughtProductsSliderCmsElementResolver">
             <argument type="service" id="order_customer.repository"/>
+            <argument type="service" id="product.repository"/>
+            <argument type="service" id="sales_channel.product.repository"/>
             <tag name="shopware.cms.data_resolver"/>
         </service>
+
+<!--        <service-->
+<!--            id="ICTECHQuickViewPopupWithPastPurchasedProduct\Core\Content\Product\Cms\IctechProductsReviewSliderCmsElementResolver">-->
+<!--            <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>-->
+<!--            <tag name="shopware.cms.data_resolver"/>-->
+<!--        </service>-->
 
     </services>
 </container>
