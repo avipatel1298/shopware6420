@@ -1,5 +1,5 @@
-import template from './sw-cms-el-config-ictech-user-bought-products-slider.html.twig';
-import './sw-cms-el-config-ictech-user-bought-products-slider.scss';
+import template from './sw-cms-el-config-ictech-products-review-slider.html.twig';
+import './sw-cms-el-config-ictech-products-review-slider.scss';
 
 const { Component, Mixin } = Shopware;
 const { Criteria } = Shopware.Data;
@@ -8,7 +8,7 @@ const { Criteria } = Shopware.Data;
  * @private since v6.5.0
  * @package content
  */
-Component.register('sw-cms-el-config-ictech-user-bought-products-slider', {
+Component.register('sw-cms-el-config-ictech-products-review-slider', {
     template,
 
     inject: ['repositoryFactory'],
@@ -54,7 +54,7 @@ Component.register('sw-cms-el-config-ictech-user-bought-products-slider', {
 
     methods: {
         createdComponent() {
-            this.initElementConfig('ictech-user-bought-products-slider');
+            this.initElementConfig('ictech-products-review-slider');
         },
         //
         onProductChange(productId) {

@@ -1,13 +1,13 @@
-{% block sw_cms_element_ictech_user_bought_products_slider_config %}
-    <div class="sw-cms-el-config-ictech-user-bought-products-slider">
-        {% block sw_cms_element_ictech_user_bought_products_slider_config_tabs %}
+{% block sw_cms_element_ictech_products_review_slider_config %}
+    <div class="sw-cms-el-config-ictech-products-review-slider">
+        {% block sw_cms_element_ictech_products_review_slider_config_tabs %}
             <sw-tabs
-                position-identifier="sw-cms-element-ictech-user-bought-products-slider"
-                class="sw-cms-el-config-ictech-user-bought-products-slider__tabs"
+                position-identifier="sw-cms-element-ictech-products-review-slider"
+                class="sw-cms-el-config-ictech-products-review-slider__tabs"
                 default-item="content"
             >
                 <template #default="{ active }">
-                    {% block sw_cms_element_ictech_user_bought_products_slider_config_tab_content %}
+                    {% block sw_cms_element_ictech_products_review_slider_config_tab_content %}
                         <sw-tabs-item
                             name="content"
                             :title="$tc('sw-cms.elements.general.config.tab.content')"
@@ -17,7 +17,7 @@
                         </sw-tabs-item>
                     {% endblock %}
 
-                    {% block sw_cms_element_ictech_user_bought_products_slider_config_tab_options %}
+                    {% block sw_cms_element_ictech_products_review_slider_config_tab_options %}
                         <sw-tabs-item
                             name="options"
                             :title="$tc('sw-cms.elements.general.config.tab.options')"
@@ -29,13 +29,13 @@
                 </template>
 
                 <template #content="{ active }">
-                    {% block sw_cms_element_ictech_user_bought_products_slider_config_content %}
+                    {% block sw_cms_element_ictech_products_review_slider_config_content %}
                         <sw-container
                             v-if="active === 'content'"
-                            class="sw-cms-el-config-ictech-user-bought-products-slider__tab-content"
+                            class="sw-cms-el-config-ictech-products-review-slider__tab-content"
                         >
 
-                            {% block sw_cms_element_ictech_user_bought_products_slider_config_content_title %}
+                            {% block sw_cms_element_ictech_products_review_slider_config_content_title %}
                                 <sw-field
                                     v-model="element.config.title.value"
                                     type="text"
@@ -48,13 +48,13 @@
                         </sw-container>
                     {% endblock %}
 
-                    {% block sw_cms_element_ictech_user_bought_products_slider_config_options %}
+                    {% block sw_cms_element_ictech_products_review_slider_config_options %}
                         <sw-container
                             v-else-if="active === 'options'"
-                            class="sw-cms-el-config-ictech-user-bought-products-slider__tab-options"
+                            class="sw-cms-el-config-ictech-products-review-slider__tab-options"
                         >
 
-                            {% block sw_cms_element_ictech_user_bought_products_slider_config_settings_display_mode %}
+                            {% block sw_cms_element_ictech_products_review_slider_config_settings_display_mode %}
                                 <sw-select-field
                                     v-model="element.config.displayMode.value"
                                     :label="$tc('sw-cms.elements.general.config.label.displayMode')"
@@ -71,7 +71,7 @@
                                 </sw-select-field>
                             {% endblock %}
 
-                            {% block sw_cms_element_ictech_user_bought_products_slider_config_settings_vertical_align %}
+                            {% block sw_cms_element_ictech_products_review_slider_config_settings_vertical_align %}
                                 <sw-select-field
                                     v-model="element.config.verticalAlign.value"
                                     :label="$tc('sw-cms.elements.general.config.label.verticalAlign')"
@@ -89,7 +89,7 @@
                                 </sw-select-field>
                             {% endblock %}
 
-                            {% block sw_cms_element_ictech_user_bought_products_slider_config_settings_box_layout %}
+                            {% block sw_cms_element_ictech_products_review_slider_config_settings_box_layout %}
                                 <sw-select-field
                                     v-model="element.config.boxLayout.value"
                                     :label="$tc('sw-cms.elements.productBox.config.label.layoutType')"
@@ -106,7 +106,7 @@
                                 </sw-select-field>
                             {% endblock %}
 
-                            {% block sw_cms_element_ictech_user_bought_products_slider_config_settings_navigation %}
+                            {% block sw_cms_element_ictech_products_review_slider_config_settings_navigation %}
                                 <sw-field
                                     v-model="element.config.navigation.value"
                                     type="switch"
@@ -115,7 +115,7 @@
                                 />
                             {% endblock %}
 
-                            {% block sw_cms_element_ictech_user_bought_products_slider_config_settings_rotate %}
+                            {% block sw_cms_element_ictech_products_review_slider_config_settings_rotate %}
                                 <sw-field
                                     v-model="element.config.rotate.value"
                                     type="switch"
@@ -124,7 +124,7 @@
                                 />
                             {% endblock %}
 
-                            {% block sw_cms_element_ictech_user_bought_products_slider_config_settings_border %}
+                            {% block sw_cms_element_ictech_products_review_slider_config_settings_border %}
                                 <sw-field
                                     v-model="element.config.border.value"
                                     type="switch"
@@ -133,7 +133,7 @@
                                 />
                             {% endblock %}
 
-                            {% block sw_cms_element_ictech_user_bought_products_slider_config_settings_min_width %}
+                            {% block sw_cms_element_ictech_products_review_slider_config_settings_min_width %}
                                 <sw-field
                                     v-model="element.config.elMinWidth.value"
                                     type="text"

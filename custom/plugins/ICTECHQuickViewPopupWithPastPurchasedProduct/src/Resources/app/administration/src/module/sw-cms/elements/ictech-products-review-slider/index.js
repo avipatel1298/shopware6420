@@ -1,21 +1,21 @@
+import './preview';
 import './component';
 import './config';
-import'./preview';
 
 const Criteria = Shopware.Data.Criteria;
 const criteria = new Criteria(1, 25);
-// criteria.addAssociation('crossSellings.assignedProducts.product');
+criteria.addAssociation('cover');
 
 /**
  * @private since v6.5.0
  * @package content
  */
 Shopware.Service('cmsService').registerCmsElement({
-    name: 'ictech-user-bought-products-slider',
-    label: 'sw-cms.elements.ictech-user-bought-products-slider.label',
-    component: 'sw-cms-el-ictech-user-bought-products-slider',
-    configComponent: 'sw-cms-el-config-ictech-user-bought-products-slider',
-    previewComponent: 'sw-cms-el-preview-ictech-user-bought-products-slider',
+    name: 'ictech-products-review-slider',
+    label: 'sw-cms.elements.ictechProductsReviewSlider.label',
+    component: 'sw-cms-el-ictech-products-review-slider',
+    configComponent: 'sw-cms-el-config-ictech-products-review-slider',
+    previewComponent: 'sw-cms-el-preview-ictech-products-review-slider',
     defaultConfig: {
         title: {
             source: 'static',
