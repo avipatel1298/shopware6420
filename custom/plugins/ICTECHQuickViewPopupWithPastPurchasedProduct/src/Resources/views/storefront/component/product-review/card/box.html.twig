@@ -1,0 +1,23 @@
+{% block component_product_box_include %}
+    {% if layout is empty %}
+        {% set layout = 'standard' %}
+    {% endif %}
+
+    {% set sizes = {
+        'xs': '500px',
+        'sm': '315px',
+        'md': '390px',
+        'lg': '350px',
+        'xl': '280px'
+    } %}
+
+    {% if layout == 'standard' %}
+        {% sw_include "@ICTECHQuickViewPopupWithPastPurchasedProduct/storefront/component/product-review/card/box-review-standard.html.twig" %}
+    {% elseif layout == 'minimal' %}
+        {% sw_include "@ICTECHQuickViewPopupWithPastPurchasedProduct/storefront/component/product-review/card/box-review-minimal.html.twig" %}
+    {% else %}
+        {% set template = "@ICTECHQuickViewPopupWithPastPurchasedProduct/storefront/component/product-review/card/box-" ~ layout ~ ".html.twig" %}
+        {% sw_include template ignore missing %}
+    {% endif %}
+{% endblock %}
+

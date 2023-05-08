@@ -1,0 +1,65 @@
+{% block component_review_box %}
+    {% set full = review.points|round(0, 'floor') %}
+    {% set left = ((review.points - full) * 4)|round %}
+    {% set left = left / 4 %}
+
+    {% if left > 0 %}
+        {% set half = 1 %}
+    {% endif %}
+
+    {% set blank = 5 - full - half %}
+    {% if review %}
+        {% set name = review.customer.firstName %}
+        {% set lname = review.customer.lastName %}
+        {% set id = review.id %}
+
+        <div class="card product-box box-{{ layout }}">
+            {% block component_review_box_content %}
+                <div class="card-body">
+
+                    {% block component_review_box_info %}
+                        <div class="product-info">
+                            {% block component_review_box_title %}
+                                {{ review.title }}
+                            {% endblock %}
+                            {% block component_review_box_rating %}
+                                {% if full > 0 %}
+                                    {% for star in range(1,full) %}
+                                        {% sw_include '@Storefront/storefront/component/review/point.html.twig' with {
+                                            type: 'full'
+                                        } %}
+                                    {% endfor %}
+                                {% endif %}
+
+                                {% if half %}
+                                    {% sw_include '@Storefront/storefront/component/review/point.html.twig' with {
+                                        type: 'half'
+                                    } %}
+                                {% endif %}
+
+                                {% if blank > 0 %}
+                                    {% for star in range(1,blank) %}
+                                        {% sw_include '@Storefront/storefront/component/review/point.html.twig' with {
+                                            type: 'blank'
+                                        } %}
+                                    {% endfor %}
+                                {% endif %}
+                            {% endblock %}
+
+                            {% block component_review_box_description %}
+                                <div class="product-description">
+                                    {{ review.content|striptags|raw }}
+                                </div>
+                            {% endblock %}
+
+                            {% block component_review_box_name %}
+                                By:-{{ name }} {{ lname }}
+                            {% endblock %}
+
+                        </div>
+                    {% endblock %}
+                </div>
+            {% endblock %}
+        </div>
+    {% endif %}
+{% endblock %}
