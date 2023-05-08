@@ -2,7 +2,6 @@
     {% if not sliderConfig %}
         {% set sliderConfig = element.fieldConfig.elements %}
     {% endif %}
-{#    {{ dump(element.data.elements) }}#}
     {% if element.data.elements %}
         <div
             class="cms-element-{{ element.type }}{% if sliderConfig.displayMode.value == "standard" and sliderConfig.verticalAlign.value %} has-vertical-alignment{% endif %}">
@@ -39,7 +38,6 @@
                             {% block element_ictech_user_bought_products_slider_element %}
                                 <div class="product-slider-container"
                                      data-product-slider-container="true">
-{#                                    {{ dump(element.data.entities.elements.order) }}#}
                                     {% for item in element.data.elements %}
                                             {% set product = item %}
                                             {% block element_ictech_user_bought_products_slider_inner_item %}
@@ -51,7 +49,6 @@
                                                     } %}
                                                 </div>
                                             {% endblock %}
-
                                     {% endfor %}
                                 </div>
                             {% endblock %}

@@ -2,7 +2,8 @@
     {% if not sliderConfig %}
         {% set sliderConfig = element.fieldConfig.elements %}
     {% endif %}
-    {% if element.data.products.elements %}
+{#    {{ dump(element.data) }}#}
+    {% if element.data %}
         <div
             class="cms-element-{{ element.type }}{% if sliderConfig.displayMode.value == "standard" and sliderConfig.verticalAlign.value %} has-vertical-alignment{% endif %}">
             {% block element_ictech_products_review_slider_alignment %}
@@ -24,9 +25,9 @@
 
                 {% block element_ictech_products_review_slider_slider %}
                     <div
-                        class="base-slider ictech-products-review-slider{% if sliderConfig.border.value %} has-border{% endif %}{% if sliderConfig.navigation.value %} has-nav{% endif %}"
-                        data-ictech-products-review-slider="true"
-                        data-ictech-products-review-slider-options="{{ productSliderOptions|json_encode }}">
+                        class="base-slider product-slider{% if sliderConfig.border.value %} has-border{% endif %}{% if sliderConfig.navigation.value %} has-nav{% endif %}"
+                        data-product-slider="true"
+                        data-product-slider-options="{{ productSliderOptions|json_encode }}">
 
                         {% block element_ictech_products_review_slider_title %}
                             {% if sliderConfig.title.value %}
@@ -38,14 +39,15 @@
 
                         {% block element_ictech_products_review_slider_inner %}
                             {% block element_ictech_products_review_slider_element %}
-                                <div class="ictech-products-review-slider-container"
+                                <div class="product-slider-container"
                                      data-product-slider-container="true">
-                                    {% for product in element.data.products.elements %}
+                                    {% for review in element.data.elements %}
                                         {% block element_ictech_products_review_slider_inner_item %}
-                                            <div class="ictech-products-review-slider-item">
-                                                {% sw_include '@Storefront/storefront/component/product/card/box.html.twig' with {
+                                            <div class="product-slider-item">
+                                                {% sw_include '@ICTECHQuickViewPopupWithPastPurchasedProduct/storefront/component/product-review/card/box.html.twig' with {
                                                     'layout': sliderConfig.boxLayout.value,
-                                                    'displayMode': sliderConfig.displayMode.value
+                                                    'displayMode': sliderConfig.displayMode.value,
+                                                    'review':review
                                                 } %}
                                             </div>
                                         {% endblock %}
@@ -53,21 +55,21 @@
                                 </div>
                             {% endblock %}
 
-                            {% block element_ictech_products_review_slider_controls %}
+                            {% block element_product_slider_controls %}
                                 {% if sliderConfig.navigation.value %}
                                     <div class="product-slider-controls-container">
                                         <div class="base-slider-controls"
                                              data-product-slider-controls="true">
-                                            {% block element_ictech_products_review_slider_controls_items %}
+                                            {% block element_product_slider_controls_items %}
                                                 <button
                                                     class="base-slider-controls-prev product-slider-controls-prev{% if sliderConfig.border.value %} has-border{% endif %}">
-                                                    {% block element_ictech_products_review_slider_controls_items_prev_icon %}
+                                                    {% block element_product_slider_controls_items_prev_icon %}
                                                         {% sw_icon 'arrow-head-left' %}
                                                     {% endblock %}
                                                 </button>
                                                 <button
                                                     class="base-slider-controls-next product-slider-controls-next{% if sliderConfig.border.value %} has-border{% endif %}">
-                                                    {% block element_ictech_products_review_slider_controls_items_next_icon %}
+                                                    {% block element_product_slider_controls_items_next_icon %}
                                                         {% sw_icon 'arrow-head-right' %}
                                                     {% endblock %}
                                                 </button>

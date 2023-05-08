@@ -1,8 +1,8 @@
 import template from './sw-cms-el-config-ictech-products-review-slider.html.twig';
 import './sw-cms-el-config-ictech-products-review-slider.scss';
 
-const { Component, Mixin } = Shopware;
-const { Criteria } = Shopware.Data;
+const {Component, Mixin} = Shopware;
+const {Criteria} = Shopware.Data;
 
 /**
  * @private since v6.5.0
@@ -38,8 +38,6 @@ Component.register('sw-cms-el-config-ictech-products-review-slider', {
 
         selectedProductCriteria() {
             const criteria = new Criteria(1, 25);
-            // criteria.addAssociation('crossSellings.assignedProducts.product');
-
             return criteria;
         },
 

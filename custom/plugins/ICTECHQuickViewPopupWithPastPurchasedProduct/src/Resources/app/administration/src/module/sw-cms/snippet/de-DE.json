@@ -3,15 +3,15 @@
         "blocks": {
             "commerce": {
                 "ictech-user-bought-products-slider": {
-                    "label": "User-Bought Product Slider",
+                    "label": "Gebruiker kocht product schuifregelaar",
                     "preview": {
                         "label": {
-                            "ictechUserBoughtProductsSliderTitle": "User-Bought Product Slider"
+                            "ictechUserBoughtProductsSliderTitle": "Gebruiker kocht product schuifregelaar"
                         }
                     }
                 },
                 "ictechProductsReviewSlider": {
-                    "label": "Products Review Slider"
+                    "label": "Producten Beoordelingsschuif"
                 }
             }
         },
@@ -19,24 +19,24 @@
             "ictech-user-bought-products-slider": {
                 "preview": {
                     "label": {
-                        "ictechUserBoughtProductsSliderTitle": "User Bought Product Slider Title"
+                        "ictechUserBoughtProductsSliderTitle": "Gebruiker kocht product schuifbalk titel"
                     }
                 },
-                "label": "User Bought Product Slider Title",
+                "label": "Gebruiker kocht product schuifbalk titel",
 
                 "config": {
                     "label": {
-                        "selection": "Select Product",
-                        "minWidth": "Minimum Width"
+                        "selection": "Selecteer product",
+                        "minWidth": "Minimumbreedte"
                     },
                     "placeholder": {
-                        "selection": "select Product"
+                        "selection": "selecteer product"
                     }
                 }
             },
 
             "ictechProductsReviewSlider": {
-                "label": "Product Review Slider"
+                "label": "Productbeoordeling schuifregelaar"
             }
         }
     }
