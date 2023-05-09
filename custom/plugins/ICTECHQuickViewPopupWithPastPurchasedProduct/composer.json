@@ -15,6 +15,7 @@
     },
     "extra": {
         "shopware-plugin-class": "ICTECHQuickViewPopupWithPastPurchasedProduct\\ICTECHQuickViewPopupWithPastPurchasedProduct",
+        "plugin-icon": "src/Resources/config/plugin-icon.png",
         "label": {
             "de-DE": "Schnellansicht Popup mit früher gekauften Produkten",
             "en-GB": "Quick view popup with past purchased product",

@@ -1,3 +1,5 @@
+{% sw_extends '@Storefront/storefront/component/product/card/box-standard.html.twig'%}
+
 {% block component_review_box %}
     {% set full = review.points|round(0, 'floor') %}
     {% set left = ((review.points - full) * 4)|round %}
