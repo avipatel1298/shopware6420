@@ -1,0 +1,43 @@
+{
+    "sw-cms": {
+        "blocks": {
+            "commerce": {
+                "ictech-user-bought-products-slider": {
+                    "label": "Door de gebruiker gekochte product schuifregelaar",
+                    "preview": {
+                        "label": {
+                            "ictechUserBoughtProductsSliderTitle": "Door de gebruiker gekochte product schuifregelaar"
+                        }
+                    }
+                },
+                "ictechProductsReviewSlider": {
+                    "label": "Producten Beoordelingsschuif"
+                }
+            }
+        },
+        "elements": {
+            "ictech-user-bought-products-slider": {
+                "preview": {
+                    "label": {
+                        "ictechUserBoughtProductsSliderTitle": "Gebruiker kocht product schuifregelaar titel"
+                    }
+                },
+                "label": "Gebruiker kocht product schuifregelaar titel",
+
+                "config": {
+                    "label": {
+                        "selection": "Selecteer product",
+                        "minWidth": "Minimumbreedte"
+                    },
+                    "placeholder": {
+                        "selection": "Selecteer product"
+                    }
+                }
+            },
+
+            "ictechProductsReviewSlider": {
+                "label": "Productbeoordeling schuifregelaar"
+            }
+        }
+    }
+}

@@ -2,7 +2,7 @@
     {% if layout is empty %}
         {% set layout = 'standard' %}
     {% endif %}
-
+{#    {{ dump(review) }}#}
     {% set sizes = {
         'xs': '500px',
         'sm': '315px',
@@ -12,6 +12,7 @@
     } %}
 
     {% if layout == 'standard' %}
+
         {% sw_include "@ICTECHQuickViewPopupWithPastPurchasedProduct/storefront/component/product-review/card/box-review-standard.html.twig" %}
     {% elseif layout == 'minimal' %}
         {% sw_include "@ICTECHQuickViewPopupWithPastPurchasedProduct/storefront/component/product-review/card/box-review-minimal.html.twig" %}
