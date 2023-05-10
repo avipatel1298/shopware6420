@@ -1,0 +1,33 @@
+<div class="js-pseudo-modal-template">
+    <div class="modal fade"
+         tabindex="-1"
+         role="dialog">
+        <div class="modal-dialog"
+             role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    {% if feature('V6_5_0_0') %}
+                        <div class="modal-title js-pseudo-modal-template-title-element h5"></div>
+                    {% else %}
+                        <h5 class="modal-title js-pseudo-modal-template-title-element"></h5>
+                    {% endif %}
+
+                    <button type="button"
+                            class="{{ modalCloseBtnClass }} close"
+                    {{ dataBsDismissAttr }}="modal"
+                    aria-label="Close">
+                    {% block product_detail_zoom_modal_close_button_content %}
+                        {% if not feature('v6.5.0.0') %}
+                            <span aria-hidden="true">
+                                    {% sw_icon 'x' style { 'size': 'sm' } %}
+                                </span>
+                        {% endif %}
+                    {% endblock %}
+                    </button>
+                </div>
+                <div class="modal-body js-pseudo-modal-template-content-element">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

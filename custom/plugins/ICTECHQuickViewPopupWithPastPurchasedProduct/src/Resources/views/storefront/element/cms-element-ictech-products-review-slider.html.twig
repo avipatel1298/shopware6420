@@ -2,7 +2,6 @@
 {% set ReviewRatingSlider = config('ICTECHQuickViewPopupWithPastPurchasedProduct.config.ReviewRatingSlider',context.salesChannel.id) %}
 {% block element_ictech_products_review_slider %}
     {% if (ActiveInactive === true) and (ReviewRatingSlider === true) %}
-{#        {{ dump(element) }}#}
         {% if not sliderConfig %}
             {% set sliderConfig = element.fieldConfig.elements %}
         {% endif %}
@@ -45,9 +44,10 @@
                                     <div class="product-slider-container"
                                          data-product-slider-container="true">
                                         {% for review in element.data.elements %}
+{#                                            {{ dump(review) }}#}
                                             {% block element_ictech_products_review_slider_inner_item %}
                                                 <div class="product-slider-item">
-                                                    {% sw_include '@ICTECHQuickViewPopupWithPastPurchasedProduct/storefront/component/product/card/box.html.twig' with {
+                                                    {% sw_include '@ICTECHQuickViewPopupWithPastPurchasedProduct/storefront/component/product-review/card/box.html.twig' with {
                                                         'layout': sliderConfig.boxLayout.value,
                                                         'displayMode': sliderConfig.displayMode.value,
                                                         'review':review

@@ -1,19 +1,16 @@
-{% sw_extends '@Storefront/storefront/component/product/card/box-standard.html.twig'%}
-
 {% block component_review_box %}
     {% set full = review.points|round(0, 'floor') %}
     {% set left = ((review.points - full) * 4)|round %}
     {% set left = left / 4 %}
-
     {% if left > 0 %}
         {% set half = 1 %}
     {% endif %}
-
     {% set blank = 5 - full - half %}
     {% if review %}
         {% set name = review.customer.firstName %}
         {% set lname = review.customer.lastName %}
         {% set id = review.id %}
+{#        {{ dump(review) }}#}
 
         <div class="card product-box box-{{ layout }}">
             {% block component_review_box_content %}

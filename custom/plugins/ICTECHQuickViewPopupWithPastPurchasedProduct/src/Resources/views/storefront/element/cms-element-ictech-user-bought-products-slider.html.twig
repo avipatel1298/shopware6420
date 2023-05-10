@@ -1,8 +1,8 @@
 {% set ActiveInactive = config('ICTECHQuickViewPopupWithPastPurchasedProduct.config.ActiveInactive',context.salesChannel.id) %}
-{% set CustomerBoughtProductsSlider = config('ICTECHQuickViewPopupWithPastPurchasedProduct.config.CustomerBoughtProductsSlider') %}
+{% set CustomerBuyProductsSlider = config('ICTECHQuickViewPopupWithPastPurchasedProduct.config.CustomerBuyProductsSlider') %}
 {% block element_ictech_user_bought_products_slider %}
-    {% if (ActiveInactive === true) and (CustomerBoughtProductsSlider === true) %}
-        {#{{ dump(,context.salesChannel.id) }} #}
+    {% if (ActiveInactive === true) and (CustomerBuyProductsSlider === true) %}
+{#        {{ dump(CustomerBuyProductsSlider) }}#}
         {% if not sliderConfig %}
             {% set sliderConfig = element.fieldConfig.elements %}
         {% endif %}
