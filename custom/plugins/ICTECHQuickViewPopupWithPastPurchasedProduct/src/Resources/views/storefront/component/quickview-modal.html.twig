@@ -1,33 +1,66 @@
-<div class="js-pseudo-modal-template">
-    <div class="modal fade"
-         tabindex="-1"
-         role="dialog">
-        <div class="modal-dialog"
-             role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    {% if feature('V6_5_0_0') %}
-                        <div class="modal-title js-pseudo-modal-template-title-element h5"></div>
-                    {% else %}
-                        <h5 class="modal-title js-pseudo-modal-template-title-element"></h5>
-                    {% endif %}
+{% block products_quickview_modal %}
+<div class="modal fade"
+     id="customQuickViewPopUP"
+     data-backdrop="static"
+     tabindex="-1"
+     role="dialog"
+     aria-hidden="true">
 
-                    <button type="button"
-                            class="{{ modalCloseBtnClass }} close"
-                    {{ dataBsDismissAttr }}="modal"
-                    aria-label="Close">
-                    {% block product_detail_zoom_modal_close_button_content %}
-                        {% if not feature('v6.5.0.0') %}
-                            <span aria-hidden="true">
-                                    {% sw_icon 'x' style { 'size': 'sm' } %}
-                                </span>
-                        {% endif %}
+    {% block products_quickview_modal_dialog %}
+        <div class="modal-dialog" role="dialog">
+
+            {% block products_quickview_modal_content %}
+                <div class="modal-content">
+
+                    {% block products_quickview_modal_header %}
+                        <div class="modal-header">
+
+                            {% block products_quickview_modal_header_title %}
+                                <h5 class="modal-title">{{ "account.editOrderCancelOrderModalHeader"|trans|sw_sanitize }}</h5>
+                            {% endblock %}
+
+                            {% block products_quickview_modal_header_close_button %}
+                                <button class="close"
+                                        type="button"
+                                {{ dataBsDismissAttr }}="modal"
+                                aria-label="Close">
+                                {% sw_icon 'x' %}
+                                </button>
+                            {% endblock %}
+                        </div>
                     {% endblock %}
-                    </button>
+
+                    {% block products_quickview_modal_body %}
+                        <div class="modal-body">
+
+                            {% block products_quickview_modal_body_text %}
+                                <p>{{ "account.editOrderCancelOrderModalBodyText"|trans|sw_sanitize }}</p>
+                            {% endblock %}
+
+                            {% block products_quickview_modal_body_question %}
+                                <p>{{ "account.editOrderCancelOrderModalBodyQuestion"|trans|sw_sanitize }}</p>
+                            {% endblock %}
+                        </div>
+                    {% endblock %}
+
                 </div>
-                <div class="modal-body js-pseudo-modal-template-content-element">
-                </div>
-            </div>
+            {% endblock %}
         </div>
-    </div>
+    {% endblock %}
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    {% endblock %}

@@ -2,53 +2,49 @@
 
 namespace ICTECHQuickViewPopupWithPastPurchasedProduct\Storefront\Controller;
 
-use Shopware\Core\Framework\Feature;
+use Shopware\Core\Content\Product\ProductCollection;
+use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
+use Shopware\Core\Framework\DataAbstractionLayer\Search\Sorting\FieldSorting;
 use Shopware\Core\System\SalesChannel\SalesChannelContext;
 use Shopware\Storefront\Controller\StorefrontController;
-use Shopware\Storefront\Page\Product\ProductPageLoadedHook;
-use Shopware\Storefront\Page\Product\ProductPageLoader;
+use Shopware\Storefront\Framework\Routing\Annotation\RouteScope;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
-
-
+/**
+ * @RouteScope(scopes={"storefront"})
+ */
 class QuickViewPopUpController extends StorefrontController
 {
-    private ProductPageLoader $productPageLoader;
+    /**
+     * @Route("/custom-modal", name="frontend.custom.modal.show", options={"seo"="false"}, methods={"GET", "POST"})
+     */
+    public function show(SalesChannelContext $salesChannelContext): Response
+    {
+        $products = $this->fetchProducts($salesChannelContext);
 
-
-    public function __construct(
-        ProductPageLoader $productPageLoader,
-
-    ){
-        $this->productPageLoader = $productPageLoader;
-
+        return $this->render('@Storefront/storefront/modal/custom_modal.html.twig', [
+            'title' => 'Custom Modal',
+            'productCollection' => $products,
+        ]);
     }
 
     /**
-     * @Since("6.3.3.0")
-     * @HttpCache()
-     * @Route("/detail/{productId}", name="frontend.detail.page", methods={"GET"}, defaults={"XmlHttpRequest": true})
+     * Fetches the product collection from the database.
+     *
+     * @return ProductCollection|null
      */
-    public function index(SalesChannelContext $context, Request $request): Response
+    private function fetchProducts(SalesChannelContext $salesChannelContext): ?ProductCollection
     {
-        $page = $this->productPageLoader->load($request, $context);
+        $criteria = new Criteria();
+        $criteria->addSorting(new FieldSorting('createdAt', FieldSorting::DESCENDING));
+        $criteria->setLimit(5);
 
-        $this->hook(new ProductPageLoadedHook($page, $context));
+        $productRepository = $this->container->get('product.repository');
+        $products = $productRepository->search($criteria, $salesChannelContext->getContext())->getEntities();
 
-        $ratingSuccess = $request->get('success');
-
-        /**
-         * @deprecated tag:v6.5.0 - remove complete if statement, cms page id is always set
-         *
-         * Fallback layout for non-assigned product layout
-         */
-        if (!$page->getCmsPage()) {
-            Feature::throwException('v6.5.0.0', 'Fallback will be removed because cms page is always set in subscriber.');
-
-            return $this->renderStorefront('@Storefront/storefront/page/product-detail/index.html.twig', ['page' => $page, 'ratingSuccess' => $ratingSuccess]);
-        }
-
-        return $this->renderStorefront('@Storefront/storefront/page/content/product-detail.html.twig', ['page' => $page]);
+        return $products;
     }
+
 }

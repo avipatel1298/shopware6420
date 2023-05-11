@@ -3,18 +3,31 @@
         xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/trunk/src/Core/System/SystemConfig/Schema/config.xsd">
 
     <card>
+        <!--Main Active/Inactive Switch-->
         <title>Configuration</title>
         <input-field type="bool">
             <name>ActiveInactive</name>
             <label>Active</label>
         </input-field>
+        <!--User Bought Product Slider Switch-->
         <input-field type="bool">
             <name>CustomerBuyProductsSlider</name>
             <label>User's Bought Products Slider</label>
         </input-field>
+        <!--Products Review Slider-->
         <input-field type="bool">
             <name>ReviewRatingSlider</name>
             <label>Review Rating Slider</label>
         </input-field>
     </card>
+
+<!--    <component name="sw-cms-page-select">-->
+<!--        <name>ProductsReviewSlider</name>-->
+<!--        <entity>cms_page</entity>-->
+<!--        <pageType>page</pageType>-->
+<!--        <label>Product Review Slider</label>-->
+<!--        <label lang="de-DE">Schieberegler für Produktbewertungen</label>-->
+<!--        <placeholder>Assign layout...</placeholder>-->
+<!--        <placeholder lang="de-DE">Layout zuweisen ...</placeholder>-->
+<!--    </component>-->
 </config>

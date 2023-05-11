@@ -44,7 +44,7 @@
                                     <div class="product-slider-container"
                                          data-product-slider-container="true">
                                         {% for review in element.data.elements %}
-{#                                            {{ dump(review) }}#}
+                                            {#                                            {{ dump(review) }} #}
                                             {% block element_ictech_products_review_slider_inner_item %}
                                                 <div class="product-slider-item">
                                                     {% sw_include '@ICTECHQuickViewPopupWithPastPurchasedProduct/storefront/component/product-review/card/box.html.twig' with {

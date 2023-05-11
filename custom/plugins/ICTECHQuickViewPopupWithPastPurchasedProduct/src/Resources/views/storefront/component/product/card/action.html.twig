@@ -1,7 +1,6 @@
 {% sw_extends '@Storefront/storefront/component/product/card/action.html.twig'%}
 {% block component_product_box_action_inner %}
     {{ parent() }}
-{#    {{ dump(id) }}#}
 {% block product_quickview_button %}
         {% if feature('v6.5.0.0') %}
             <div class="d-grid">
@@ -11,11 +10,13 @@
                 </button>
             </div>
         {% else %}
-            <button class="btn btn-block btn-buy mt-2"
-                    title="{{ "listing.boxAddProduct"|trans|striptags }}" data-bs-toggle="modal" data-toggle="modal" data-url="{{ seoUrl('frontend.detail.page', {'productId': id}) }}">
-                    Quick View
-
+            <button type="button"
+                    class="btn btn-primary btn-block btn-buy mt-2"
+            {{ dataBsToggleAttr }}="modal"
+            {{ dataBsTargetAttr }}="#customQuickViewPopUP">
+            {{"Quick View"}}
             </button>
+            {% sw_include '@ICTECHQuickViewPopupWithPastPurchasedProduct/storefront/component/quickview-modal.html.twig' %}
         {% endif %}
     {% endblock %}
 {% endblock %}
