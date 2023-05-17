@@ -1,0 +1,5 @@
+{
+   "cms-page": {
+       "mySnippets": "hello %url%"
+   }
+}

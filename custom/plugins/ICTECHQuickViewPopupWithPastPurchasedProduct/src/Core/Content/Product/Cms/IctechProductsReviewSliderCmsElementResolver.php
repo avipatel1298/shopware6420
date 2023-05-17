@@ -59,16 +59,8 @@ class IctechProductsReviewSliderCmsElementResolver extends AbstractCmsElementRes
             $criteria->addFilter((new EqualsFilter('productId', $productId)));
             $criteria->addAssociation('customer');
             $reviews = $this->productReviewRepository->search($criteria, $context);
-//
-//            dd($reviews);
+
             $slot->setData($reviews);
         }
-//        dd($slot);
-
-//        dd($productId);
-
-
     }
-
-
 }
