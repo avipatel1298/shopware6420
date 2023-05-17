@@ -1,7 +1,8 @@
-{% sw_extends '@Storefront/storefront/component/product/card/action.html.twig'%}
+{% sw_extends '@Storefront/storefront/component/product/card/action.html.twig' %}
+
 {% block component_product_box_action_inner %}
     {{ parent() }}
-{% block product_quickview_button %}
+    {% block product_quickview_button %}
         {% if feature('v6.5.0.0') %}
             <div class="d-grid">
                 <button class="btn btn-buy"
@@ -12,11 +13,73 @@
         {% else %}
             <button type="button"
                     class="btn btn-primary btn-block btn-buy mt-2"
-            {{ dataBsToggleAttr }}="modal"
-            {{ dataBsTargetAttr }}="#customQuickViewPopUP">
-            {{"Quick View"}}
+                    data-toggle="modal"
+                    data-target="#quickView"
+                    >
+                Quick View
             </button>
-            {% sw_include '@ICTECHQuickViewPopupWithPastPurchasedProduct/storefront/component/quickview-modal.html.twig' %}
+            {% block modal %}
+                <!-- Modal -->
+                <div class="modal fade" id="quickView" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                    <div class="product-detail-content">
+
+                                        {% block page_product_detail_headline %}
+                                            <div class="row align-items-center product-detail-headline">
+                                                {% sw_include '@Storefront/storefront/page/product-detail/headline.html.twig' %}
+                                            </div>
+                                        {% endblock %}
+
+                                        {% set mediaItems = page.product.media.media %}
+
+                                        {% block page_product_detail_main %}
+{#                                            {{ dump(product.id) }}#}
+                                            <div class="row product-detail-main">
+                                                {% block page_product_detail_media %}
+                                                    <div class="col-lg-7 product-detail-media">
+                                                        {% if page.product.media %}
+                                                            {% sw_include '@Storefront/storefront/element/cms-element-image-gallery.html.twig' with {
+                                                                'mediaItems': mediaItems,
+                                                                'zoom': true,
+                                                                'zoomModal': true,
+                                                                'displayMode': 'contain',
+                                                                'gutter': 5,
+                                                                'minHeight': '430px',
+                                                                'navigationArrows': 'inside',
+                                                                'navigationDots': 'inside',
+                                                                'galleryPosition': 'left',
+                                                                'isProduct': true,
+                                                                'fallbackImageTitle': page.product.translated.name,
+                                                                'startIndexThumbnails': 1,
+                                                                'startIndexSlider': 1,
+                                                                'keepAspectRatioOnZoom': false
+                                                            } %}
+                                                        {% endif %}
+                                                    </div>
+                                                {% endblock %}
+
+                                                {% block page_product_detail_buy %}
+                                                    <div class="col-lg-5 product-detail-buy">
+                                                        {% sw_include '@Storefront/storefront/page/product-detail/buy-widget.html.twig' %}
+                                                    </div>
+                                                {% endblock %}
+                                            </div>
+                                        {% endblock %}
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endblock %}
+
         {% endif %}
     {% endblock %}
 {% endblock %}

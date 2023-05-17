@@ -73,11 +73,10 @@ class IctechUserBoughtProductsSliderCmsElementResolver extends AbstractProductDe
                 $productIds[] = array_column($array,'productId');
 
             }
-            $productId=array_column($productIds,'0');
+            $productId = array_column($productIds,'0');
             $productCriteria = new Criteria();
             $productCriteria->addFilter(new EqualsAnyFilter('id',$productId));
             $products = $this->salesChannelRepository->search($productCriteria,$resolverContext->getSalesChannelContext());
-//dd($products);
             $slot->setData($products);
         }
 

@@ -20,14 +20,4 @@
             <label>Review Rating Slider</label>
         </input-field>
     </card>
-
-<!--    <component name="sw-cms-page-select">-->
-<!--        <name>ProductsReviewSlider</name>-->
-<!--        <entity>cms_page</entity>-->
-<!--        <pageType>page</pageType>-->
-<!--        <label>Product Review Slider</label>-->
-<!--        <label lang="de-DE">Schieberegler für Produktbewertungen</label>-->
-<!--        <placeholder>Assign layout...</placeholder>-->
-<!--        <placeholder lang="de-DE">Layout zuweisen ...</placeholder>-->
-<!--    </component>-->
 </config>

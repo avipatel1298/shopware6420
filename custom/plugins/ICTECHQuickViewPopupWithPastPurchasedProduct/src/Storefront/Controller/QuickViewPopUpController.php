@@ -2,49 +2,29 @@
 
 namespace ICTECHQuickViewPopupWithPastPurchasedProduct\Storefront\Controller;
 
-use Shopware\Core\Content\Product\ProductCollection;
-use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
-use Shopware\Core\Framework\DataAbstractionLayer\Search\Sorting\FieldSorting;
-use Shopware\Core\System\SalesChannel\SalesChannelContext;
+use Shopware\Core\Framework\DataAbstractionLayer\EntityRepository;
 use Shopware\Storefront\Controller\StorefrontController;
-use Shopware\Storefront\Framework\Routing\Annotation\RouteScope;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @RouteScope(scopes={"storefront"})
+ * @Route(defaults={"_routeScope"={"storefront"}})
  */
 class QuickViewPopUpController extends StorefrontController
 {
-    /**
-     * @Route("/custom-modal", name="frontend.custom.modal.show", options={"seo"="false"}, methods={"GET", "POST"})
-     */
-    public function show(SalesChannelContext $salesChannelContext): Response
-    {
-        $products = $this->fetchProducts($salesChannelContext);
+    private EntityRepository $productRepository;
 
-        return $this->render('@Storefront/storefront/modal/custom_modal.html.twig', [
-            'title' => 'Custom Modal',
-            'productCollection' => $products,
-        ]);
+    public function __construct(EntityRepository $productRepository)
+    {
+        $this->productRepository = $productRepository;
     }
 
     /**
-     * Fetches the product collection from the database.
-     *
-     * @return ProductCollection|null
+     * @Route("/product/product-detail/{productId}", name="frontend.product.detail.page", methods={"GET"}, defaults={"productId"=null, "XmlHttpRequest"=true})
      */
-    private function fetchProducts(SalesChannelContext $salesChannelContext): ?ProductCollection
+    public function index(Request $request, string $productId): Response
     {
-        $criteria = new Criteria();
-        $criteria->addSorting(new FieldSorting('createdAt', FieldSorting::DESCENDING));
-        $criteria->setLimit(5);
-
-        $productRepository = $this->container->get('product.repository');
-        $products = $productRepository->search($criteria, $salesChannelContext->getContext())->getEntities();
-
-        return $products;
+        return $page = $this->renderStorefront('@ICTECHQuickViewPopupWithPastPurchasedProduct/storefront/page/product-detail/product-detail-index.html.twig');
     }
-
 }

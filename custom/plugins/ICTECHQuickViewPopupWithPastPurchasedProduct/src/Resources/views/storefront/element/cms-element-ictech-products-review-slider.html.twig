@@ -6,7 +6,7 @@
             {% set sliderConfig = element.fieldConfig.elements %}
         {% endif %}
         {% if element.data %}
-            <div
+            <div id="reviewSlider"
                 class="cms-element-{{ element.type }}{% if sliderConfig.displayMode.value == "standard" and sliderConfig.verticalAlign.value %} has-vertical-alignment{% endif %}">
                 {% block element_ictech_products_review_slider_alignment %}
                     {% if config.verticalAlign.value %}
@@ -44,7 +44,6 @@
                                     <div class="product-slider-container"
                                          data-product-slider-container="true">
                                         {% for review in element.data.elements %}
-                                            {#                                            {{ dump(review) }} #}
                                             {% block element_ictech_products_review_slider_inner_item %}
                                                 <div class="product-slider-item">
                                                     {% sw_include '@ICTECHQuickViewPopupWithPastPurchasedProduct/storefront/component/product-review/card/box.html.twig' with {
