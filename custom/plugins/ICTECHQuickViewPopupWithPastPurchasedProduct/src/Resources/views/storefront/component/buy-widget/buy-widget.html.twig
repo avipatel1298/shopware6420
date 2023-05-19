@@ -1,0 +1,27 @@
+{% sw_extends '@Storefront/storefront/component/buy-widget/buy-widget.html.twig' %}
+
+
+{% block buy_widget_rich_snippets %}
+
+
+<a class href="{{ seoUrl('frontend.detail.page', {'productId': product.id}) }}">
+</a>
+{% endif %}
+
+
+ {{ parent() }}
+ {% endblock %}
+{% block buy_widget_reviews %}
+
+    {{ parent() }}
+{% endblock %}
+
+
+
+{% block buy_widget_ordernumber_container  %}
+
+ {{ parent() }}
+
+<a class href="{{ seoUrl('frontend.detail.page', {'productId': product.id}) }}">
+</a>
+ {% endblock %}
