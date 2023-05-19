@@ -1,5 +1,4 @@
-{% sw_extends '@Storefront/storefront/page/content/product-detail.html.twig' %}
-
+{% sw_extends '@Storefront/storefront/page/product-detail/index.html.twig' %}
 
 {% block base_header %}
     {{ parent() }}
@@ -9,6 +8,13 @@
     {{ parent() }}
 {% endblock %}
 
+{% block page_product_detail_tabs %}
+    {{ parent() }}
+
+{% endblock %}
+
 {% block base_footer %}
     {{ parent() }}
 {% endblock %}
+
+
