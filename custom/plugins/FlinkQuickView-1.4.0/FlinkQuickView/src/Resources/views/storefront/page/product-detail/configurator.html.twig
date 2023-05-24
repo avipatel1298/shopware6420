@@ -1,0 +1,12 @@
+{% sw_extends '@Storefront/storefront/page/product-detail/configurator.html.twig' %}
+
+{% block page_product_detail_configurator_form %}
+    {% if flinkQuickView %}
+        {% set config = {
+            url: url('flink.quickview.switch', { productId: page.product.parentId }),
+            elementId: 'flinkQuickView'
+        } %}
+    {% endif %}
+
+    {{ parent() }}
+{% endblock %}

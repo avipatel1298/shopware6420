@@ -1,0 +1,65 @@
+{% sw_extends '@Storefront/storefront/component/product/card/box-standard.html.twig' %}
+
+{% block component_product_box_badges %}
+    {% if config('FlinkQuickView.config.buttonPosition') == 'top' %}
+        {% sw_include '@FlinkQuickView/flink/component/flink-quick-view-button.html.twig' %}
+    {% endif %}
+
+    {{ parent() }}
+{% endblock %}
+
+{% block component_product_box_image %}
+    {{ parent() }}
+
+    {% if config('FlinkQuickView.config.buttonPosition') == 'below_thumb' %}
+        {% sw_include '@FlinkQuickView/flink/component/flink-quick-view-button.html.twig' %}
+    {% endif %}
+{% endblock %}
+
+{% block component_product_box_rating %}
+    {{ parent() }}
+
+    {% if config('FlinkQuickView.config.buttonPosition') == 'below_rating' %}
+        {% sw_include '@FlinkQuickView/flink/component/flink-quick-view-button.html.twig' %}
+    {% endif %}
+{% endblock %}
+
+{% block component_product_box_name %}
+    {{ parent() }}
+
+    {% if config('FlinkQuickView.config.buttonPosition') == 'below_title' %}
+        {% sw_include '@FlinkQuickView/flink/component/flink-quick-view-button.html.twig' %}
+    {% endif %}
+{% endblock %}
+
+{% block component_product_box_variant_characteristics %}
+    {{ parent() }}
+
+    {% if config('FlinkQuickView.config.buttonPosition') == 'below_variant_characteristics' %}
+        {% sw_include '@FlinkQuickView/flink/component/flink-quick-view-button.html.twig' %}
+    {% endif %}
+{% endblock %}
+
+{% block component_product_box_description %}
+    {{ parent() }}
+
+    {% if config('FlinkQuickView.config.buttonPosition') == 'below_description' %}
+        {% sw_include '@FlinkQuickView/flink/component/flink-quick-view-button.html.twig' %}
+    {% endif %}
+{% endblock %}
+
+{% block component_product_box_price %}
+    {{ parent() }}
+
+    {% if config('FlinkQuickView.config.buttonPosition') == 'below_price' %}
+        {% sw_include '@FlinkQuickView/flink/component/flink-quick-view-button.html.twig' %}
+    {% endif %}
+{% endblock %}
+
+{% block component_product_box_action %}
+    {{ parent() }}
+
+    {% if config('FlinkQuickView.config.buttonPosition') == 'bottom' %}
+        {% sw_include '@FlinkQuickView/flink/component/flink-quick-view-button.html.twig' %}
+    {% endif %}
+{% endblock %}

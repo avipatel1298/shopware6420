@@ -1,0 +1,30 @@
+.flink-quickview-btn {
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.flink-quickview-btn__ {
+    &top {
+        margin-top: 0;
+    }
+    &bottom {
+        margin-bottom: 0;
+    }
+}
+
+.modal.quickview {
+    .modal-dialog {
+        max-width: none;
+
+        @include media-breakpoint-up(sm) {
+            max-width: 1200px;
+        }
+    }
+
+    .quickview-minimal-image {
+        img {
+            width: 100%;
+        }
+    }
+}

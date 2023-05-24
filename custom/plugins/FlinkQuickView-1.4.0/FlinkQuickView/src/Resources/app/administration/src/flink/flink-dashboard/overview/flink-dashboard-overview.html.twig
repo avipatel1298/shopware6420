@@ -1,0 +1,117 @@
+{% block flink_dashboard_overview %}
+<sw-page class="flink-dashboard-overview" id="flinkDashboard">
+    {% block flink_dashboard_overview_header %}
+        <template #smart-bar-back>
+            <router-link v-if="parentRoute"
+                         class="smart-bar__back-btn"
+                         :to="{ name: parentRoute }"
+                         :style="{ 'color': '#71d3ad' }">
+                <sw-icon name="default-arrow-head-left" small></sw-icon>
+                <sw-icon name="default-action-settings" small></sw-icon>
+            </router-link>
+        </template>
+        <template #smart-bar-header>
+            <h2>{{ $tc('flink-dashboard.title') }}</h2>
+        </template>
+    {% endblock %}
+
+    <template #content>
+
+        <div v-if="flinkFeed.discount">
+            <div v-if="flinkFeed.discount.type == 'sale' && flinkFeed.discount.daysLeft > -1" class="flink-global-sale">
+                <strong class="flink-dashboard-badge">{{ flinkFeed.discount.value }}</strong>
+                <strong>{{ flinkFeed.discount.label[locale] }}</strong> - {{ $tc('flink-dashboard.daysLeft', 0, { days: flinkFeed.discount.daysLeft }) }}
+                <sw-button :link="flinkFeed.url[locale]" :title="$tc('flink-dashboard.toPluginsLinkText')" size="small" variant="ghost">{{ $tc('flink-dashboard.toPluginsLinkText') }}</sw-button>
+            </div>
+            <div v-else-if="flinkFeed.discount.type == 'voucher'" class="flink-global-voucher">
+                <strong class="flink-dashboard-badge">CODE: {{ flinkFeed.discount.code }}</strong>
+                <strong>{{ flinkFeed.discount.label[locale] }}</strong>
+                <sw-button :link="flinkFeed.url[locale]" :title="$tc('flink-dashboard.toPluginsLinkText')" size="small" variant="ghost">{{ $tc('flink-dashboard.toPluginsLinkText') }}</sw-button>
+            </div>
+        </div>
+
+        {% block flink_dashboard_overview_content %}
+
+            <div :style="{'display': !displayPlugins.length ? 'none' : ''}" class="flink-feed-plugin-showcase">
+
+                <div class="flink-feed-plugin-showcase--left">
+                    <span>{{ $t('flink-dashboard.cardFlinkFeed') }}:</span>
+                </div>
+
+                <div class="flink-feed-plugin-showcase--main" ref="pluginShowcaseMain">
+                    <div class="flink-feed-plugins">
+                        <a :href="plugin.url[locale]" target="_blank" rel="noopener" v-for="plugin in displayPlugins" class="flink-feed-plugin">
+                            <div class="flink-feed-plugin-top">
+                                <div class="flink-feed-plugin-icon"><img :src="plugin.icon" :alt="plugin.title['de-DE']"></div>
+                                <div class="flink-feed-plugin-title"><strong>{{ plugin.title[locale] }}</strong></div>
+                            </div>
+                            <div class="flink-feed-plugin-description">
+                                {{ plugin.description[locale] }}
+                                <div v-if="plugin.discount" class="flink-feed-plugin-discount" :class="'flink-feed-plugin-discount-' + plugin.discount.type">
+                                    <template v-if="plugin.discount.type == 'sale'">
+                                        <strong>{{ plugin.discount.value }} {{ $tc('flink-dashboard.discount') }}</strong> -
+                                        <template v-if="plugin.discount.daysLeft == 1">
+                                            {{ $tc('flink-dashboard.dayLeft') }}
+                                        </template>
+                                        <template v-else>
+                                            {{ $tc('flink-dashboard.daysLeft', 0, {days: plugin.discount.daysLeft}) }}
+                                        </template>
+                                    </template>
+                                    <template v-else-if="plugin.discount.type == 'voucher'">
+                                        <strong>{{ plugin.discount.value }} {{ $tc('flink-dashboard.discount') }}</strong> - {{ $tc('flink-dashboard.exlusiveVoucher') }}: {{ plugin.discount.code }}
+                                    </template>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="flink-dashboard-config" v-if="activeFlinkPlugins.length">
+                {% block flink_dashboard_overview_plugins %}
+                    <sw-tabs class="flink-dashboard-config-tabs" :defaultItem="defaultConfigPlugin">
+                        <template #default="{ active }">
+                            <sw-tabs-item
+                                    v-for="plugin in activeFlinkPlugins"
+                                    :name="plugin.name"
+                                    :title="plugin.label"
+                                    :activeTab="active">
+                                {{ plugin.name }}
+                            </sw-tabs-item>
+                        </template>
+
+                        <template #content="{ active }">
+                            {% block link_dashboard_sw_system_config %}
+                                <template v-for="plugin in activeFlinkPlugins">
+                                    <div :style="{ 'display': plugin.name == active ? '' : 'none' }">
+
+                                        <div class="flink-dashboard-config-buttons">
+                                            <img v-if="plugin.icon" :src="'data:image/png;base64, ' + plugin.icon" :alt="plugin.name">
+                                            <div class="flink-dashboard-config-plugin-info">
+                                                <strong>{{ plugin.label }}</strong><br>
+                                                {{ plugin.description }}
+                                            </div>
+                                            <sw-button variant="primary" class="flink-dashboard-config-save" @click.prevent="onSave(plugin.name)">
+                                                {{ $tc('global.default.save') }}
+                                            </sw-button>
+                                        </div>
+
+                                        <sw-system-config
+                                                :domain="plugin.name + '.config'"
+                                                salesChannelSwitchable
+                                                :ref="'systemConfig_' + plugin.name">
+                                        </sw-system-config>
+
+                                    </div>
+                                </template>
+                            {% endblock %}
+                        </template>
+
+                    </sw-tabs>
+                {% endblock %}
+            </div>
+        {% endblock %}
+    </template>
+</sw-page>
+{% endblock %}

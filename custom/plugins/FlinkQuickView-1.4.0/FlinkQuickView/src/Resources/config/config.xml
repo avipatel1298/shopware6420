@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/master/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <card>
+        <title>Quickview Button Settings</title>
+        <title lang="de-DE">Schnellansicht Button-Einstellungen</title>
+
+        <input-field type="single-select">
+            <name>buttonPosition</name>
+            <label>Where should the button be positioned in the product box?</label>
+            <label lang="de-DE">Wo soll der Button in der Produkt-Box positioniert werden?</label>
+            <options>
+                <option>
+                    <id>top</id>
+                    <name>At the top</name>
+                    <name lang="de-DE">Ganz oben</name>
+                </option>
+                <option>
+                    <id>below_thumb</id>
+                    <name>Below the product thumbnail</name>
+                    <name lang="de-DE">Unter dem Produktbild</name>
+                </option>
+                <option>
+                    <id>below_title</id>
+                    <name>Below the product title</name>
+                    <name lang="de-DE">Unter dem Produkttitel</name>
+                </option>
+                <option>
+                    <id>below_rating</id>
+                    <name>Below the product rating</name>
+                    <name lang="de-DE">Unter der Produktbewertung</name>
+                </option>
+                <option>
+                    <id>below_description</id>
+                    <name>Below the product description</name>
+                    <name lang="de-DE">Unter der Produktbeschreibung</name>
+                </option>
+                <option>
+                    <id>below_variant_characteristics</id>
+                    <name>Below the variant characteristics</name>
+                    <name lang="de-DE">Unter den Variantenoptionen</name>
+                </option>
+                <option>
+                    <id>below_price</id>
+                    <name>Below the product price</name>
+                    <name lang="de-DE">Unter dem Produktpreis</name>
+                </option>
+                <option>
+                    <id>bottom</id>
+                    <name>At the bottom</name>
+                    <name lang="de-DE">Ganz unten</name>
+                </option>
+            </options>
+            <helpText>Here you only determine the position in the HTML code. The positioning can be modified as usual via CSS.</helpText>
+            <helpText lang="de-DE">Hier bestimmen Sie lediglich die Position im HTML-Code. Die Positionierung kann wie gewohnt per CSS modifiziert werden.</helpText>
+            <defaultValue>top</defaultValue>
+        </input-field>
+
+        <input-field type="single-select">
+            <name>buttonClass</name>
+            <label>Choose button type?</label>
+            <label lang="de-DE">Button-Typ auswählen</label>
+            <options>
+                <option>
+                    <id></id>
+                    <name>None (only use own button classes below)</name>
+                    <name lang="de-DE">Keiner (nur eigene Button Klassen unten nutzen)</name>
+                </option>
+                <option>
+                    <id>btn-primary</id>
+                    <name>Primary color</name>
+                    <name lang="de-DE">Primäre Farbe</name>
+                </option>
+                <option>
+                    <id>btn-outline-primary</id>
+                    <name>Primary color (outline)</name>
+                    <name lang="de-DE">Primäre Farbe (Outline)</name>
+                </option>
+                <option>
+                    <id>btn-secondary</id>
+                    <name>Secondary color</name>
+                    <name lang="de-DE">Sekundäre Farbe</name>
+                </option>
+                <option>
+                    <id>btn-outline-secondary</id>
+                    <name>Secondary color (outline)</name>
+                    <name lang="de-DE">Sekundäre Farbe (Outline)</name>
+                </option>
+                <option>
+                    <id>btn-success</id>
+                    <name>Success color</name>
+                    <name lang="de-DE">Erfolg Farbe</name>
+                </option>
+                <option>
+                    <id>btn-outline-success</id>
+                    <name>Success color (outline)</name>
+                    <name lang="de-DE">Erfolg Farbe (Outline)</name>
+                </option>
+                <option>
+                    <id>btn-danger</id>
+                    <name>Error color</name>
+                    <name lang="de-DE">Fehler Farbe</name>
+                </option>
+                <option>
+                    <id>btn-outline-danger</id>
+                    <name>Error color (outline)</name>
+                    <name lang="de-DE">Fehler Farbe (Outline)</name>
+                </option>
+                <option>
+                    <id>btn-info</id>
+                    <name>Information color</name>
+                    <name lang="de-DE">Information Farbe</name>
+                </option>
+                <option>
+                    <id>btn-outline-info</id>
+                    <name>Information color (outline)</name>
+                    <name lang="de-DE">Information Farbe (Outline)</name>
+                </option>
+                <option>
+                    <id>btn-warning</id>
+                    <name>Notice color</name>
+                    <name lang="de-DE">Hinweis Farbe</name>
+                </option>
+                <option>
+                    <id>btn-outline-warning</id>
+                    <name>Notice color (outline)</name>
+                    <name lang="de-DE">Hinweis Farbe (Outline)</name>
+                </option>
+            </options>
+            <defaultValue>btn-outline-primary</defaultValue>
+        </input-field>
+
+        <input-field type="text">
+            <name>buttonExtraClasses</name>
+            <label>Own CSS classes for the button</label>
+            <label lang="de-DE">Eigene CSS-Klassen für den Button</label>
+        </input-field>
+
+    </card>
+
+    <card>
+        <title>Quickview Modal Settings</title>
+        <title lang="de-DE">Schnellansicht Popup-Einstellungen</title>
+
+        <input-field type="single-select">
+            <name>popupStyle</name>
+            <label>Style of the popup (more styles to follow)</label>
+            <label lang="de-DE">Stil des Popups (mehr Stile folgen bald)</label>
+            <options>
+                <option>
+                    <id>0</id>
+                    <name>Style 1</name>
+                    <name lang="de-DE">Stil 1</name>
+                </option>
+            </options>
+            <defaultValue>0</defaultValue>
+        </input-field>
+
+        <input-field type="int">
+            <name>descriptionLength</name>
+            <label>Length of product description in popup (number of characters)</label>
+            <label lang="de-DE">Länge der Produktbeschreibung (Anzahl Zeichen)</label>
+            <helpText>If '0', the whole description is displayed. Please note: if you define a length here, the description also doesn't contain any formatting.</helpText>
+            <helpText lang="de-DE">Falls '0', wird die gesamte Beschreibung angezeigt. Hinweis: wenn du hier eine Länge definierst, enthält die Beschreibung auch keine Formatierungen.</helpText>
+            <defaultValue>0</defaultValue>
+        </input-field>
+
+        <input-field type="bool">
+            <name>hideProductNumber</name>
+            <label>Hide product number in quick view modal</label>
+            <label lang="de-DE">Artikelnummer in der Schnellansicht nicht anzeigen</label>
+        </input-field>
+    </card>
+</config>

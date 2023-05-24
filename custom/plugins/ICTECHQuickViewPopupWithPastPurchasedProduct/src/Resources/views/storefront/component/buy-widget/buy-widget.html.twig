@@ -2,17 +2,24 @@
 
 
 {% block buy_widget_rich_snippets %}
+    {% if config('DmitsProductPopup.config.showButtonProductPageTop') and app.request.get('quickview') %}
 
 
-<a class href="{{ seoUrl('frontend.detail.page', {'productId': product.id}) }}">
-</a>
-{% endif %}
+        <a class="{{config('DmitsProductPopup.config.showButtonProductPageClass')}}" href="{{ seoUrl('frontend.detail.page', {'productId': product.id}) }}">
+            {{ "dmits.productpopup.productpagelink.title"|trans }}
+        </a>
+    {% endif %}
 
 
- {{ parent() }}
- {% endblock %}
+    {{ parent() }}
+{% endblock %}
 {% block buy_widget_reviews %}
-
+    {% if app.request.get('quickview') %}
+        {% set remoteClickOptions = {
+            selector: "#review-tab-" ~ product.id,
+            scrollToElement: false
+        } %}
+    {% endif %}
     {{ parent() }}
 {% endblock %}
 
@@ -20,8 +27,11 @@
 
 {% block buy_widget_ordernumber_container  %}
 
- {{ parent() }}
+    {{ parent() }}
+    {% if config('DmitsProductPopup.config.showButtonProductPageBottom') and app.request.get('quickview') %}
 
-<a class href="{{ seoUrl('frontend.detail.page', {'productId': product.id}) }}">
-</a>
- {% endblock %}
+        <a class="{{config('DmitsProductPopup.config.showButtonProductPageClass')}}" href="{{ seoUrl('frontend.detail.page', {'productId': product.id}) }}">
+            {{ "dmits.productpopup.productpagelink.title"|trans }}
+        </a>
+    {% endif %}
+{% endblock %}
