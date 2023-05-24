@@ -1,0 +1,44 @@
+{
+    "name": "flink/quick-view",
+    "description": "Artikel-Schnellansicht in der Kategorie-Ansicht",
+    "version": "1.4.0",
+    "type": "shopware-platform-plugin",
+    "license": "proprietary",
+    "authors": [
+        {
+          "name": "FlinkFactory",
+          "homepage": "https://flinkfactory.com",
+          "email": "shopware@flinkfactory.com"
+        }
+    ],
+    "require": {
+        "shopware/core": "*",
+        "shopware/storefront": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Flink\\QuickView\\": "src/"
+        }
+    },
+    "extra": {
+        "shopware-plugin-class": "Flink\\QuickView\\FlinkQuickView",
+        "plugin-icon": "src/Resources/config/plugin.png",
+        "copyright": "(c) by FlinkFactory",
+        "label": {
+            "de-DE": "Produkt-Schnellansicht für Produkt-Boxen",
+            "en-GB": "Item Quickview in product boxes"
+        },
+        "description": {
+            "de-DE": "Per Button können Artikeldetails in Kategorie-Ansicht oder Slider als Box Overlay geladen werden, ohne auf die Artikeldetailseite zu wechseln.",
+            "en-GB": "Using a button, item details can be viewed in the category view or sliders as a box overlay without switching to the item details page."
+        },
+        "manufacturerLink": {
+            "de-DE": "https://flinkfactory.com",
+            "en-GB": "https://flinkfactory.com"
+        },
+        "supportLink": {
+            "de-DE": "https://flinkfactory.com",
+            "en-GB": "https://flinkfactory.com"
+        }
+    }
+}

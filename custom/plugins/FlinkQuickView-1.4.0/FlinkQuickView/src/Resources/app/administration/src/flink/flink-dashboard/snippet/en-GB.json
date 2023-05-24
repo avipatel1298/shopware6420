@@ -1,0 +1,11 @@
+{
+    "flink-dashboard": {
+        "title": "FlinkFactory Plugin Settings",
+        "menuItem": "FlinkFactory Plugins",
+        "cardFlinkFeed": "These plugins might interest you",
+        "toPluginsLinkText": "To our plugins",
+        "daysLeft": "Only {days} days left!",
+        "discount": "Discount",
+        "exlusiveVoucher": "Exclusive discount code"
+    }
+}

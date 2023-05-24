@@ -1,53 +1,82 @@
 <?php
-//
-//namespace ICTECHQuickViewPopupWithPastPurchasedProduct\Storefront\Controller;
-//
-//use Shopware\Core\Content\Product\ProductEntity;
-//use Shopware\Core\Framework\DataAbstractionLayer\EntityRepositoryInterface;
-//use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
-//use Shopware\Core\Framework\Routing\Annotation\RouteScope;
-//use Shopware\Core\System\SalesChannel\SalesChannelContext;
-//use Shopware\Storefront\Framework\Cache\Annotation\HttpCache;
-//use Shopware\Storefront\Page\Product\ProductPageLoader;
-//use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-//use Symfony\Component\HttpFoundation\Request;
-//use Symfony\Component\Routing\Annotation\Route;
-//use Symfony\Component\HttpFoundation\Response;
-//
-//
-///**
-// * @RouteScope(scopes={"storefront"})
-// */
-//class QuickViewPopUpController extends AbstractController
-//{
-//    /**
-//     * @var ProductPageLoader
-//     */
-//    private $productPageLoader;
-//
-//    private $productRepository;
-//
-//    public function __construct(
-//
-//        ProductPageLoader         $productPageLoader,
-//        EntityRepositoryInterface $productRepository
-//    )
-//    {
-//        $this->productPageLoader = $productPageLoader;
-//        $this->productRepository = $productRepository;
-//    }
-//
-//    /**
-//     * @HttpCache()
-//     * @Route("/detail/{productId}", name="frontend.product.detail.page", methods={"GET"}, defaults={"XmlHttpRequest": true})
-//     */
-//    public function detail(string $productId, Request $request, SalesChannelContext $context): Response
-//    {
-//        $product = $this->productRepository->search(new Criteria([$productId]), $context->getContext())->first();
-//
-//        // Render the product detail page template with the loaded page data
-//        return $this->renderStorefront('@ICTECHQuickViewPopupWithPastPurchasedProduct/storefront/page/product-detail/index.html.twig', [
-//            'product' => $product,
-//        ]);
-//    }
-//}
+
+namespace ICTECHQuickViewPopupWithPastPurchasedProduct\Storefront\Controller;
+use Shopware\Core\Content\Category\SalesChannel\AbstractCategoryRoute;
+use Shopware\Core\Content\Cms\SalesChannel\AbstractCmsRoute;
+use Shopware\Core\Content\Product\Exception\ProductNotFoundException;
+use Shopware\Core\Content\Product\SalesChannel\Detail\AbstractProductDetailRoute;
+use Shopware\Core\Content\Product\SalesChannel\Listing\AbstractProductListingRoute;
+use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
+use Shopware\Core\Framework\Routing\Annotation\RouteScope;
+use Shopware\Core\Framework\Routing\Exception\MissingRequestParameterException;
+use Shopware\Core\System\SalesChannel\SalesChannelContext;
+use Shopware\Storefront\Controller\StorefrontController;
+use Shopware\Storefront\Page\Product\Configurator\ProductCombinationFinder;
+use Shopware\Storefront\Page\Product\QuickView\MinimalQuickViewPageLoader;
+use Shopware\Storefront\Page\Product\Review\ProductReviewLoader;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+
+/**
+ * @RouteScope(scopes={"storefront"})
+ */
+class QuickViewPopUpController extends StorefrontController
+{
+
+    /**
+     * @var ProductCombinationFinder
+     */
+    private $combinationFinder;
+
+    /**
+     * @var MinimalQuickViewPageLoader
+     */
+    private $minimalQuickViewPageLoader;
+
+    public function __construct(
+        ProductCombinationFinder $combinationFinder,
+        MinimalQuickViewPageLoader $minimalQuickViewPageLoader
+    ) {
+        $this->combinationFinder = $combinationFinder;
+        $this->minimalQuickViewPageLoader = $minimalQuickViewPageLoader;
+    }
+
+    /**
+     * Route to load the cms element buy box product config which assigned to the provided product id.
+     * Product id is required to load the slot config for the buy box
+     *
+     * @RouteScope(scopes={"storefront"})
+     * @Route("/ictech/quickview/{productId}/switch", name="ictech.quickview.switch", methods={"GET"}, defaults={"productId"=null, "XmlHttpRequest"=true})
+     *
+     * @throws MissingRequestParameterException
+     * @throws ProductNotFoundException
+     */
+    public function switchBuyBoxVariant(string $productId, Request $request, SalesChannelContext $context): Response
+    {
+        if (!$productId) {
+            throw new MissingRequestParameterException('Parameter productId missing');
+        }
+
+        /** @var string $switchedOption */
+        $switchedOption = $request->query->get('switched');
+
+        /** @var string $elementId */
+        $elementId = $request->query->get('elementId');
+
+        /** @var array $newOptions */
+        $newOptions = json_decode($request->query->get('options'), true);
+
+        $redirect = $this->combinationFinder->find($productId, $switchedOption, $newOptions, $context);
+
+        $newProductId = $redirect->getVariantId();
+        $request->attributes->set('productId', $newProductId);
+        $page = $this->minimalQuickViewPageLoader->load($request, $context);
+
+        return $this->renderStorefront('@Storefront/storefront/component/product/quickview/minimal.html.twig', [
+            'page' => $page,
+            'elementId' => $elementId,
+        ]);
+    }
+}

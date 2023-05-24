@@ -20,14 +20,14 @@
             <argument type="service" id="product_review.repository"/>
             <tag name="shopware.cms.data_resolver"/>
         </service>
-<!--        &lt;!&ndash; Quickview Popup Controller &ndash;&gt;-->
-<!--        <service id="ICTECHQuickViewPopupWithPastPurchasedProduct\Storefront\Controller\QuickViewPopUpController"-->
-<!--                 public="true">-->
-<!--            <argument type="service" id="product.repository"/>-->
-<!--            <tag name="controller.service_arguments"/>-->
-<!--            <call method="setContainer">-->
-<!--                <argument type="service" id="service_container"/>-->
-<!--            </call>-->
-<!--        </service>-->
+        <!-- Quickview Popup Controller -->
+        <service id="ICTECHQuickViewPopupWithPastPurchasedProduct\Storefront\Controller\QuickViewPopUpController"
+                 public="true">
+            <argument type="service" id="product.repository"/>
+            <tag name="controller.service_arguments"/>
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
     </services>
 </container>

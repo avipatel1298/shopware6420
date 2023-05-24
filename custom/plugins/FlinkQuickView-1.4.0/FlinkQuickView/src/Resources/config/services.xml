@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+           <services>
+               <service id="Flink\QuickView\Resources\snippet\en_GB\SnippetFile_en_GB">
+                   <tag name="shopware.snippet.file" priority="100"/>
+               </service>
+               <service id="Flink\QuickView\Resources\snippet\de_DE\SnippetFile_de_DE">
+                   <tag name="shopware.snippet.file" priority="100"/>
+               </service>
+               <service id="Flink\QuickView\Resources\snippet\es_ES\SnippetFile_es_ES">
+                   <tag name="shopware.snippet.file" priority="100"/>
+               </service>
+               <service id="Flink\QuickView\Resources\snippet\fr_FR\SnippetFile_fr_FR">
+                   <tag name="shopware.snippet.file" priority="100"/>
+               </service>
+               <service id="Flink\QuickView\Resources\snippet\it_IT\SnippetFile_it_IT">
+                   <tag name="shopware.snippet.file" priority="100"/>
+               </service>
+               <service id="Flink\QuickView\Resources\snippet\nl_NL\SnippetFile_nl_NL">
+                   <tag name="shopware.snippet.file" priority="100"/>
+               </service>
+               <service id="Flink\QuickView\Resources\snippet\pl_PL\SnippetFile_pl_PL">
+                   <tag name="shopware.snippet.file" priority="100"/>
+               </service>
+               <service id="Flink\QuickView\Resources\snippet\pt_PT\SnippetFile_pt_PT">
+                   <tag name="shopware.snippet.file" priority="100"/>
+               </service>
+               <service id="Flink\QuickView\Resources\snippet\ru_RU\SnippetFile_ru_RU">
+                   <tag name="shopware.snippet.file" priority="100"/>
+               </service>
+
+               <service id="Flink\QuickView\Subscriber\QuickViewSubscriber">
+                   <argument type="service" id="Shopware\Core\Content\Product\SalesChannel\Detail\ProductDetailRoute"/>
+                   <tag name="kernel.event_subscriber"/>
+               </service>
+
+               <service id="Flink\QuickView\Storefront\Controller\QuickViewController">
+                   <argument type="service" id="Shopware\Storefront\Page\Product\Configurator\ProductCombinationFinder"/>
+                   <argument type="service" id="Shopware\Storefront\Page\Product\QuickView\MinimalQuickViewPageLoader"/>
+                   <call method="setContainer">
+                       <argument type="service" id="service_container"/>
+                   </call>
+                   <tag name="controller.service_arguments"/>
+               </service>
+
+           </services>
+</container>
