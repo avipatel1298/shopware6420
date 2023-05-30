@@ -1,22 +1,15 @@
 <?php
 
 namespace ICTECHQuickViewPopupWithPastPurchasedProduct\Storefront\Controller;
-use Shopware\Core\Content\Category\SalesChannel\AbstractCategoryRoute;
-use Shopware\Core\Content\Cms\SalesChannel\AbstractCmsRoute;
 use Shopware\Core\Content\Product\Exception\ProductNotFoundException;
-use Shopware\Core\Content\Product\SalesChannel\Detail\AbstractProductDetailRoute;
-use Shopware\Core\Content\Product\SalesChannel\Listing\AbstractProductListingRoute;
-use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
 use Shopware\Core\Framework\Routing\Annotation\RouteScope;
 use Shopware\Core\Framework\Routing\Exception\MissingRequestParameterException;
 use Shopware\Core\System\SalesChannel\SalesChannelContext;
 use Shopware\Storefront\Controller\StorefrontController;
 use Shopware\Storefront\Page\Product\Configurator\ProductCombinationFinder;
 use Shopware\Storefront\Page\Product\QuickView\MinimalQuickViewPageLoader;
-use Shopware\Storefront\Page\Product\Review\ProductReviewLoader;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -74,7 +67,7 @@ class QuickViewPopUpController extends StorefrontController
         $request->attributes->set('productId', $newProductId);
         $page = $this->minimalQuickViewPageLoader->load($request, $context);
 
-        return $this->renderStorefront('@Storefront/storefront/component/product/quickview/minimal.html.twig', [
+        return $this->renderStorefront('@ICTECHQuickViewPopupWithPastPurchasedProduct/storefront/component/product/quickview/minimal.html.twig', [
             'page' => $page,
             'elementId' => $elementId,
         ]);

@@ -3,7 +3,6 @@
 <container xmlns="http://symfony.com/schema/dic/services"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-
     <services>
         <!--User Bought Product Slider-->
         <service
@@ -13,6 +12,8 @@
             <argument type="service" id="sales_channel.product.repository"/>
             <tag name="shopware.cms.data_resolver"/>
         </service>
+        <!--User Bought Product Slider-->
+
         <!--Products Review Slider-->
         <service
             id="ICTECHQuickViewPopupWithPastPurchasedProduct\Core\Content\Product\Cms\IctechProductsReviewSliderCmsElementResolver">
@@ -20,6 +21,8 @@
             <argument type="service" id="product_review.repository"/>
             <tag name="shopware.cms.data_resolver"/>
         </service>
+        <!--Products Review Slider-->
+
         <!-- Quickview Popup Controller -->
         <service id="ICTECHQuickViewPopupWithPastPurchasedProduct\Storefront\Controller\QuickViewPopUpController"
                  public="true">
@@ -29,5 +32,17 @@
                 <argument type="service" id="service_container"/>
             </call>
         </service>
+        <!-- Quickview Popup Controller -->
+
+        <!--Quickview Popup Subscriber-->
+        <service id="ICTECHQuickViewPopupWithPastPurchasedProduct\Subscriber\QuickViewPopUpSubscriber">
+            <argument type="service" id="Shopware\Core\Content\Product\SalesChannel\Detail\ProductDetailRoute"/>
+            <argument type="service" id="product_review.repository"/>
+            <argument type="service" id="product.repository"/>
+            <argument type="service" id="order_customer.repository"/>
+            <argument type="service" id="sales_channel.product.repository"/>
+            <tag name="kernel.event_subscriber"/>
+        </service>
+        <!--Quickview Popup Subscriber-->
     </services>
 </container>

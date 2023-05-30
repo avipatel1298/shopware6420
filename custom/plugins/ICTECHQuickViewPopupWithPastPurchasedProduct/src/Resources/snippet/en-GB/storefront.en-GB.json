@@ -1,5 +1,5 @@
 {
-   "cms-page": {
-       "mySnippets": "hello %url%"
-   }
+    "listing": {
+        "boxDetail": "Quick View"
+    }
 }
