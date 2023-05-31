@@ -1,5 +1,4 @@
 {% sw_extends '@Storefront/storefront/component/product/quickview/minimal.html.twig' %}
-
 {% block component_product_quickview_minimal %}
     {% set name = page.product.translated.name %}
     {% set manufacturer = page.product.manufacturer %}
@@ -44,26 +43,22 @@
                 {% endblock %}
             </div>
         {% endif %}
-
         {% sw_include '@Storefront/storefront/page/product-detail/buy-widget.html.twig' with {
             'ICTECHQuickViewPopupWithPastPurchasedProduct': true
         } %}
-
-
         <a href="{{ seoUrl('frontend.detail.page', {'productId': page.product.id}) }}">
             {{ 'See Full Details'|trans }}
         </a>
-
     </div>
-
     {% block slider_include %}
-    {%  sw_include '@ICTECHQuickViewPopupWithPastPurchasedProduct/storefront/element/cms-element-ictech-user-bought-products-slider.html.twig' with {
-        'customerProduct': page.extensions.customerProducts
-    } %}
-        {% endblock %}
+        <div class="product review-slider mt-2"
+            {% sw_include '@ICTECHQuickViewPopupWithPastPurchasedProduct/storefront/element/cms-element-ictech-user-bought-products-slider.html.twig' with {
+                'customerProduct': page.extensions.customerProducts
+            } %}
 
-    {%  sw_include '@ICTECHQuickViewPopupWithPastPurchasedProduct/storefront/element/cms-element-ictech-products-review-slider.html.twig' with {
-        'customerReview': page.extensions.customerReviewData
-    } %}
-
+            {% sw_include '@ICTECHQuickViewPopupWithPastPurchasedProduct/storefront/element/cms-element-ictech-products-review-slider.html.twig' with {
+                'customerReview': page.extensions.customerReviewData
+            } %}
+       </div>
+    {% endblock %}
 {% endblock %}

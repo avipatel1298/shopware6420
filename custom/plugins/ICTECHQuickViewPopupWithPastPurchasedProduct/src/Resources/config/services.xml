@@ -4,7 +4,7 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <!--User Bought Product Slider-->
+        <!--User Bought Product Slider and Products Review Slider-->
         <service
             id="ICTECHQuickViewPopupWithPastPurchasedProduct\Core\Content\Product\Cms\IctechUserBoughtProductsSliderCmsElementResolver">
             <argument type="service" id="order_customer.repository"/>
@@ -12,16 +12,13 @@
             <argument type="service" id="sales_channel.product.repository"/>
             <tag name="shopware.cms.data_resolver"/>
         </service>
-        <!--User Bought Product Slider-->
-
-        <!--Products Review Slider-->
         <service
             id="ICTECHQuickViewPopupWithPastPurchasedProduct\Core\Content\Product\Cms\IctechProductsReviewSliderCmsElementResolver">
             <argument type="service" id="Shopware\Core\System\SystemConfig\SystemConfigService"/>
             <argument type="service" id="product_review.repository"/>
             <tag name="shopware.cms.data_resolver"/>
         </service>
-        <!--Products Review Slider-->
+        <!--User Bought Product Slider and Products Review Slider-->
 
         <!-- Quickview Popup Controller -->
         <service id="ICTECHQuickViewPopupWithPastPurchasedProduct\Storefront\Controller\QuickViewPopUpController"

@@ -1,13 +1,9 @@
 {% sw_extends '@Storefront/storefront/page/product-detail/index.html.twig' %}
-
-
 {% block base_head %}
     {% sw_include '@Storefront/storefront/page/product-detail/meta.html.twig' %}
 {% endblock %}
-
 {% block base_content %}
     {% block page_product_detail %}
-
         <div class="product-detail"
              itemscope
              itemtype="https://schema.org/Product">
@@ -19,7 +15,6 @@
                                 {% sw_include '@Storefront/storefront/page/product-detail/headline.html.twig' %}
                             </div>
                         {% endblock %}
-
                         {% set mediaItems = page.product.media.media %}
                         {% block page_product_detail_main %}
                             <div class="row product-detail-main">
@@ -45,7 +40,6 @@
                                         {% endif %}
                                     </div>
                                 {% endblock %}
-
                                 {% block page_product_detail_buy %}
                                     <div class="col-lg-5 product-detail-buy">
                                         {% sw_include '@Storefront/storefront/page/product-detail/buy-widget.html.twig' %}
@@ -55,13 +49,11 @@
                         {% endblock %}
                     </div>
                 {% endblock %}
-
                 {% block page_product_detail_tabs %}
                     <div class="product-detail-tabs">
                         {% sw_include '@Storefront/storefront/page/product-detail/tabs.html.twig' %}
                     </div>
                 {% endblock %}
-
                 {% block page_product_detail_cross_selling %}
                     {% if page.crossSellings.elements is defined and page.crossSellings.elements|filter(item => item.total > 0)|length > 0 %}
                         <div class="product-detail-tabs product-detail-cross-selling">

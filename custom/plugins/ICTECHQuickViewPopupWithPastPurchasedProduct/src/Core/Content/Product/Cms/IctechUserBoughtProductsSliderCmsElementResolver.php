@@ -17,18 +17,16 @@ use Shopware\Core\System\SalesChannel\Entity\SalesChannelRepositoryInterface;
 #[Package('inventory')]
 class IctechUserBoughtProductsSliderCmsElementResolver extends AbstractProductDetailCmsElementResolver
 {
-
     private EntityRepositoryInterface $orderCustomerRepository;
 
     private EntityRepositoryInterface $productRepository;
 
     private SalesChannelRepositoryInterface $salesChannelRepository;
 
-
     /**
      * @internal
      */
-    public function __construct(EntityRepositoryInterface $orderCustomerRepository,EntityRepositoryInterface $productRepository,SalesChannelRepositoryInterface $salesChannelRepository)
+    public function __construct(EntityRepositoryInterface $orderCustomerRepository, EntityRepositoryInterface $productRepository, SalesChannelRepositoryInterface $salesChannelRepository)
     {
 
         $this->orderCustomerRepository = $orderCustomerRepository;
@@ -48,13 +46,12 @@ class IctechUserBoughtProductsSliderCmsElementResolver extends AbstractProductDe
 
         $criteria = new Criteria();
         $criteria->addAssociation('orderCustomer');
-
         return $collection->all() ? $collection : null;
     }
 
+    //Function for getting data of products which is previously bought by customer
     public function enrich(CmsSlotEntity $slot, ResolverContext $resolverContext, ElementDataCollection $result): void
     {
-
         $config = $slot->getFieldConfig();
         $slot->setFieldConfig($config);
         $customer = $resolverContext->getSalesChannelContext()->getCustomer();
@@ -68,15 +65,14 @@ class IctechUserBoughtProductsSliderCmsElementResolver extends AbstractProductDe
 
             $orders = $this->orderCustomerRepository->search($criteria, $context);
             $productIds = [];
-            foreach ($orders as $order){
-                $array=$order->getOrder()->getLineitems()->getElements();
-                $productIds[] = array_column($array,'productId');
-
+            foreach ($orders as $order) {
+                $array = $order->getOrder()->getLineitems()->getElements();
+                $productIds[] = array_column($array, 'productId');
             }
-            $productId = array_column($productIds,'0');
+            $productId = array_column($productIds, '0');
             $productCriteria = new Criteria();
-            $productCriteria->addFilter(new EqualsAnyFilter('id',$productId));
-            $products = $this->salesChannelRepository->search($productCriteria,$resolverContext->getSalesChannelContext());
+            $productCriteria->addFilter(new EqualsAnyFilter('id', $productId));
+            $products = $this->salesChannelRepository->search($productCriteria, $resolverContext->getSalesChannelContext());
             $slot->setData($products);
         }
 

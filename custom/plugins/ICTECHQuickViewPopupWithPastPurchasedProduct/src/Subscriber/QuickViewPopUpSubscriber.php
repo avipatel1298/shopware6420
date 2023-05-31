@@ -2,7 +2,6 @@
 
 namespace ICTECHQuickViewPopupWithPastPurchasedProduct\Subscriber;
 
-use Shopware\Core\Content\Product\Events\ProductListingResultEvent;
 use Shopware\Core\Content\Product\SalesChannel\Detail\AbstractProductDetailRoute;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityRepository;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityRepositoryInterface;
@@ -12,7 +11,6 @@ use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\EqualsAnyFilter;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\EqualsFilter;
 use Shopware\Core\Framework\Struct\ArrayStruct;
 use Shopware\Core\System\SalesChannel\Entity\SalesChannelRepositoryInterface;
-use Shopware\Storefront\Page\Product\ProductPageLoadedEvent;
 use Shopware\Storefront\Page\Product\QuickView\MinimalQuickViewPageCriteriaEvent;
 use Shopware\Storefront\Page\Product\QuickView\MinimalQuickViewPageLoadedEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -20,20 +18,20 @@ use Symfony\Component\HttpFoundation\Request;
 
 class QuickViewPopUpSubscriber implements EventSubscriberInterface
 {
-
     private AbstractProductDetailRoute $productDetailRoute;
     private EntityRepository $productReviewRepository;
     private EntityRepositoryInterface $productRepository;
     private EntityRepositoryInterface $orderCustomerRepository;
     private SalesChannelRepositoryInterface $salesChannelRepository;
 
-
     public function __construct(
         AbstractProductDetailRoute      $productDetailRoute,
         EntityRepository                $productReviewRepository,
         EntityRepositoryInterface       $productRepository,
         EntityRepositoryInterface       $orderCustomerRepository,
-        SalesChannelRepositoryInterface $salesChannelRepository)
+        SalesChannelRepositoryInterface $salesChannelRepository
+    )
+
     {
         $this->productDetailRoute = $productDetailRoute;
         $this->productRepository = $productRepository;
@@ -46,16 +44,16 @@ class QuickViewPopUpSubscriber implements EventSubscriberInterface
      * @return string[]
      */
     public static function getSubscribedEvents(): array
+
     {
         return [
             MinimalQuickViewPageCriteriaEvent::class => 'onMinimalQuickViewPageCriteria',
             MinimalQuickViewPageLoadedEvent::class => 'onMinimalQuickViewPageLoaded',
-            ProductListingResultEvent::class => 'onProductListingPageLoadEvent',
-            ProductPageLoadedEvent::class => 'onProductPage'
         ];
     }
 
     public function onMinimalQuickViewPageCriteria(MinimalQuickViewPageCriteriaEvent $event)
+
     {
         try {
             $criteria = $event->getCriteria();
@@ -67,6 +65,7 @@ class QuickViewPopUpSubscriber implements EventSubscriberInterface
     }
 
     public function onMinimalQuickViewPageLoaded(MinimalQuickViewPageLoadedEvent $event)
+
     {
         $customer = $event->getSalesChannelContext()->getCustomer();
         $reviews = $event->getSalesChannelContext()->getContext();
@@ -83,7 +82,7 @@ class QuickViewPopUpSubscriber implements EventSubscriberInterface
 
         $result = $this->productDetailRoute->load($productId, new Request, $event->getSalesChannelContext(), $criteria);
 
-        //customer Past Bought products slider
+        //customer Past Bought products slider data with extension
         $customerProducts = [];
         if ($customer !== null) {
             $criteria = new Criteria();
@@ -103,10 +102,11 @@ class QuickViewPopUpSubscriber implements EventSubscriberInterface
             $productCriteria->addFilter(new EqualsAnyFilter('id', $productId));
             $customerProducts['customerProductsData'] = $this->salesChannelRepository->search($productCriteria, $event->getSalesChannelContext())->getElements();
         }
+
         $event->getPage()->addExtension('customerProducts', new ArrayStruct($customerProducts));
         $page->configuratorSettings = $result->getConfigurator();
 
-        //Customer Review Slider
+        //Customer Review Slider data with extension
         $context = $event->getSalesChannelContext()->getContext();
         $productReviewId = $event->getRequest()->attributes->get('productId');
         $criteria = new Criteria();
@@ -120,58 +120,6 @@ class QuickViewPopUpSubscriber implements EventSubscriberInterface
             $event->getPage()->addExtension('customerReviewData', new ArrayStruct($customerReviews));
             $page->configuratorSettings = $result->getConfigurator();
 
-        }
-
-    }
-
-    public function onProductListingPageLoadEvent(ProductListingResultEvent $event)
-    {
-        $customer = $event->getSalesChannelContext()->getCustomer();
-        $context = $event->getContext();
-        $criteria = new Criteria();
-
-        if ($customer !== null) {
-            $criteria->addFilter((new EqualsFilter('customerId', $customer->getId())));
-            $criteria->addAssociation('order');
-            $criteria->addAssociation('order.lineItems');
-            $orders = $this->orderCustomerRepository->search($criteria, $context);
-            $productIds = [];
-
-            foreach ($orders as $order) {
-                $array = $order->getOrder()->getLineitems()->getElements();
-                $productIds[] = array_column($array, 'productId');
-            }
-            $productId = array_column($productIds, '0');
-            $productCriteria = new Criteria();
-            $productCriteria->addFilter(new EqualsAnyFilter('id', $productId));
-            $products = $this->salesChannelRepository->search($productCriteria, $event->getSalesChannelContext());
-        }
-    }
-
-    public function onProductPage(ProductPageLoadedEvent $event)
-    {
-        $customer = $event->getSalesChannelContext()->getCustomer();
-        $context = $event->getContext();
-        $criteria = new Criteria();
-
-        if ($customer !== null) {
-            $criteria->addFilter((new EqualsFilter('customerId', $customer->getId())));
-            $criteria->addAssociation('order');
-            $criteria->addAssociation('order.lineItems');
-            $orders = $this->orderCustomerRepository->search($criteria, $context);
-            $productIds = [];
-
-            foreach ($orders as $order) {
-                $array = $order->getOrder()->getLineitems()->getElements();
-                $productIds[] = array_column($array, 'productId');
-            }
-            $productId = array_column($productIds, '0');
-            $productCriteria = new Criteria();
-            $productCriteria->addFilter(new EqualsAnyFilter('id', $productId));
-            $products = $this->salesChannelRepository->search($productCriteria, $event->getSalesChannelContext());
-            $produc = [$products];
-
-            $event->getPage()->addExtension('products', new ArrayStruct($produc));
         }
     }
 }

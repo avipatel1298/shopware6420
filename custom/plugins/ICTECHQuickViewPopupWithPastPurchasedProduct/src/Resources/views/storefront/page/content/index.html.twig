@@ -1,6 +1,4 @@
 {% sw_extends '@Storefront/storefront/page/content/index.html.twig' %}
-
-{# @var page \Shopware\Storefront\Page\LandingPage\LandingPage|\Shopware\Storefront\Page\CategoryPage\CategoryPage #}
 {% block base_main_inner %}
     <div class="container-main">
         {% block page_content %}
@@ -12,9 +10,7 @@
                     } only %}
                 </div>
             {% endblock %}
-
             {% block cms_content %}
-                {# @deprecated tag:v6.5.0 - keep if branch - page.cmsPage will be removed. Use page.landingPage.cmsPage instead #}
                 {% if feature('v6.5.0.0') %}
                     {% set cmsPageClasses = ('cms-page ' ~ page.landingPage.cmsPage.cssClass|striptags)|trim %}
                     {% set cmsPage = page.landingPage ? page.landingPage.cmsPage : page.cmsPage %}
