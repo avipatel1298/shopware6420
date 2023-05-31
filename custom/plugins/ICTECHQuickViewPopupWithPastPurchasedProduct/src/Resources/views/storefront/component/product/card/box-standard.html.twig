@@ -1,163 +1,33 @@
 {% sw_extends '@Storefront/storefront/component/product/card/box-standard.html.twig' %}
 
+{% block component_product_box_badges %}
+    {{ parent() }}
+{% endblock %}
 
 {% block component_product_box_image %}
-	{% if (config('DmitsProductPopup.config.active')) %}
-        {% if product.variation or not (config('DmitsProductPopup.config.imageAddToCard')) or  product.customFields.dmits_customproducts_product_iscustom %}
-<div class="product-image-wrapper openProduct" data-url="{{ seoUrl('frontend.detail.page', {'productId': id}) }}">
-    {% else %}
-    <div class="product-image-wrapper triggerAddToCart">
-        {% endif %}
-        {# fallback if display mode is not set #}
-        {% set displayMode = displayMode ?: 'standard' %}
+    {{ parent() }}
+{% endblock %}
 
-        {# set display mode 'cover' for box-image with standard display mode #}
-        {% if layout == 'image' and displayMode == 'standard' %}
-            {% set displayMode = 'cover' %}
-        {% endif %}
+{% block component_product_box_rating %}
+    {{ parent() }}
+{% endblock %}
 
+{% block component_product_box_name %}
+    {{ parent() }}
+{% endblock %}
 
-        {% if cover.url %}
-            {% set attributes = {
-                'class': 'product-image is-'~displayMode,
-                'alt': (cover.translated.alt ?: name),
-                'title': (cover.translated.title ?: name)
-            } %}
+{% block component_product_box_variant_characteristics %}
+    {{ parent() }}
+{% endblock %}
 
-            {% if displayMode == 'cover' or displayMode == 'contain' %}
-                {% set attributes = attributes|merge({ 'data-object-fit': displayMode }) %}
-            {% endif %}
+{% block component_product_box_description %}
+    {{ parent() }}
+{% endblock %}
 
-            {% sw_thumbnails 'product-image-thumbnails' with {
-                media: cover,
-                sizes: sizes
-            } %}
-        {% else %}
-            <div class="product-image-placeholder">
-                {% sw_icon 'placeholder' style {
-                    'size': 'fluid'
-                } %}
-            </div>
-        {% endif %}
+{% block component_product_box_price %}
+    {{ parent() }}
+{% endblock %}
 
-
-        {% if config('core.cart.wishlistEnabled') %}
-            {% block component_product_box_wishlist_action %}
-                {% sw_include '@Storefront/storefront/component/product/card/wishlist.html.twig' with {
-                    appearance: 'circle',
-                    productId: id
-                } %}
-            {% endblock %}
-        {% endif %}
-
-    </div>
-    {% else %}
-        {{ parent() }}
-    {% endif %}
-    {% endblock %}
-
-
-    {% block component_product_box_name %}
-        {% if (config('DmitsProductPopup.config.active')) %}
-            <span data-url="{{ seoUrl('frontend.detail.page', {'productId': id}) }}"
-                  class="product-name openProduct">{{ name }}</span>
-        {% else %}
-            {{ parent() }}
-        {% endif %}
-    {% endblock %}
-
-    {% block component_product_box_action %}
-        {% if (config('DmitsProductPopup.config.active')) %}
-            {% set isAvailable = not product.isCloseout or (product.availableStock >= product.minPurchase) %}
-            {% set displayFrom = product.calculatedPrices.count > 1 %}
-            {% set displayBuyButton = isAvailable and product.childCount <= 0 %}
-
-            {% if displayBuyButton and config('core.listing.allowBuyInListing') %}
-                {% if product.variation or product.customFields.dmits_customproducts_product_iscustom %}
-                    <div class="d-grid">
-                        <button data-url="{{ seoUrl('frontend.detail.page', {'productId': id}) }}"
-                                class="openProduct btn btn-block btn-light">
-                            {{ "listing.boxProductDetails"|trans|sw_sanitize }}
-                        </button>
-                    </div>
-                {% else %}
-
-                    {# @var product \Shopware\Core\Content\Product\SalesChannel\SalesChannelProductEntity #}
-                <form action="{{ path('frontend.checkout.line-item.add') }}"
-                      method="post"
-                      class="buy-widget"
-                      data-add-to-cart="true">
-
-
-
-                    {% block component_product_box_action_form %}
-
-                        {% block component_product_box_action_buy_redirect_input %}
-                            {# fallback redirect back to detail page is deactivated via js #}
-                            <input type="hidden"
-                                   name="redirectTo"
-                                   value="frontend.detail.page">
-
-                            <input type="hidden"
-                                   name="redirectParameters"
-                                   data-redirect-parameters="true"
-                                   value='{"productId": "{{ product.id }}"}'>
-                        {% endblock %}
-
-                        {% block page_product_detail_buy_product_buy_info %}
-                            <input type="hidden"
-                                   name="lineItems[{{ id }}][id]"
-                                   value="{{ id }}">
-                            <input type="hidden"
-                                   name="lineItems[{{ id }}][referencedId]"
-                                   value="{{ id }}">
-                            <input type="hidden"
-                                   name="lineItems[{{ id }}][type]"
-                                   value="product">
-                            <input type="hidden"
-                                   name="lineItems[{{ id }}][stackable]"
-                                   value="1">
-                            <input type="hidden"
-                                   name="lineItems[{{ id }}][removable]"
-                                   value="1">
-                            <input type="hidden"
-                                   name="lineItems[{{ id }}][quantity]"
-                                   value="{{ product.minPurchase }}">
-                        {% endblock %}
-
-                        {% block page_product_detail_product_buy_meta %}
-                            <input type="hidden"
-                                   name="product-name"
-                                   value="{{ product.translated.name }}">
-                        {% endblock %}
-
-                        {% block page_product_detail_product_buy_button %}
-                            <div class="d-grid">
-                                <button class="btn btn-block btn-buy"
-                                        title="{{ "listing.boxAddProduct"|trans|striptags }}">
-                                    {{ "listing.boxAddProduct"|trans|sw_sanitize }}
-                                </button>
-                            </div>
-                        {% endblock %}
-                        </form>
-                        {% if displayFrom or config('DmitsProductPopup.config.showDetailButton') %}
-                            <div class="d-grid">
-                                <button data-url="{{ seoUrl('frontend.detail.page', {'productId': id}) }}"
-                                        class="openProduct btn btn-block btn-light">
-                                    {{ "listing.boxProductDetails"|trans|sw_sanitize }}
-                                </button>
-                            </div>
-                        {% endif %}
-                    {% endblock %}
-
-                {% endif %}
-
-            {% endif %}
-        {% else %}
-            {{ parent() }}
-        {% endif %}
-    {% endblock %}
-
-
-
-
+{% block component_product_box_action %}
+    {{ parent() }}
+{% endblock %}

@@ -1,6 +1,7 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace ICTECHQuickViewPopupWithPastPurchasedProduct\Storefront\Controller;
+
 use Shopware\Core\Content\Product\Exception\ProductNotFoundException;
 use Shopware\Core\Framework\Routing\Annotation\RouteScope;
 use Shopware\Core\Framework\Routing\Exception\MissingRequestParameterException;
@@ -17,12 +18,10 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class QuickViewPopUpController extends StorefrontController
 {
-
     /**
      * @var ProductCombinationFinder
      */
     private $combinationFinder;
-
     /**
      * @var MinimalQuickViewPageLoader
      */
@@ -37,9 +36,6 @@ class QuickViewPopUpController extends StorefrontController
     }
 
     /**
-     * Route to load the cms element buy box product config which assigned to the provided product id.
-     * Product id is required to load the slot config for the buy box
-     *
      * @RouteScope(scopes={"storefront"})
      * @Route("/ictech/quickview/{productId}/switch", name="ictech.quickview.switch", methods={"GET"}, defaults={"productId"=null, "XmlHttpRequest"=true})
      *

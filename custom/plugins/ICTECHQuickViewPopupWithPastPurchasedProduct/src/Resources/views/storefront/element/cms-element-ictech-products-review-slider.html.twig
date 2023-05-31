@@ -20,7 +20,7 @@
                             nav: false,
                             mouseDrag: false,
                             controls: true,
-                            autoplay: false
+                            autoplay: true
                         }
                     } %}
                     {% block element_ictech_products_review_slider_slider %}
@@ -40,7 +40,6 @@
                                 {% block element_ictech_products_review_slider_element %}
                                     <div class="product-slider-container"
                                          data-product-slider-container="true">
-
                                         {% for review in page.extensions.customerReviewData['customerReviewData'] %}
                                             {% block element_ictech_products_review_slider_inner_item %}
                                                 <div class="product-slider-item">

@@ -1,7 +1,4 @@
-{# @var cmsPage \Shopware\Core\Content\Cms\CmsPageEntity #}
-{# @var landingPage \Shopware\Core\Content\LandingPage\LandingPageEntity #}
 {% sw_extends '@Storefront/storefront/page/content/detail.html.twig' %}
-
 {% block page_content_sections_inner %}
     <div class="cms-sections">
         {% for section in cmsPage.sections %}
@@ -18,7 +15,6 @@
             {% if sectionBgColor %}
                 {% set sectionClasses = ['bg-color']|merge(sectionClasses) %}
             {% endif %}
-
             {% if section.visibility is null %}
                 {% set visibility = {
                     mobile: true,
