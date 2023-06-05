@@ -1,0 +1,31 @@
+{
+    "name": "ictech/ictech-bulk-delete-order",
+    "description": "Bulk Delete Orders",
+    "type": "shopware-platform-plugin",
+    "license": "proprietary",
+    "autoload": {
+        "psr-4": {
+            "ICTECHBulkDeleteOrder\\": "src/"
+        }
+    },
+    "extra": {
+        "shopware-plugin-class": "ICTECHBulkDeleteOrder\\ICTECHBulkDeleteOrder",
+        "plugin-icon": "",
+        "label": {
+            "de-DE": "loschen Mehrfach Bestellungen",
+            "en-GB": "Bulk Delete Orders"
+        },
+        "description": {
+            "de-DE": "Nach der Installation dieses Plugins erhält der Administrator eine zusätzliche Option zur Löschung der Sammelbestellung.",
+            "en-GB": "After installing this plugin, the admin will get an additional option of deleting the bulk order."
+        },
+        "manufacturerLink": {
+            "de-DE": "https://www.icreativetechnologies.com",
+            "en-GB": "https://www.icreativetechnologies.com"
+        },
+        "supportLink": {
+            "de-DE": "https://support.icreativetechnologies.com/",
+            "en-GB": "https://support.icreativetechnologies.com/"
+        }
+    }
+}

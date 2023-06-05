@@ -8,3 +8,38 @@ div#reviewSlider .tns-outer {
 
     }
 }
+.cms-element-review {
+    .review-slider-title {
+        padding-left: 20px;
+        font-weight: 700;
+        color: #444;
+        font-size: 20px;
+    }
+    .ict-review-title {
+        font-weight: 700;
+        font-size: 18px;
+    }
+    .product-description {
+        color: #444;
+        white-space: normal;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        height: auto;
+        margin: 5px 0;
+    }
+    .ict-customer-info {
+        color: cornflowerblue;
+        font-weight: 500;
+    }
+}
+.product-slider-title {
+    padding-left: 20px;
+    font-weight: 700;
+    color: #444;
+    font-size: 20px;
+}
+@media (max-width:767px){
+    .cms-element-product-listing button.ict-quick-view {
+        display:none;
+    }
+}
