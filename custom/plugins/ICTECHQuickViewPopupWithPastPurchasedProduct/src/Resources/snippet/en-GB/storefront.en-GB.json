@@ -1,5 +1,16 @@
 {
     "listing": {
         "boxDetail": "Quick View"
+    },
+    "slider": {
+        "productSlider": {
+            "title":"Your Past Purchased Products"
+        },
+        "reviewSlider": {
+            "title": "Product Reviews"
+        }
+    },
+    "reviewSliderRatingUsername": {
+        "userName":"By:-"
     }
 }

@@ -3,11 +3,17 @@
 {% block element_ictech_user_bought_products_slider %}
 
     {% if (ActiveInactive === true) and (CustomerBuyProductsSlider === true) %}
+
         {% if not sliderConfig %}
             {% set sliderConfig = element.fieldConfig.elements %}
         {% endif %}
         <div
             class="cms-element-has-vertical-alignment">
+            {% block element_ictech_user_bought_products_slider_title %}
+                <div class="product-slider-title">
+                    {{ "slider.productSlider.title"|trans|sw_sanitize }}
+                </div>
+            {% endblock %}
             {% block element_ictech_user_bought_products_slider_alignment %}
                 {% if config.verticalAlign.value %}
                     <div class="cms-element-alignment{% if sliderConfig.verticalAlign.value == "center" %} align-self-center{% elseif sliderConfig.verticalAlign.value == "flex-end" %} align-self-end{% else %} align-self-start{% endif %}">
@@ -22,8 +28,9 @@
                         mouseDrag: false,
                         controls: true,
                         autoplay:  true,
-                        items: 3,
-                        loop: false
+                        items: 2,
+                        loop: true,
+                        speed: 200
                     }
                 } %}
 
@@ -31,20 +38,14 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div
-                                class="base-slider product-slider{% if sliderConfig.border.value %} has-border{% endif %}{% if sliderConfig.navigation.value %} has-nav{% endif %}"
+                                class="base-slider product-slider has-nav"
                                 data-product-slider="true"
                                 data-product-slider-options="{{ productSliderOptions|json_encode }}">
 
-                                {% block element_ictech_user_bought_products_slider_title %}
-                                    {% if sliderConfig.title.value %}
-                                        <div class="cms-element-title">
-                                            <p class="cms-element-title-paragraph">{{ sliderConfig.title.value }}</p>
-                                        </div>
-                                    {% endif %}
-                                {% endblock %}
                                 {% block element_ictech_user_bought_products_slider_inner %}
                                     {% block element_ictech_user_bought_products_slider_element %}
-                                        <div class="col-lg-12">
+                                        <div
+                                            class="{% if page.extensions.customerProducts['customerProductsData']|length >= 3 %}col-lg-4 col-md-8 {% elseif page.extensions.customerProducts['customerProductsData']|length == 2 %}col-lg-4 col-md-8{% endif %}">
                                             <div class="product-slider-container"
                                                  data-product-slider-container="true">
                                                 {% for item in page.extensions.customerProducts['customerProductsData'] %}
@@ -61,20 +62,20 @@
                                             </div>
                                         </div>
                                     {% endblock %}
-                                    {% block element_product_slider_controls %}
+                                    {% block element_ictech_user_bought_products_slider_controls %}
                                         <div class="product-slider-controls-container">
                                             <div class="base-slider-controls"
                                                  data-product-slider-controls="true">
-                                                {% block element_product_slider_controls_items %}
+                                                {% block element_ictech_user_bought_products_slider_controls_items %}
                                                     <button
-                                                        class="base-slider-controls-prev product-slider-controls-prev{% if sliderConfig.border.value %} has-border{% endif %}">
-                                                        {% block element_product_slider_controls_items_prev_icon %}
+                                                        class="base-slider-controls-prev product-slider-controls-prev">
+                                                        {% block element_ictech_user_bought_products_slider_controls_items_prev_icon %}
                                                             {% sw_icon 'arrow-head-left' %}
                                                         {% endblock %}
                                                     </button>
                                                     <button
-                                                        class="base-slider-controls-next product-slider-controls-next{% if sliderConfig.border.value %} has-border{% endif %}">
-                                                        {% block element_product_slider_controls_items_next_icon %}
+                                                        class="base-slider-controls-next product-slider-controls-next">
+                                                        {% block element_ictech_user_bought_products_slider_controls_items_next_icon %}
                                                             {% sw_icon 'arrow-head-right' %}
                                                         {% endblock %}
                                                     </button>

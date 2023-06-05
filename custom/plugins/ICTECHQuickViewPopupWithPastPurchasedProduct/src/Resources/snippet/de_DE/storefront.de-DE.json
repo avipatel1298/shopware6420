@@ -1,5 +1,16 @@
 {
     "listing": {
         "boxDetail": "Schnellansicht"
+    },
+    "slider": {
+        "productSlider": {
+            "title":"Ihre früher gekauften Produkte"
+        },
+        "reviewSlider": {
+            "title":"Produktbewertungen"
+        }
+    },
+    "reviewSliderRatingUsername": {
+        "userName":"Unter:-"
     }
 }
