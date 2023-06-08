@@ -12,5 +12,9 @@
     },
     "reviewSliderRatingUsername": {
         "userName":"Unter:-"
+    },
+
+    "detail": {
+        "productDetail": "Vollständiges Detail sehen"
     }
 }

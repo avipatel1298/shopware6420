@@ -1,19 +1,19 @@
-{% set ActiveInactive = config('ICTECHQuickViewPopupWithPastPurchasedProduct.config.ActiveInactive',context.salesChannel.id) %}
+{% set Active = config('ICTECHQuickViewPopupWithPastPurchasedProduct.config.Active',context.salesChannel.id) %}
 {% set CustomerBuyProductsSlider = config('ICTECHQuickViewPopupWithPastPurchasedProduct.config.CustomerBuyProductsSlider') %}
 {% block element_ictech_user_bought_products_slider %}
-
-    {% if (ActiveInactive === true) and (CustomerBuyProductsSlider === true) %}
-
+    {% if (Active === true) and (CustomerBuyProductsSlider === true) %}
         {% if not sliderConfig %}
             {% set sliderConfig = element.fieldConfig.elements %}
         {% endif %}
         <div
             class="cms-element-has-vertical-alignment">
-            {% block element_ictech_user_bought_products_slider_title %}
-                <div class="product-slider-title">
-                    {{ "slider.productSlider.title"|trans|sw_sanitize }}
-                </div>
-            {% endblock %}
+            {% if (Active === true) and (page.extensions.customerProducts['customerProductsData'] == true) %}
+                {% block element_ictech_user_bought_products_slider_title %}
+                    <div class="product-slider-title">
+                        {{ "slider.productSlider.title"|trans|sw_sanitize }}
+                    </div>
+                {% endblock %}
+            {% endif %}
             {% block element_ictech_user_bought_products_slider_alignment %}
                 {% if config.verticalAlign.value %}
                     <div class="cms-element-alignment{% if sliderConfig.verticalAlign.value == "center" %} align-self-center{% elseif sliderConfig.verticalAlign.value == "flex-end" %} align-self-end{% else %} align-self-start{% endif %}">
@@ -45,7 +45,7 @@
                                 {% block element_ictech_user_bought_products_slider_inner %}
                                     {% block element_ictech_user_bought_products_slider_element %}
                                         <div
-                                            class="{% if page.extensions.customerProducts['customerProductsData']|length >= 3 %}col-lg-4 col-md-8 {% elseif page.extensions.customerProducts['customerProductsData']|length == 2 %}col-lg-4 col-md-8{% endif %}">
+                                            class="{% if page.extensions.customerProducts['customerProductsData']|length >= 3 %}col-lg-4 col-md-8 {% elseif page.extensions.customerProducts['customerProductsData']|length == 2 %}col-lg-6 col-md-6{% endif %}">
                                             <div class="product-slider-container"
                                                  data-product-slider-container="true">
                                                 {% for item in page.extensions.customerProducts['customerProductsData'] %}

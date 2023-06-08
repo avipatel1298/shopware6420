@@ -5,25 +5,28 @@
         <!--Main Active/Inactive Switch-->
         <title>Configuration</title>
         <input-field type="bool">
-            <name>ActiveInactive</name>
+            <name>Active</name>
             <label>Active</label>
             <label lang ="de-DE">Aktiv</label>
+            <label lang ="nl-NL">Actief</label>
         </input-field>
         <!--Main Active/Inactive Switch-->
 
         <!--User Bought Product Slider Switch-->
         <input-field type="bool">
             <name>CustomerBuyProductsSlider</name>
-            <label>User's Bought Products Slider</label>
-            <label lang ="de-DE">Schieberegler „Gekaufte Produkte“ des Benutzers</label>
+            <label>Slider for purchased products of the user</label>
+            <label lang ="de-DE">Schieberegler für gekaufte Produkte des Benutzers</label>
+            <label lang ="nl-NL">Slider voor gekochte producten van de gebruiker</label>
         </input-field>
         <!--User Bought Product Slider Switch-->
 
         <!--Products Review Slider-->
         <input-field type="bool">
-            <name>ReviewRatingSlider</name>
-            <label>Review Rating Slider</label>
-            <label lang ="de-DE">Bewertungsschieberegler bewerten</label>
+            <name>ProductReviewRatingSlider</name>
+            <label>Product Review Rating Slider</label>
+            <label lang ="de-DE">Schieberegler für die Produktbewertung</label>
+            <label lang ="nl-NL">Schuifregelaar voor productbeoordeling</label>
         </input-field>
         <!--Products Review Slider-->
     </card>

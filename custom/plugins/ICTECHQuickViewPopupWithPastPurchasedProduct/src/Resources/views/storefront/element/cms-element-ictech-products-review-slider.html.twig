@@ -1,7 +1,7 @@
-{% set ActiveInactive = config('ICTECHQuickViewPopupWithPastPurchasedProduct.config.ActiveInactive',context.salesChannel.id) %}
-{% set ReviewRatingSlider = config('ICTECHQuickViewPopupWithPastPurchasedProduct.config.ReviewRatingSlider',context.salesChannel.id) %}
+{% set Active = config('ICTECHQuickViewPopupWithPastPurchasedProduct.config.Active',context.salesChannel.id) %}
+{% set ProductReviewRatingSlider = config('ICTECHQuickViewPopupWithPastPurchasedProduct.config.ProductReviewRatingSlider',context.salesChannel.id) %}
 {% block element_ictech_products_review_slider %}
-    {% if (ActiveInactive === true) and (ReviewRatingSlider === true) %}
+    {% if (Active === true) and (ProductReviewRatingSlider === true) %}
         {% if not sliderConfig %}
             {% set sliderConfig = element.fieldConfig.elements %}
         {% endif %}
