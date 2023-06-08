@@ -1,4 +1,6 @@
 {% sw_extends '@Storefront/storefront/component/product/card/action.html.twig' %}
+{% set Active = config('ICTECHQuickViewPopupWithPastPurchasedProduct.config.Active',context.salesChannel.id) %}
+
 {% block component_product_box_action_inner %}
     {{ parent() }}
     {% block product_quickview_button %}
@@ -10,11 +12,13 @@
                 </button>
             </div>
         {% else %}
+            {% if Active == true %}
             <button class="btn btn-block btn-buy mt-2 ict-quick-view" data-toggle="modal" data-target="#quickViewModal"
                     data-url="{{ path('widgets.quickview.minimal', {'productId': id}) }}"
                     title="{{ "listing.boxDetail"|trans|striptags }}">
                 {{ "listing.boxDetail"|trans|sw_sanitize }}
             </button>
+                {% endif %}
         {% endif %}
     {% endblock %}
     <div class="js-pseudo-modal-template">

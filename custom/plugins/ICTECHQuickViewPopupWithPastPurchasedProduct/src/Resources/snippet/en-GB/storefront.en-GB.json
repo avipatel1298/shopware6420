@@ -4,7 +4,7 @@
     },
     "slider": {
         "productSlider": {
-            "title":"Your Past Purchased Products"
+            "title":"Your Last Purchased Products"
         },
         "reviewSlider": {
             "title": "Product Reviews"
@@ -12,5 +12,9 @@
     },
     "reviewSliderRatingUsername": {
         "userName":"By:-"
+    },
+
+    "detail": {
+        "productDetail": "See Full Detail"
     }
 }
