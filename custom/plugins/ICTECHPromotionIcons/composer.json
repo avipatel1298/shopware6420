@@ -1,0 +1,37 @@
+{
+    "name": "ict/ictech-promotion-icon",
+    "description": "Promotion icon",
+    "type": "shopware-platform-plugin",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "iCreateivetechnologies"
+        }
+    ],
+    "version": "1.0.0",
+    "autoload": {
+        "psr-4": {
+            "ICTECHPromotionIcons\\": "src/"
+        }
+    },
+    "extra": {
+        "shopware-plugin-class": "ICTECHPromotionIcons\\ICTECHPromotionIcons",
+        "plugin-icon": "icon.png",
+        "label": {
+            "de-DE": " Rabatt Bild",
+            "en-GB": "Promotion icon"
+        },
+        "description": {
+            "de-DE": "Nach der Installation dieses Plugins kann der Administrator für jeden Aktionscode ein anderes Symbol oder Logo verwenden",
+            "en-GB": " After Installing this plugin, the admin can use different icons or logos for each  promotional code."
+        },
+        "manufacturerLink": {
+            "de-DE": "https://www.icreativetechnologies.com",
+            "en-GB": "https://www.icreativetechnologies.com"
+        },
+        "supportLink": {
+            "de-DE": "https://support.icreativetechnologies.com/",
+            "en-GB": "https://support.icreativetechnologies.com/"
+        }
+    }
+}

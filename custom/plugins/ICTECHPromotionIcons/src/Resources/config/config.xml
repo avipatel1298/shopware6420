@@ -1,0 +1,12 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/trunk/src/Core/System/SystemConfig/Schema/config.xsd">
+    <card>
+        <!-- Main Active/Inactive Switch -->
+        <title>Configuration</title>
+        <input-field type="bool">
+            <name>Active</name>
+            <label>Active/Inactive</label>
+            <label lang="de-DE">Aktiv/Inaktiv</label>
+        </input-field>
+        <!-- Main Active/Inactive Switch -->
+    </card>
+</config>

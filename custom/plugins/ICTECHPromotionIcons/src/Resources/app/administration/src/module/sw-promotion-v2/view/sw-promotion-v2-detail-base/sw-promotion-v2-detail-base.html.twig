@@ -1,0 +1,29 @@
+{% block sw_promotion_v2_detail_base_general_active %}
+    {% parent() %}
+    <sw-container
+        columns="repeat(auto-fit, minmax(250px, 1fr))"
+        gap="0px 30px"
+        class="sw-category-detail-menu"
+    >
+        {% block sw_promotion_v2_detail_base_general_ict_logo %}
+            <sw-upload-listener
+                :upload-tag="mediaUploadTag"
+                auto-upload
+                @media-upload-finish="setMediaItem"
+            />
+
+            <sw-media-upload-v2
+                :label="$tc('sw-category.base.menu.imageLabel')"
+                variant="regular"
+                :source="desktopLogo"
+                :upload-tag="mediaUploadTag"
+                :allow-multi-select="false"
+                @media-drop="onDropMedia"
+                @media-upload-sidebar-open="showMediaModal = true"
+                @media-upload-remove-image="onUnlinkLogo"
+            />
+        {% endblock %}
+    </sw-container>
+{% endblock %}
+
+
